@@ -1,6 +1,37 @@
 <?php
+date_default_timezone_set('Asia/Hong_Kong');
+require("configdbconnect.php");
+$configuration = $globleConnectDB;
 defined('BASEPATH') OR exit('No direct script access allowed');
+define('PANELVERSION', "V0.9.5.18");
 
+//Project inforamtion
+define('AUTOSKU', True);
+define('SKU_PREFIX', 'JPF');
+define('DEFAULT_IMAGE', 'image/default_image.jpg');
+define('GLOBAL_CURRENCY', $configuration['currency']);
+define('SITE_NAME', $configuration['site_name']);
+define('SITE_LOGO', $configuration['site_logo']);
+define('SITE_URL', $configuration['site_url']);
+define('PRODUCT_IMAGE_BASE', $configuration['product_images_url']);
+define('PRODUCT_FOLDER', $configuration['product_folders']);
+
+//Email Setting
+define('EMAIL_SENDER', $configuration['email_sender']);
+define('EMAIL_SENDER_NAME', $configuration['email_sender_name']);
+define('EMAIL_BCC', $configuration['email_bcc']);
+
+
+//reporting
+define('PDF_HEADER', $globleConnectReport['pdf_report_header']);
+define('EMAIL_HEADER', $globleConnectReport['email_header']);
+define('EMAIL_FOOTER', $globleConnectReport['email_footer']);
+define('MESSAGE_HEADER', $globleConnectReport['message_header']);
+define('REPORT_MODE', $globleConnectReport['report_mode']);
+
+
+define('SEO_TITLE', $configuration['seo_title']);
+define('SEO_DESC', $configuration['seo_desc']);
 /*
 |--------------------------------------------------------------------------
 | Display Debug backtrace

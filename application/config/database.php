@@ -1,4 +1,5 @@
 <?php
+require('configuration_db.php');
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
@@ -76,9 +77,9 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => '',
-	'password' => '',
-	'database' => '',
+	'username' => 'j2k5e6r5_octopus',
+	'password' => 'India$2017',
+	'database' => $activedb,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

@@ -22,7 +22,7 @@ $baselink = 'https://' . $_SERVER['SERVER_NAME'];
 
 $baselinkurl = $_SERVER['SERVER_NAME'];
 
-$baselinkmain = strpos($baselink, '192.168') ? 'http://' . $baselinkurl . '/masteradminpanel' : 'https://' . $baselinkurl . '/';
+$baselinkmain = strpos($baselink, '192.168') ? 'http://' . $baselinkurl . '/tailoradmin' : 'https://' . $baselinkurl . '/';
 
 $config['base_url'] = $baselinkmain;
 
