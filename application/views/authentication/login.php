@@ -13,7 +13,7 @@ $this->load->view('layout/header');
         <div class="news-caption">
             <h4 class="caption-title"><i class="fa fa-diamond text-success"></i> <?php echo SEO_TITLE; ?></h4>
             <p>
-               <?php echo SEO_DESC; ?>
+                <?php echo SEO_DESC; ?>
             </p>
         </div>
     </div>
@@ -25,7 +25,7 @@ $this->load->view('layout/header');
             <div class="brand">
 
                 <img src="<?php echo SITE_LOGO; ?>" style="height: 70px;">  
-                <small><?php echo SITE_NAME;?> Admin Control Panel </small>
+                <small><?php echo SITE_NAME; ?> Admin Control Panel </small>
             </div>
             <div class="icon" >
                 <i class="fa fa-sign-in"></i>
@@ -42,11 +42,11 @@ $this->load->view('layout/header');
                 <div class="form-group m-b-15">
                     <input type="password" name="password" class="form-control input-lg" placeholder="Password" />
                 </div>
-<!--                <div class="checkbox m-b-30">
-                    <label>
-                        <input type="checkbox" /> Remember Me
-                    </label>
-                </div>-->
+                <!--                <div class="checkbox m-b-30">
+                                    <label>
+                                        <input type="checkbox" /> Remember Me
+                                    </label>
+                                </div>-->
                 <div class="login-buttons">
                     <button type="submit" name="signIn" value="signIn" class="btn btn-success btn-block btn-lg">Sign me in</button>
                 </div>
@@ -70,3 +70,22 @@ $this->load->view('layout/header');
 <?php
 $this->load->view('layout/footer');
 ?>
+<script>
+    $(function () {
+        <?php
+        $checklogin = $this->session->flashdata('checklogin');
+        if($checklogin['show']){
+        ?>
+        $.gritter.add({
+            title: '<?php echo $checklogin['title']; ?>',
+            text: '<?php echo $checklogin['text']; ?>',
+            image: '<?php echo base_url(); ?>assets/emoji/sad.png',
+            sticky: true,
+            time: '',
+            class_name: 'my-sticky-class'
+        });
+       <?php
+        }
+       ?>
+    })
+</script>

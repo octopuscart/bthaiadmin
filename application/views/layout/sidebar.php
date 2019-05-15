@@ -14,10 +14,22 @@ $product_menu = array(
         "Product Reports" => site_url("ProductManagement/product_list"),
     ),
 );
-
-
-
 array_push($menu_control, $product_menu);
+
+
+$cms_menu = array(
+    "title" => "Content Management",
+    "icon" => "fa fa-file-text",
+    "sub_menu" => array(
+        "Look Book" => site_url("CMS/lookbook"),
+        "Blog" => site_url("CMS/blog"),
+    ),
+);
+array_push($menu_control, $cms_menu);
+
+
+
+
 ?>
 
 <!-- begin #sidebar -->
@@ -28,7 +40,7 @@ array_push($menu_control, $product_menu);
         <ul class="nav">
             <li class="nav-profile">
                 <div class="image">
-                    <a href="javascript:;"><img src="assets/img/user-13.jpg" alt="" /></a>
+                    <a href="javascript:;"><img src='<?php echo base_url(); ?>assets/profile_image/<?php echo $userdata['image'] ?>' alt="" class="media-object rounded-corner" style="    width: 35px;background: url(<?php echo base_url(); ?>assets/emoji/user.png);    height: 35px;background-size: cover;" /></a>
                 </div>
                 <div class="info textoverflow" >
                     <?php echo $userdata['first_name']; ?>

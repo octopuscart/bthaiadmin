@@ -21,11 +21,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $baselink = 'https://' . $_SERVER['SERVER_NAME'];
 
 $baselinkurl = $_SERVER['SERVER_NAME'];
+$islocal = false;
 
-$baselinkmain = strpos($baselink, '192.168') ? 'http://' . $baselinkurl . '/tailoradmin' : 'https://' . $baselinkurl . '/';
+if (strpos($baselink, '192.168')) {
+    $islocal = true;
+    $baselinkmain = 'http://' . $baselinkurl . '/tailoradmin';
+} elseif (strpos($baselink, 'localhost')) {
+    $islocal = true;
+    $baselinkmain = 'http://' . $baselinkurl . '/tailoradmin';
+} else {
+    $baselinkmain = 'https://' . $baselinkurl . '/';
+}
 
 $config['base_url'] = $baselinkmain;
-
+$config['index_page'] = $islocal ? 'index.php/' : '';
 
 /*
   |--------------------------------------------------------------------------
@@ -369,15 +378,7 @@ $config['encryption_key'] = '';
 $baselink = 'http://' . $_SERVER['SERVER_NAME'];
 
 
-if (strpos($baselink, '192.168')) {
-    $config['sess_driver'] = 'files';
-    $config['sess_cookie_name'] = 'ci_session';
-    $config['sess_expiration'] = 7200;
-    $config['sess_save_path'] = NULL;
-    $config['sess_match_ip'] = FALSE;
-    $config['sess_time_to_update'] = 300;
-    $config['sess_regenerate_destroy'] = FALSE;
-} elseif (strpos($baselink, 'localhost')) {
+if ($islocal) {
     $config['sess_driver'] = 'files';
     $config['sess_cookie_name'] = 'ci_session';
     $config['sess_expiration'] = 7200;
