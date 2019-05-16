@@ -134,7 +134,7 @@ class Order extends CI_Controller {
         } else {
             redirect('/');
         }
-        $this->load->view('Order/orderdetails', $data);
+        $this->load->view('order/orderdetails', $data);
     }
 
     public function orderdetails_payments($order_key) {
@@ -345,7 +345,7 @@ class Order extends CI_Controller {
                 array_push($orderslistr, $value);
             }
             $data['orderslist'] = $orderslistr;
-            $this->load->view('Order/orderslist', $data);
+            $this->load->view('order/orderslist', $data);
         }
         if ($this->user_type == 'Vendor') {
             $this->db->order_by('vo.id', 'desc');
