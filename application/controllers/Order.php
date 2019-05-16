@@ -47,6 +47,36 @@ class Order extends CI_Controller {
         $data = array();
         $blog_data = $this->Curd_model->get('style_tips', 'desc');
         $data['blog_data'] = $blog_data;
+
+        $this->db->order_by('id', 'desc');
+        $this->db->limit(5);
+        $query = $this->db->get('user_order');
+
+        $orderlist = $query->result();
+        $orderslistr = [];
+        foreach ($orderlist as $key => $value) {
+            $this->db->order_by('id', 'desc');
+            $this->db->where('order_id', $value->id);
+            $query = $this->db->get('user_order_status');
+            $status = $query->row();
+            $value->status = $status ? $status->status : $value->status;
+            $value->status_datetime = $status ? $status->c_date . " " . $status->c_time : $value->order_date . " " . $value->order_time;
+            $this->db->order_by('id', 'desc');
+            $this->db->where('order_id', $value->id);
+            $query = $this->db->get('cart');
+            $cartdata = $query->result();
+            $tempdata = array();
+            $itemarray = array();
+            foreach ($cartdata as $key1 => $value1) {
+                array_push($tempdata, $value1->item_name . "(" . $value1->quantity . ")");
+                $itemarray[$value1->item_name] = $value1->quantity;
+            }
+            $value->itemsarray = $itemarray;
+            $value->items = implode(", ", $tempdata);
+            array_push($orderslistr, $value);
+        }
+        $data['orderslist'] = $orderslistr;
+
         $this->load->view('Order/dashboard', $data);
     }
 

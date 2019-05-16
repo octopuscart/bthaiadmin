@@ -138,82 +138,92 @@ function truncate($str, $len) {
                 </div>
                 <div class="tab-pane fade" id="purchase">
                     <div class="height-sm" data-scrollbar="true">
+                        
+                        
                         <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th class="hidden-sm">Product</th>
-                                    <th>Amount</th>
-                                    <th>User</th>
-                                </tr>
-                            </thead>
-<!--                            <tbody>
-                                <tr>
-                                    <td>13/02/2013</td>
-                                    <td class="hidden-sm">
-                                        <a href="javascript:;">
-                                            <img src="<?php echo base_url(); ?>assets/img/product/product-1.png" alt=""  />
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <h6><a href="javascript:;">Nunc eleifend lorem eu velit eleifend, eget faucibus nibh placerat.</a></h6>
-                                    </td>
-                                    <td>$349.00</td>
-                                    <td><a href="javascript:;">Derick Wong</a></td>
-                                </tr>
-                                <tr>
-                                    <td>13/02/2013</td>
-                                    <td class="hidden-sm">
-                                        <a href="javascript:;">
-                                            <img src="<?php echo base_url(); ?>assets/img/product/product-2.png" alt="" />
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <h6><a href="javascript:;">Nunc eleifend lorem eu velit eleifend, eget faucibus nibh placerat.</a></h6>
-                                    </td>
-                                    <td>$399.00</td>
-                                    <td><a href="javascript:;">Derick Wong</a></td>
-                                </tr>
-                                <tr>
-                                    <td>13/02/2013</td>
-                                    <td class="hidden-sm">
-                                        <a href="javascript:;">
-                                            <img src="<?php echo base_url(); ?>assets/img/product/product-3.png" alt="" />
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <h6><a href="javascript:;">Nunc eleifend lorem eu velit eleifend, eget faucibus nibh placerat.</a></h6>
-                                    </td>
-                                    <td>$499.00</td>
-                                    <td><a href="javascript:;">Derick Wong</a></td>
-                                </tr>
-                                <tr>
-                                    <td>13/02/2013</td>
-                                    <td class="hidden-sm">
-                                        <a href="javascript:;">
-                                            <img src="<?php echo base_url(); ?>assets/img/product/product-4.png" alt="" />
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <h6><a href="javascript:;">Nunc eleifend lorem eu velit eleifend, eget faucibus nibh placerat.</a></h6>
-                                    </td>
-                                    <td>$230.00</td>
-                                    <td><a href="javascript:;">Derick Wong</a></td>
-                                </tr>
-                                <tr>
-                                    <td>13/02/2013</td>
-                                    <td class="hidden-tablet hidden-phone">
-                                        <a href="javascript:;">
-                                            <img src="<?php echo base_url(); ?>assets/img/product/product-5.png" alt="" />
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <h6><a href="javascript:;">Nunc eleifend lorem eu velit eleifend, eget faucibus nibh placerat.</a></h6>
-                                    </td>
-                                    <td>$500.00</td>
-                                    <td><a href="javascript:;">Derick Wong</a></td>
-                                </tr>
-                            </tbody>-->
+                 <thead>
+                            <tr>
+                                <th style="width: 20px">S. NO.</th>
+                                <th style="width:250px">Order Information</th>
+                                <th style="width:200px">Customer Information</th>
+                            
+                                <th>Status</th>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (count($orderslist)) {
+                                $count = 1;
+                                foreach ($orderslist as $key => $value) {
+                                    ?>
+                                    <tr style="border-bottom: 1px solid #000;">
+                                        <td>
+                                            <?php echo $count; ?>
+                                        </td>
+                                        <td>
+                                      
+                                                <table class="small_table">
+                                                    <tr>
+                                                        <th>Order No.</th>
+                                                        <td>: <?php echo $value->order_no; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Total Amount</th>
+                                                        <td>: {{<?php echo $value->total_price; ?>|currency:" "}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Total Products</th>
+                                                        <td>: {{<?php echo $value->total_quantity; ?>}}</td>
+                                                    </tr>
+                                                </table>
+                                        
+                                        </td>
+
+                                        <td>
+                                           
+                                                <b> <?php echo $value->name; ?></b>
+                                                <table class="small_table">
+                                                    <tr>
+                                                        <th><i class="fa fa-envelope"></i> &nbsp; </th>
+                                                        <td class="overtext"> <a href="#" title="<?php echo $value->email; ?>"><?php echo $value->email; ?></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th><i class="fa fa-phone"></i>  &nbsp;</th>
+                                                        <td> <?php echo $value->contact_no; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th><i class="fa fa-map-marker"></i> &nbsp; </th>
+                                                        <td> <?php echo $value->city . ", " . $value->country; ?></td>
+                                                    </tr>
+                                                </table>
+                                          
+                                        </td>
+                                        
+
+                                        
+                                        <td>
+                                            <?php
+                                            echo "" . $value->status . "<br/>";
+                                            echo $value->status_datetime;
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo site_url("order/orderdetails/".$value->order_key);?>" class="btn btn-primary btn-sm" style="    margin-top: 20%;">Update <i class="fa fa-arrow-circle-right"></i></a>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                    $count++;
+                                }
+                            } else {
+                                ?>
+                            <h4><i class="fa fa-warning"></i> No order found</h4>
+                            <?php
+                        }
+                        ?>
+
+                        </tbody>
                         </table>
                     </div>
                 </div>
