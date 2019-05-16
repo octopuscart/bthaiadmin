@@ -40,7 +40,7 @@ function truncate($str, $len) {
                 <div class="stats-icon"><i class="fa fa-pencil-square"></i></div>
                 <div class="stats-info">
                     <h4>Total Orders</h4>
-                    <p>1200</p>	
+                    <p><?php echo count($orderslist);?></p>	
                 </div>
                 <!--                <div class="stats-link">
                                     <a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -54,7 +54,7 @@ function truncate($str, $len) {
                 <div class="stats-icon"><i class="fa fa-usd"></i></div>
                 <div class="stats-info">
                     <h4>Total Amount</h4>
-                    <p>1,291,922</p>	
+                    <p><?php echo $total_amount;?></p>	
                 </div>
                 <!--                <div class="stats-link">
                                     <a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -68,7 +68,7 @@ function truncate($str, $len) {
                 <div class="stats-icon"><i class="fa fa-users"></i></div>
                 <div class="stats-info">
                     <h4>Registered User</h4>
-                    <p>800</p>	
+                    <p><?php echo $total_users;?></p>	
                 </div>
                 <!--                <div class="stats-link">
                                     <a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
