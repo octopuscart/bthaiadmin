@@ -26,7 +26,7 @@ function truncate($str, $len) {
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">Dashboard <small>header small text goes here...</small></h1>
+    <h1 class="page-header">Dashboard <small></small></h1>
     <!-- end page-header -->
 
     <!-- begin row -->
@@ -147,7 +147,7 @@ function truncate($str, $len) {
                                     <th>User</th>
                                 </tr>
                             </thead>
-                            <tbody>
+<!--                            <tbody>
                                 <tr>
                                     <td>13/02/2013</td>
                                     <td class="hidden-sm">
@@ -213,7 +213,7 @@ function truncate($str, $len) {
                                     <td>$500.00</td>
                                     <td><a href="javascript:;">Derick Wong</a></td>
                                 </tr>
-                            </tbody>
+                            </tbody>-->
                         </table>
                     </div>
                 </div>
@@ -264,7 +264,7 @@ function truncate($str, $len) {
                             <a href="javascript:;"><img src="<?php echo base_url(); ?>assets/img/user-1.jpg" alt="" /></a>
                             <h4 class="username text-ellipsis">
                                 Marble Lungs
-                                <small>Indian</small>
+                                <small>Hong Kong</small>
                             </h4>
                         </li>
                         <li>
@@ -399,45 +399,22 @@ function truncate($str, $len) {
                         <li class="active">
                             <a href="javascript:;" class="todolist-container active" data-click="todolist">
                                 <div class="todolist-input"><i class="fa fa-square-o"></i></div>
-                                <div class="todolist-title">Donec vehicula pretium nisl, id lacinia nisl tincidunt id.</div>
+                                <div class="todolist-title">Visit to Australia.</div>
                             </a>
                         </li>
                         <li>
                             <a href="javascript:;" class="todolist-container" data-click="todolist">
                                 <div class="todolist-input"><i class="fa fa-square-o"></i></div>
-                                <div class="todolist-title">Duis a ullamcorper massa.</div>
+                                <div class="todolist-title">Appointment made by Mr. Adam Smith.</div>
                             </a>
                         </li>
                         <li>
                             <a href="javascript:;" class="todolist-container" data-click="todolist">
                                 <div class="todolist-input"><i class="fa fa-square-o"></i></div>
-                                <div class="todolist-title">Phasellus bibendum, odio nec vestibulum ullamcorper.</div>
+                                <div class="todolist-title">Review on Zegna Stock.</div>
                             </a>
                         </li>
-                        <li>
-                            <a href="javascript:;" class="todolist-container" data-click="todolist">
-                                <div class="todolist-input"><i class="fa fa-square-o"></i></div>
-                                <div class="todolist-title">Duis pharetra mi sit amet dictum congue.</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" class="todolist-container" data-click="todolist">
-                                <div class="todolist-input"><i class="fa fa-square-o"></i></div>
-                                <div class="todolist-title">Duis pharetra mi sit amet dictum congue.</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" class="todolist-container" data-click="todolist">
-                                <div class="todolist-input"><i class="fa fa-square-o"></i></div>
-                                <div class="todolist-title">Phasellus bibendum, odio nec vestibulum ullamcorper.</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" class="todolist-container active" data-click="todolist">
-                                <div class="todolist-input"><i class="fa fa-square-o"></i></div>
-                                <div class="todolist-title">Donec vehicula pretium nisl, id lacinia nisl tincidunt id.</div>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -467,8 +444,8 @@ $this->load->view('layout/footer');
 <script src="<?php echo base_url(); ?>assets/plugins/jquery-jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/dashboard.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/dashboard-v2.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/dashboard.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/dashboard-v2.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 
 <script>
