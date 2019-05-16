@@ -68,6 +68,39 @@ $cms_menu = array(
 array_push($menu_control, $cms_menu);
 
 
+$msg_menu = array(
+    "title" => "Message Management",
+    "icon" => "fa fa-file-text",
+    "active"=>"",
+    "sub_menu" => array(
+        "Send Mail/Newsletter (Prm.)" => site_url(""),
+        "Send Mail/Newsletter (Txn.)" => site_url(""),
+    ),
+);
+array_push($menu_control, $msg_menu);
+
+$schedule_menu = array(
+    "title" => "Schedule Management",
+    "icon" => "fa fa-file-text",
+    "active"=>"",
+    "sub_menu" => array(
+        "Set Schedule" => site_url(""),
+        "Schedule Report" => site_url(""),
+    ),
+);
+array_push($menu_control, $schedule_menu);
+
+$user_menu = array(
+    "title" => "Schedule Management",
+    "icon" => "fa fa-file-text",
+    "active"=>"",
+    "sub_menu" => array(
+        "Add User" => site_url("#"),
+        "Users Reports" => site_url("#"),
+    ),
+);
+array_push($menu_control, $user_menu);
+
 
 
 foreach ($menu_control as $key => $value) {
