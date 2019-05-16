@@ -20,21 +20,21 @@ array_push($menu_control, $product_menu);
 
 $order_menu = array(
     "title" => "Order Manegement",
-    "icon" => "ion-cube",
+    "icon" => "fa fa-list",
     "active"=>"",
     "sub_menu" => array(
-        "Orders Reports" => site_url(""),
-        "Order Analytics" => site_url(""),
+        "Orders Reports" => site_url("#"),
+        "Order Analytics" => site_url("#"),
     ),
 );
 array_push($menu_control, $order_menu);
 
 $client_menu = array(
     "title" => "Client Manegement",
-    "icon" => "ion-cube",
+    "icon" => "fa fa-users",
     "active"=>"",
     "sub_menu" => array(
-        "Clients Reports" => site_url(""),
+        "Clients Reports" => site_url("#"),
         
     ),
 );
@@ -70,37 +70,51 @@ array_push($menu_control, $cms_menu);
 
 $msg_menu = array(
     "title" => "Message Management",
-    "icon" => "fa fa-file-text",
+    "icon" => "fa fa-envelope",
     "active"=>"",
     "sub_menu" => array(
-        "Send Mail/Newsletter (Prm.)" => site_url(""),
-        "Send Mail/Newsletter (Txn.)" => site_url(""),
+        "Send Mail/Newsletter (Prm.)" => site_url("#"),
+        "Send Mail/Newsletter (Txn.)" => site_url("#"),
     ),
 );
 array_push($menu_control, $msg_menu);
 
 $schedule_menu = array(
     "title" => "Schedule Management",
-    "icon" => "fa fa-file-text",
+    "icon" => "fa fa-calendar",
     "active"=>"",
     "sub_menu" => array(
-        "Set Schedule" => site_url(""),
-        "Schedule Report" => site_url(""),
+        "Set Schedule" => site_url("#"),
+        "Schedule Report" => site_url("#"),
     ),
 );
 array_push($menu_control, $schedule_menu);
 
 $user_menu = array(
-    "title" => "Schedule Management",
-    "icon" => "fa fa-file-text",
+    "title" => "User Management",
+    "icon" => "fa fa-user",
     "active"=>"",
     "sub_menu" => array(
         "Add User" => site_url("#"),
         "Users Reports" => site_url("#"),
     ),
 );
+
+
 array_push($menu_control, $user_menu);
 
+$setting_menu = array(
+    "title" => "Settings",
+    "icon" => "fa fa-cogs",
+    "active"=>"",
+    "sub_menu" => array(
+        "Add Sliders" => site_url("#"),
+      
+    ),
+);
+
+
+array_push($menu_control, $setting_menu);
 
 
 foreach ($menu_control as $key => $value) {
