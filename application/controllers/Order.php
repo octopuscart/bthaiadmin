@@ -132,7 +132,7 @@ class Order extends CI_Controller {
         $data['vendor_orders'] = count($vendororderlist);
         $data['total_order'] = count($orderslistr);
         $data['total_users'] = count($userlist);
-        $data['orderslist'] = $orderslistr;
+      
         $this->load->library('JsonSorting', $orderslistr);
         $orderstatus = $this->jsonsorting->collect_data('status');
         $orderuser = $this->jsonsorting->collect_data('name');
