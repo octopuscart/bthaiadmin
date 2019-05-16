@@ -19,14 +19,26 @@ array_push($menu_control, $product_menu);
 
 
 $order_menu = array(
-    "title" => "Product Manegement",
+    "title" => "Order Manegement",
     "icon" => "ion-cube",
     "active"=>"",
     "sub_menu" => array(
-        "Product Reports" => site_url("ProductManagement/product_list"),
+        "Orders Reports" => site_url(""),
+        "Order Analytics" => site_url(""),
     ),
 );
 array_push($menu_control, $order_menu);
+
+$client_menu = array(
+    "title" => "Client Manegement",
+    "icon" => "ion-cube",
+    "active"=>"",
+    "sub_menu" => array(
+        "Clients Reports" => site_url(""),
+        
+    ),
+);
+array_push($menu_control, $client_menu);
 
 
 
