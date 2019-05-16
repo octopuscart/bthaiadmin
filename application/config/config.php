@@ -34,7 +34,7 @@ if (strpos($baselink, '192.168')) {
 }
 
 $config['base_url'] = $baselinkmain;
-$config['index_page'] = $islocal ? 'index.php/' : '';
+$config['index_page'] ='index.php/';
 
 /*
   |--------------------------------------------------------------------------
