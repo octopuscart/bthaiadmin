@@ -18,6 +18,16 @@ $product_menu = array(
 array_push($menu_control, $product_menu);
 
 
+$order_menu = array(
+    "title" => "Product Manegement",
+    "icon" => "ion-cube",
+    "active"=>"",
+    "sub_menu" => array(
+        "Product Reports" => site_url("ProductManagement/product_list"),
+    ),
+);
+array_push($menu_control, $order_menu);
+
 
 
 $blog_menu = array(
