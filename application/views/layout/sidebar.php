@@ -38,7 +38,7 @@ $client_menu = array(
     "icon" => "fa fa-users",
     "active" => "",
     "sub_menu" => array(
-        "Clients Reports" => site_url("#"),
+        "Clients Reports" => site_url("UserManager/usersReport"),
     ),
 );
 array_push($menu_control, $client_menu);
