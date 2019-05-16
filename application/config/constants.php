@@ -15,6 +15,9 @@ define('SITE_LOGO', $configuration['site_logo']);
 define('SITE_URL', $configuration['site_url']);
 define('PRODUCT_IMAGE_BASE', $configuration['product_images_url']);
 define('PRODUCT_FOLDER', $configuration['product_folders']);
+define('product_folders', $configuration['product_folders']);
+
+define('product_image_base', $configuration['product_images_url']);
 
 //Email Setting
 define('EMAIL_SENDER', $configuration['email_sender']);

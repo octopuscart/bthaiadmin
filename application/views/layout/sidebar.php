@@ -10,9 +10,13 @@ $menu_control = array();
 $product_menu = array(
     "title" => "Product Manegement",
     "icon" => "ion-cube",
-    "active"=>"",
+    "active" => "",
     "sub_menu" => array(
-        "Product Reports" => site_url("ProductManagement/product_list"),
+//        "Add Product" => site_url("ProductManager/add_product"),
+        "Product Reports" => site_url("ProductManager/productReport"),
+        "Categories" => site_url("ProductManager/categories"),
+        "Items Prices" => site_url("ProductManager/categoryItems"),
+        "Product Sorting" => site_url("ProductManager/productSorting"),
     ),
 );
 array_push($menu_control, $product_menu);
@@ -21,10 +25,10 @@ array_push($menu_control, $product_menu);
 $order_menu = array(
     "title" => "Order Manegement",
     "icon" => "fa fa-list",
-    "active"=>"",
+    "active" => "",
     "sub_menu" => array(
         "Orders Reports" => site_url("Order/orderslist"),
-        "Order Analytics" => site_url("Order/orderAnalysis"),
+        "Order Analytics" => site_url("Order/index"),
     ),
 );
 array_push($menu_control, $order_menu);
@@ -32,10 +36,9 @@ array_push($menu_control, $order_menu);
 $client_menu = array(
     "title" => "Client Manegement",
     "icon" => "fa fa-users",
-    "active"=>"",
+    "active" => "",
     "sub_menu" => array(
         "Clients Reports" => site_url("#"),
-        
     ),
 );
 array_push($menu_control, $client_menu);
@@ -45,7 +48,7 @@ array_push($menu_control, $client_menu);
 $blog_menu = array(
     "title" => "Blog Management",
     "icon" => "fa fa-edit",
-    "active"=>"",
+    "active" => "",
     "sub_menu" => array(
         "Categories" => site_url("CMS/blogCategories"),
         "Add New" => site_url("CMS/newBlog"),
@@ -59,7 +62,7 @@ array_push($menu_control, $blog_menu);
 $cms_menu = array(
     "title" => "Content Management",
     "icon" => "fa fa-file-text",
-    "active"=>"",
+    "active" => "",
     "sub_menu" => array(
         "Look Book" => site_url("CMS/lookbook"),
         "Blog" => site_url("CMS/blog"),
@@ -71,7 +74,7 @@ array_push($menu_control, $cms_menu);
 $msg_menu = array(
     "title" => "Message Management",
     "icon" => "fa fa-envelope",
-    "active"=>"",
+    "active" => "",
     "sub_menu" => array(
         "Send Mail/Newsletter (Prm.)" => site_url("#"),
         "Send Mail/Newsletter (Txn.)" => site_url("#"),
@@ -82,7 +85,7 @@ array_push($menu_control, $msg_menu);
 $schedule_menu = array(
     "title" => "Schedule Management",
     "icon" => "fa fa-calendar",
-    "active"=>"",
+    "active" => "",
     "sub_menu" => array(
         "Set Schedule" => site_url("#"),
         "Schedule Report" => site_url("#"),
@@ -93,7 +96,7 @@ array_push($menu_control, $schedule_menu);
 $user_menu = array(
     "title" => "User Management",
     "icon" => "fa fa-user",
-    "active"=>"",
+    "active" => "",
     "sub_menu" => array(
         "Add User" => site_url("#"),
         "Users Reports" => site_url("#"),
@@ -106,10 +109,9 @@ array_push($menu_control, $user_menu);
 $setting_menu = array(
     "title" => "Settings",
     "icon" => "fa fa-cogs",
-    "active"=>"",
+    "active" => "",
     "sub_menu" => array(
         "Add Sliders" => site_url("#"),
-      
     ),
 );
 
@@ -126,7 +128,6 @@ foreach ($menu_control as $key => $value) {
         }
     }
 }
-
 ?>
 
 <!-- begin #sidebar -->
@@ -141,7 +142,7 @@ foreach ($menu_control as $key => $value) {
                 </div>
                 <div class="info textoverflow" >
 
-                    <?php echo $userdata['first_name']; ?>
+<?php echo $userdata['first_name']; ?>
                     <small class="textoverflow" title="<?php echo $userdata['username']; ?>"><?php echo $userdata['username']; ?></small>
                 </div>
             </li>
@@ -158,11 +159,11 @@ foreach ($menu_control as $key => $value) {
                 </a>
                 <ul class="sub-menu">
 
-                    <li class="active"><a href="<?php echo site_url("Order/index");?>">Dashboard</a></li>
+                    <li class="active"><a href="<?php echo site_url("Order/index"); ?>">Dashboard</a></li>
 
                 </ul>
             </li>
-            <?php foreach ($menu_control as $mkey => $mvalue) { ?>
+<?php foreach ($menu_control as $mkey => $mvalue) { ?>
 
                 <li class="has-sub <?php echo $mvalue['active']; ?>">
                     <a href="javascript:;">
@@ -171,17 +172,17 @@ foreach ($menu_control as $key => $value) {
                         <span><?php echo $mvalue['title']; ?></span>
                     </a>
                     <ul class="sub-menu">
-                        <?php
-                        $submenu = $mvalue['sub_menu'];
-                        foreach ($submenu as $key => $value) {
-                            ?>
+    <?php
+    $submenu = $mvalue['sub_menu'];
+    foreach ($submenu as $key => $value) {
+        ?>
                             <li><a href="<?php echo $value; ?>"><?php echo $key; ?></a></li>
                         <?php } ?>
                     </ul>
                 </li>
-            <?php } ?>
-           
-         
+                    <?php } ?>
+
+
         </ul>
         <!-- end sidebar nav -->
     </div>

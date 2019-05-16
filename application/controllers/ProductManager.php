@@ -834,7 +834,7 @@ class ProductManager extends CI_Controller {
             }
         }
 
-
+$product_model = $this->Product_model;
         $data['product_model'] = $product_model;
         $this->load->view('productManager/productSorting', $data);
     }

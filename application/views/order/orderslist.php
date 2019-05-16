@@ -1,27 +1,28 @@
 <?php
-$this->load->view('layout/layoutTop');
+$this->load->view('layout/header');
+$this->load->view('layout/topmenu');
 ?>
 
 <style>
-    .order_box{
+    .order_panel{
         padding: 10px;
         padding-bottom: 11px!important;
         border: 1px solid #c5c5c5;
         background: #fff;
 
     }
-    .order_box li{
+    .order_panel li{
         line-height: 19px!important;
         padding: 7px!important;
         border: none!important;
     }
 
-    .order_box li i{
+    .order_panel li i{
         float: left!important;
         line-height: 19px!important;
         margin-right: 13px!important;
     }
-    .order_box h6{
+    .order_panel h6{
         margin-top: 0px;
         margin-bottom: 5px;
     }
@@ -37,14 +38,14 @@ $this->load->view('layout/layoutTop');
 
     <div class="row">
         <div class="col-md-12">
-            <div class="box box-info">
-                <div class="box-header with-border">
+            <div class="panel panel-info">
+                <div class="panel-header with-border">
                     <?php
                     $this->load->view('Order/orderdates');
                     ?>
                 </div>
-                <!-- /.box-header -->
-                <div class="box-body">
+                <!-- /.panel-header -->
+                <div class="panel-body">
 
                     <table id="tableDataOrder" class="table table-bordered  tableDataOrder">
                         <thead>
@@ -156,7 +157,7 @@ $this->load->view('layout/layoutTop');
 <!-- /.content -->
 
 <?php
-$this->load->view('layout/layoutFooter');
+$this->load->view('layout/footer');
 ?> 
 
 <script>
