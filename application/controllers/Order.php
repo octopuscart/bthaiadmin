@@ -47,7 +47,7 @@ class Order extends CI_Controller {
         $data = array();
         $blog_data = $this->Curd_model->get('style_tips', 'desc');
         $data['blog_data'] = $blog_data;
-        $this->load->view('order/dashboard', $data);
+        $this->load->view('Order/dashboard', $data);
     }
 
     public function orderPrint($order_id, $subject = "") {
@@ -134,7 +134,7 @@ class Order extends CI_Controller {
         } else {
             redirect('/');
         }
-        $this->load->view('order/orderdetails', $data);
+        $this->load->view('Order/orderdetails', $data);
     }
 
     public function orderdetails_payments($order_key) {
@@ -345,7 +345,7 @@ class Order extends CI_Controller {
                 array_push($orderslistr, $value);
             }
             $data['orderslist'] = $orderslistr;
-            $this->load->view('order/orderslist', $data);
+            $this->load->view('Order/orderslist', $data);
         }
         if ($this->user_type == 'Vendor') {
             $this->db->order_by('vo.id', 'desc');
