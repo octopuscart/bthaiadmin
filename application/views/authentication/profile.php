@@ -52,7 +52,7 @@ $this->load->view('layout/topmenu');
                 </div>
                 <!-- begin profile-highlight -->
                 <div class="profile-highlight">
-                    <h4><i class="fa fa-cog"></i> Settin</h4>
+                    <h4><i class="fa fa-cog"></i> Settings</h4>
                     <div class="checkbox m-b-5 m-t-0" >
                         <label><input type="checkbox" id="edit_toggle" /> Edit Profile Information</label>
                     </div>

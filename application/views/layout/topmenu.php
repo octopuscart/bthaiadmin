@@ -48,7 +48,7 @@ if($userdata){
                     </li>
                     <li class="media">
                         <a href="javascript:;">
-                            <div class="media-left"><img src="assets/img/user-1.jpg" class="media-object" alt="" /></div>
+                            <div class="media-left"><img src="<?php echo base_url(); ?>assets/img/user-1.jpg" class="media-object" alt="" /></div>
                             <div class="media-body">
                                 <h6 class="media-heading">John Smith</h6>
                                 <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
@@ -58,7 +58,7 @@ if($userdata){
                     </li>
                     <li class="media">
                         <a href="javascript:;">
-                            <div class="media-left"><img src="assets/img/user-2.jpg" class="media-object" alt="" /></div>
+                            <div class="media-left"><img src="<?php echo base_url(); ?>assets/img/user-2.jpg" class="media-object" alt="" /></div>
                             <div class="media-body">
                                 <h6 class="media-heading">Olivia</h6>
                                 <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
