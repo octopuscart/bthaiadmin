@@ -1,5 +1,6 @@
 <?php
-$this->load->view('layout/layoutTop');
+$this->load->view('layout/header');
+$this->load->view('layout/topmenu');
 ?>
 <style>
     .vendororder{
