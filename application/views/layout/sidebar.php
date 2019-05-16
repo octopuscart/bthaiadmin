@@ -23,8 +23,8 @@ $order_menu = array(
     "icon" => "fa fa-list",
     "active"=>"",
     "sub_menu" => array(
-        "Orders Reports" => site_url("#"),
-        "Order Analytics" => site_url("#"),
+        "Orders Reports" => site_url("Order/orderslist"),
+        "Order Analytics" => site_url("Order/orderAnalysis"),
     ),
 );
 array_push($menu_control, $order_menu);
