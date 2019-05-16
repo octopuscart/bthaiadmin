@@ -199,11 +199,7 @@ class Configuration extends CI_Controller {
         }
 
         if ($this->db->table_exists('style_tips')) {
-            if ($this->db->field_exists('style_tips', 'category_id ')) {
-                // table exists
-            } else {
-                $this->db->query('ALTER TABLE `style_tips` ADD `category_id` VARCHAR(200) NOT NULL AFTER `id`;');
-            }
+            
         } else {
             $this->db->query('CREATE TABLE `style_tips` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
