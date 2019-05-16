@@ -265,8 +265,6 @@ $this->load->view('Order/orderinfocomman');
 
 
 
-
-
 <?php
-$this->load->view('layout/layoutFooter');
+$this->load->view('layout/footer');
 ?> 
