@@ -41,7 +41,7 @@ $this->load->view('layout/topmenu');
             <div class="panel panel-info">
                 <div class="panel-header with-border">
                     <?php
-                    $this->load->view('Order/orderdates');
+                    $this->load->view('order/orderdates');
                     ?>
                 </div>
                 <!-- /.panel-header -->
