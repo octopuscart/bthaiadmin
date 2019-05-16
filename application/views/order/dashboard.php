@@ -16,7 +16,7 @@ function truncate($str, $len) {
 <link href="<?php echo base_url(); ?>assets/plugins/bootstrap-calendar/css/bootstrap_calendar.css" rel="stylesheet" />
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 
-<!-- begin #page-container -->
+
 
 <div id="content" class="content">
     <!-- begin breadcrumb -->
@@ -450,7 +450,7 @@ $this->load->view('layout/footer');
 
 <script>
     $(document).ready(function () {
-        App.init();
+     
         Dashboard.init();
         DashboardV2.init();
     });

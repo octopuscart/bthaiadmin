@@ -48,53 +48,13 @@ var handleVisitorsLineChart = function() {
     var blackTransparent = 'rgba(0,0,0,0.6)';
     var whiteTransparent = 'rgba(255,255,255,0.4)';
     
-    Morris.Line({
-        element: 'visitors-line-chart',
-        data: [
-            {x: '2014-02-01', y: 60, z: 30},
-            {x: '2014-03-01', y: 70, z: 40},
-            {x: '2014-04-01', y: 40, z: 10},
-            {x: '2014-05-01', y: 100, z: 70},
-            {x: '2014-06-01', y: 40, z: 10},
-            {x: '2014-07-01', y: 80, z: 50},
-            {x: '2014-08-01', y: 70, z: 40}
-        ],
-        xkey: 'x',
-        ykeys: ['y', 'z'],
-        xLabelFormat: function(x) {
-            x = getMonthName(x.getMonth());
-            return x.toString();
-        },
-        labels: ['Page Views', 'Unique Visitors'],
-        lineColors: [green, blue],
-        pointFillColors: [greenLight, blueLight],
-        lineWidth: '2px',
-        pointStrokeColors: [blackTransparent, blackTransparent],
-        resize: true,
-        gridTextFamily: 'Open Sans',
-        gridTextColor: whiteTransparent,
-        gridTextWeight: 'normal',
-        gridTextSize: '11px',
-        gridLineColor: 'rgba(0,0,0,0.5)',
-        hideHover: 'auto',
-    });
+  
 };
 
 var handleVisitorsDonutChart = function() {
     var green = '#00acac';
     var blue = '#348fe2';
-    Morris.Donut({
-        element: 'visitors-donut-chart',
-        data: [
-            {label: "New Visitors", value: 900},
-            {label: "Return Visitors", value: 1200}
-        ],
-        colors: [green, blue],
-        labelFamily: 'Open Sans',
-        labelColor: 'rgba(255,255,255,0.4)',
-        labelTextSize: '12px',
-        backgroundColor: '#242a30'
-    });
+  
 };
 
 var handleVisitorsVectorMap = function() {
