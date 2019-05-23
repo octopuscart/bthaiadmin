@@ -131,7 +131,7 @@ class CMS extends CI_Controller {
             $blogArray = array(
                 "image" => $picture,
                 "tag" => $tags,
-                "category_id"=> $this->input->post("category_id"),
+                "category_id" => $this->input->post("category_id"),
                 "title" => $this->input->post("title"),
                 "description" => $this->input->post("description"),
             );
@@ -142,21 +142,20 @@ class CMS extends CI_Controller {
 
         $this->load->view('CMS/blog/new_blog', $data);
     }
-    
-    
-    function blogList(){
+
+    function blogList() {
         $blog_data = $this->Curd_model->get('style_tips', 'desc');
         $data['blog_data'] = $blog_data;
         $this->load->view('CMS/blog/blog_list', $data);
     }
-    
-    function blogDetails($blog_id){
-         $data = array();
+
+    function blogDetails($blog_id) {
+        $data = array();
         $blog_data = $this->Curd_model->get_single('style_tips', $blog_id);
         $data['blog_data'] = $blog_data;
-        
-        
-       
+
+
+
         $tag_data = $this->Curd_model->get('style_tags');
         $tags = [];
         foreach ($tag_data as $key => $value) {
@@ -199,16 +198,158 @@ class CMS extends CI_Controller {
             $blogArray = array(
                 "image" => $picture,
                 "tag" => $tags,
-                "category_id"=> $this->input->post("category_id"),
+                "category_id" => $this->input->post("category_id"),
+                "title" => $this->input->post("title"),
+                "description" => $this->input->post("description"),
+            );
+        
+            $this->db->where('id', $blog_id);
+            $this->db->update('style_tips', $blogArray);
+           // $this->Curd_model->insert('style_tips', $blogArray);
+            redirect("CMS/newBlog");
+        }
+
+        $this->load->view('CMS/blog/blog_edit', $data);
+    }
+
+    ####################################
+
+    public function lookbookCategories() {
+        $data = array();
+        $data['title'] = "Look Book Categories";
+        $data['description'] = "Look Book  Categories";
+        $data['form_title'] = "Add Category";
+        $data['table_name'] = 'lookbook_category';
+        $form_attr = array(
+            "category_name" => array("title" => "Category Name", "required" => true, "place_holder" => "Category Name", "type" => "text", "default" => ""),
+            "parent_id" => array("title" => "", "required" => false, "place_holder" => "", "type" => "hidden", "default" => ""),
+            "display_index" => array("title" => "", "required" => false, "place_holder" => "", "type" => "hidden", "default" => ""),
+        );
+
+        if (isset($_POST['submitData'])) {
+            $postarray = array();
+            foreach ($form_attr as $key => $value) {
+                $postarray[$key] = $this->input->post($key);
+            }
+            $this->Curd_model->insert('lookbook_category', $postarray);
+            redirect("CMS/lookbookCategories");
+        }
+
+
+        $categories_data = $this->Curd_model->get('lookbook_category');
+        $data['list_data'] = $categories_data;
+
+        $fields = array(
+            "id" => array("title" => "ID#", "width" => "100px"),
+            "category_name" => array("title" => "Category Name", "width" => "50%"),
+        );
+
+        $data['fields'] = $fields;
+        $data['form_attr'] = $form_attr;
+        $this->load->view('layout/curd', $data);
+    }
+
+    public function newLookbook() {
+        $data = array();
+
+        $categories_data = $this->Curd_model->get('lookbook_category');
+        $data['categories'] = $categories_data;
+
+        $config['upload_path'] = 'assets/lookbook_images';
+        $config['allowed_types'] = '*';
+        if (isset($_POST['submit_data'])) {
+            $picture = '';
+
+            if (!empty($_FILES['picture']['name'])) {
+                $temp1 = rand(100, 1000000);
+                $config['overwrite'] = TRUE;
+                $ext1 = explode('.', $_FILES['picture']['name']);
+                $ext = strtolower(end($ext1));
+                $file_newname = $temp1 . "$userid." . $ext;
+                $picture = $file_newname;
+                $config['file_name'] = $file_newname;
+                //Load upload library and initialize configuration
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('picture')) {
+                    $uploadData = $this->upload->data();
+                    $picture = $uploadData['file_name'];
+                } else {
+                    $picture = '';
+                }
+            }
+
+
+
+            #$tags = implode(", ", $this->input->post("tags"));
+
+            $blogArray = array(
+                "image" => $picture,
+                #"tag" => $tags,
+                "category_id" => $this->input->post("category_id"),
                 "title" => $this->input->post("title"),
                 "description" => $this->input->post("description"),
             );
 
-            $this->Curd_model->insert('style_tips', $blogArray);
-            redirect("CMS/newBlog");
+            $this->Curd_model->insert('lookbook', $blogArray);
+            redirect("CMS/newLookbook");
         }
-        
-        $this->load->view('CMS/blog/blog_edit', $data);
+
+        $this->load->view('CMS/lookbook/new_lookbook', $data);
+    }
+
+    function lookbookList() {
+        $blog_data = $this->Curd_model->get('lookbook', 'desc');
+        $data['blog_data'] = $blog_data;
+        $this->load->view('CMS/lookbook/lookbook_list', $data);
+    }
+
+    function lookbookDetails($lb_id) {
+        $data = array();
+        $blog_data = $this->Curd_model->get_single('lookbook', $lb_id);
+        $data['blog_data'] = $blog_data;
+        $categories_data = $this->Curd_model->get('lookbook_category');
+        $data['categories'] = $categories_data;
+
+        $config['upload_path'] = 'assets/lookbook_images';
+        $config['allowed_types'] = '*';
+        if (isset($_POST['submit_data'])) {
+            $picture = '';
+
+            if (!empty($_FILES['picture']['name'])) {
+                $temp1 = rand(100, 1000000);
+                $config['overwrite'] = TRUE;
+                $ext1 = explode('.', $_FILES['picture']['name']);
+                $ext = strtolower(end($ext1));
+                $file_newname = $temp1 . "$userid." . $ext;
+                $picture = $file_newname;
+                $config['file_name'] = $file_newname;
+                //Load upload library and initialize configuration
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('picture')) {
+                    $uploadData = $this->upload->data();
+                    $picture = $uploadData['file_name'];
+                } else {
+                    $picture = '';
+                }
+            }
+
+            $blogArray = array(
+                "image" => $picture,
+                "category_id" => $this->input->post("category_id"),
+                "title" => $this->input->post("title"),
+                "description" => $this->input->post("description"),
+            );
+
+            #$this->Curd_model->insert('lookbook', $blogArray);
+            
+            $this->db->where('id', $lb_id);
+            $this->db->update('lookbook', $blogArray);
+            redirect("CMS/newLookbook");
+        }
+
+        $this->load->view('CMS/lookbook/lookbook_edit', $data);
     }
 
 }

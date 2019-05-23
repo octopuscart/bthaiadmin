@@ -42,23 +42,21 @@ $this->load->view('layout/topmenu');
             <!-- begin wrapper -->
             <div class="wrapper">
                 <div class="p-30 bg-white">
-                  
                     <!-- begin email form -->
                     <form action="#" method="post" enctype="multipart/form-data">
                         <!-- begin email to -->
                         <label class="control-label" style='font-size: 15px;'>Category: <span id="category_name"><?php echo $categories[0]['category_name'];?></span></label>
                         <div class="m-b-15">
-                            <input type="hidden" class="form-control" name="category_id" id='category_id' required="" value="<?php echo $blog_data->id;?>" />
+                            <input type="hidden" class="form-control" name="category_id" id='category_id' required="" value="<?php echo $categories[0]['id'];?>" />
                         </div>
                         
                         
-                        
-                        <label class="control-label">Change Image:</label>
+                        <label class="control-label">Add Image:</label>
                         <div class="m-b-15">
                             <div class="btn-group" role="group" aria-label="..." style="    width: 100%;">
                                 <span class="btn btn-success col fileinput-button" ">
                                     <i class="fa fa-plus"></i>
-                                    <span>Change files...</span>
+                                    <span>Add files...</span>
                                     <input type="file" name="picture" required="">
                                 </span>
 
@@ -66,22 +64,22 @@ $this->load->view('layout/topmenu');
                         </div>
                         <!-- end email to -->
                         <!-- begin email subject -->
-                        <label class="control-label">Title:</label>
+                        <label class="control-label">Subject:</label>
                         <div class="m-b-15">
-                            <input type="text" value="<?php echo $blog_data->title;?>" class="form-control" name="title" required="" />
+                            <input type="text" class="form-control" name="title" required="" />
                         </div>
                         <!-- end email subject -->
                         <!-- begin email content -->
                         <label class="control-label">Content:</label>
                         <div class="m-b-15">
-                            <textarea  class="textarea form-control" id="wysihtml5" placeholder="Enter text ..." rows="8" name="description" required=""><?php echo $blog_data->description;?></textarea>
+                            <input type="text"  class=" form-control" id="wysihtml5" placeholder="Enter text ..." rows="8" name="description" required="">
                         </div>
 
                         <!--tags-->
-                        <div class="m-b-15">
+<!--                        <div class="m-b-15">
                             <label class="control-label">Tags</label>
-                            <input id="tags" name="tags[]" class="inverse" value="<?php echo $blog_data->tag;?>">
-                        </div>
+                            <input id="tags" name="tags[]" class="inverse">
+                        </div>-->
 
                         <!-- end email content -->
                         <button type="submit" name="submit_data" class="btn btn-primary p-l-40 p-r-40">Send</button>
@@ -103,16 +101,11 @@ $this->load->view('layout/footer');
 ?>
 <script>
     function changeCategory(cat_name, cat_id){
-    $("#category_name").text(cat_name);
-    $("#category_id").val(cat_id);
+          $("#category_name").text(cat_name);
+          $("#category_id").val(cat_id);
 }
     
     $(function () {
-
-
-        $('#tags').tagit({
-            availableTags: <?php echo json_encode($tags); ?>
-        });
 
 
 

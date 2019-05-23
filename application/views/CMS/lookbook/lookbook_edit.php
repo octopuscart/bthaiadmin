@@ -74,14 +74,11 @@ $this->load->view('layout/topmenu');
                         <!-- begin email content -->
                         <label class="control-label">Content:</label>
                         <div class="m-b-15">
-                            <textarea  class="textarea form-control" id="wysihtml5" placeholder="Enter text ..." rows="8" name="description" required=""><?php echo $blog_data->description;?></textarea>
+                            <input type="text"  class=" form-control" id="wysihtml5" value="<?php echo $blog_data->description;?>" rows="8" name="description">
                         </div>
 
                         <!--tags-->
-                        <div class="m-b-15">
-                            <label class="control-label">Tags</label>
-                            <input id="tags" name="tags[]" class="inverse" value="<?php echo $blog_data->tag;?>">
-                        </div>
+                  
 
                         <!-- end email content -->
                         <button type="submit" name="submit_data" class="btn btn-primary p-l-40 p-r-40">Send</button>
@@ -108,12 +105,6 @@ $this->load->view('layout/footer');
 }
     
     $(function () {
-
-
-        $('#tags').tagit({
-            availableTags: <?php echo json_encode($tags); ?>
-        });
-
 
 
 

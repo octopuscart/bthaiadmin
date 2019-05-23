@@ -207,7 +207,7 @@ class Configuration extends CI_Controller {
   `description` text NOT NULL,
   `image` varchar(200) NOT NULL,
   `tag` varchar(500) DEFAULT NULL,
-  CONSTRAINT id_pk PRIMARY KEY (id)
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ');
         }
@@ -228,7 +228,7 @@ class Configuration extends CI_Controller {
   `seo_keywords` text NOT NULL,
   `seo_url` text NOT NULL,
   `seo_image` text NOT NULL,
-  CONSTRAINT id_pk PRIMARY KEY (id)
+   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ');
         }
@@ -242,7 +242,7 @@ class Configuration extends CI_Controller {
   `category_name` varchar(250) NOT NULL,
   `parent_id` varchar(50) NOT NULL,
   `display_index` int(11) NOT NULL,
-  CONSTRAINT id_pk PRIMARY KEY (id)
+   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ');
         }
@@ -256,8 +256,41 @@ class Configuration extends CI_Controller {
   `tag_name` varchar(200) NOT NULL,
   `parent_id` varchar(50) NOT NULL,
   `display_index` int(11) NOT NULL,
-  CONSTRAINT id_pk PRIMARY KEY (id)
+   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+');
+        }
+
+
+        if ($this->db->table_exists('lookbook_category')) {
+            // table exists
+        } else {
+            $this->db->query('    CREATE TABLE `lookbook_category` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+
+  `category_name` varchar(250) NOT NULL,
+  `parent_id` varchar(50) NOT NULL,
+  `display_index` int(11) NOT NULL,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+');
+        }
+
+        if ($this->db->table_exists('lookbook')) {
+            // table exists
+        } else {
+            $this->db->query('   
+CREATE TABLE `lookbook` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` varchar(200) NOT NULL,
+  `title` varchar(500) NOT NULL,
+  `description` text NOT NULL,
+  `image` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 ');
         }
     }

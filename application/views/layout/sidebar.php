@@ -59,6 +59,21 @@ $blog_menu = array(
 array_push($menu_control, $blog_menu);
 
 
+
+$lookbook_menu = array(
+    "title" => "Lookbook/Style Management",
+    "icon" => "fa fa-edit",
+    "active" => "",
+    "sub_menu" => array(
+        "Categories" => site_url("CMS/lookbookCategories"),
+        "Add New" => site_url("CMS/newLookbook"),
+        "Lookbook List" => site_url("CMS/lookbookList"),
+//        "Tags" => site_url("CMS/blogTag"),
+    ),
+);
+array_push($menu_control, $lookbook_menu);
+
+
 $cms_menu = array(
     "title" => "Content Management",
     "icon" => "fa fa-file-text",
