@@ -202,10 +202,10 @@ class CMS extends CI_Controller {
                 "title" => $this->input->post("title"),
                 "description" => $this->input->post("description"),
             );
-        
+
             $this->db->where('id', $blog_id);
             $this->db->update('style_tips', $blogArray);
-           // $this->Curd_model->insert('style_tips', $blogArray);
+            // $this->Curd_model->insert('style_tips', $blogArray);
             redirect("CMS/newBlog");
         }
 
@@ -343,13 +343,95 @@ class CMS extends CI_Controller {
             );
 
             #$this->Curd_model->insert('lookbook', $blogArray);
-            
+
             $this->db->where('id', $lb_id);
             $this->db->update('lookbook', $blogArray);
             redirect("CMS/newLookbook");
         }
 
         $this->load->view('CMS/lookbook/lookbook_edit', $data);
+    }
+
+    public function socialLink() {
+        $data = array();
+        $data['title'] = "Social Link";
+        $data['description'] = "Social Link";
+        $data['form_title'] = "Add Social Link";
+        $data['table_name'] = 'conf_social_link';
+        $form_attr = array(
+            "title" => array("title" => "Title", "required" => true, "place_holder" => "Title", "type" => "text", "default" => ""),
+            "link_url" => array("title" => "URL", "required" => false, "place_holder" => "Link", "type" => "text", "default" => ""),
+            "display_index" => array("title" => "Index", "required" => false, "place_holder" => "Display Index", "type" => "text", "default" => ""),
+        );
+
+        if (isset($_POST['submitData'])) {
+            $postarray = array();
+            foreach ($form_attr as $key => $value) {
+                $postarray[$key] = $this->input->post($key);
+            }
+            $this->Curd_model->insert('conf_social_link', $postarray);
+            redirect("CMS/socialLink");
+        }
+
+
+        $categories_data = $this->Curd_model->get('conf_social_link');
+        $data['list_data'] = $categories_data;
+
+        $fields = array(
+            "title" => array("title" => "Social Account", "width" => "200px"),
+            "link_url" => array("title" => "URL", "width" => "200px"),
+        );
+
+        $data['fields'] = $fields;
+        $data['form_attr'] = $form_attr;
+        $this->load->view('layout/curd', $data);
+    }
+
+    public function seoPageSetting() {
+        $data = array();
+        $data['title'] = "Social Link";
+        $data['description'] = "SEO";
+        $data['form_title'] = "SEO";
+        $data['table_name'] = 'seo_settings';
+        $form_attr = array(
+            "seo_title" => array("title" => "Title", "required" => true, "place_holder" => "Title", "type" => "text", "default" => ""),
+            "seo_description" => array("title" => "Description", "required" => true, "place_holder" => "Description", "type" => "text", "default" => ""),
+            "seo_keywords" => array("title" => "Keywords", "required" => true, "place_holder" => "Keywords", "type" => "text", "default" => ""),
+            "seo_url" => array("title" => "Page URL", "required" => false, "place_holder" => "Link", "type" => "text", "default" => ""),
+        );
+
+        if (isset($_POST['submitData'])) {
+            $postarray = array();
+            foreach ($form_attr as $key => $value) {
+                $postarray[$key] = $this->input->post($key);
+            }
+            $this->Curd_model->insert('seo_settings', $postarray);
+            redirect("CMS/seoPageSetting");
+        }
+
+
+        $categories_data = $this->Curd_model->get('seo_settings');
+        $data['list_data'] = $categories_data;
+
+        $fields = array(
+            "id" => array("title" => "ID#", "width" => "100px"),
+            "seo_title" => array("title" => "Title", "width" => "200px"),
+            "seo_description" => array("title" => "Description", "width" => "200px"),
+            "seo_keywords" => array("title" => "Keywords", "width" => "200px"),
+            "seo_url" => array("title" => "URL", "width" => "200px"),
+        );
+
+        $data['fields'] = $fields;
+        $data['form_attr'] = $form_attr;
+        $this->load->view('layout/curd', $data);
+    }
+
+    public function siteConfigUpdate() {
+        $data = array();
+        $blog_data = $this->Curd_model->get_single('configuration_site',1);
+        $data['site_data'] = $blog_data;
+
+        $this->load->view('authentication/site_update', $data); 
     }
 
 }

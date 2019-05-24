@@ -224,7 +224,7 @@ class Configuration extends CI_Controller {
             $this->db->query('CREATE TABLE `seo_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `seo_title` varchar(500) NOT NULL,
-  `seo_desc` text NOT NULL,
+  `seo_description` text NOT NULL,
   `seo_keywords` text NOT NULL,
   `seo_url` text NOT NULL,
   `seo_image` text NOT NULL,
@@ -293,6 +293,25 @@ CREATE TABLE `lookbook` (
 
 ');
         }
+        
+           if ($this->db->table_exists('conf_social_link')) {
+            // table exists
+        } else {
+            $this->db->query('   
+CREATE TABLE `conf_social_link` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(500) NOT NULL,
+  `link_url` text NOT NULL,
+  `display_index` int(11) NOT NULL,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+');
+        }
+        
+        
+        
     }
 
 }

@@ -73,17 +73,17 @@ $lookbook_menu = array(
 );
 array_push($menu_control, $lookbook_menu);
 
-
-$cms_menu = array(
-    "title" => "Content Management",
-    "icon" => "fa fa-file-text",
-    "active" => "",
-    "sub_menu" => array(
-        "Look Book" => site_url("CMS/lookbook"),
-        "Blog" => site_url("CMS/blog"),
-    ),
-);
-array_push($menu_control, $cms_menu);
+//
+//$cms_menu = array(
+//    "title" => "Content Management",
+//    "icon" => "fa fa-file-text",
+//    "active" => "",
+//    "sub_menu" => array(
+//        "Look Book" => site_url("CMS/lookbook"),
+//        "Blog" => site_url("CMS/blog"),
+//    ),
+//);
+//array_push($menu_control, $cms_menu);
 
 
 $msg_menu = array(
@@ -126,12 +126,41 @@ $setting_menu = array(
     "icon" => "fa fa-cogs",
     "active" => "",
     "sub_menu" => array(
+        "Site Edit" => site_url("CMS/siteConfigUpdate"),
         "Add Sliders" => site_url("#"),
+        
     ),
 );
 
 
 array_push($menu_control, $setting_menu);
+
+
+
+$social_menu = array(
+    "title" => "Social Management",
+    "icon" => "fa fa-calendar",
+    "active" => "",
+    "sub_menu" => array(
+        "Social Link" => site_url("CMS/socialLink"),
+      
+    ),
+);
+array_push($menu_control, $social_menu);
+
+
+$seo_menu = array(
+    "title" => "SEO",
+    "icon" => "fa fa-calendar",
+    "active" => "",
+    "sub_menu" => array(
+        "General" => site_url("CMS/seoPageSetting"),
+        "Page Wise Setting" => site_url("CMS/seoPageSetting"),
+      
+    ),
+);
+array_push($menu_control, $seo_menu);
+
 
 
 foreach ($menu_control as $key => $value) {
