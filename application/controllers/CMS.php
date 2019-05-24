@@ -430,6 +430,18 @@ class CMS extends CI_Controller {
         $data = array();
         $blog_data = $this->Curd_model->get_single('configuration_site',1);
         $data['site_data'] = $blog_data;
+        if(isset($_POST['update_data'])){
+          $blogArray = array(
+      
+            "seo_keywords" => $this->input->post("keyword"),
+            "seo_title" => $this->input->post("title"),
+             "seo_desc" => $this->input->post("description"),
+         );
+
+          $this->db->where('id', 1);
+         $this->db->update('configuration_site', $blogArray);
+             redirect("CMS/siteConfigUpdate");
+        }
 
         $this->load->view('authentication/site_update', $data); 
     }

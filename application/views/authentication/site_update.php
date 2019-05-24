@@ -27,7 +27,7 @@ $this->load->view('layout/topmenu');
                     <!-- begin email form -->
                     <form action="#" method="post" enctype="multipart/form-data">
                         <!-- begin email to -->
-                   <?php print_r($site_data);?>
+                  
                        
                       
                         <!-- end email to -->
@@ -40,18 +40,18 @@ $this->load->view('layout/topmenu');
                         <!-- begin email content -->
                         <label class="control-label">Description:</label>
                         <div class="m-b-15">
-                            <textarea  class="textarea form-control"   rows="8" name="description" required=""><?php echo $site_data->desc;?></textarea>
+                            <textarea  class="textarea form-control"   rows="8" name="description" required=""><?php echo $site_data->seo_desc;?></textarea>
                         </div>
 
                         <!--tags-->
                           <label class="control-label">Keywords:</label>
                         <div class="m-b-15">
-                            <textarea  class="textarea form-control"   rows="8" name="description" required=""><?php echo $site_data->keywords;?></textarea>
+                            <textarea  class="textarea form-control"   rows="8" name="keyword" required=""><?php echo $site_data->seo_keywords;?></textarea>
                         </div>
 
 
                         <!-- end email content -->
-                        <button type="submit" name="submit_data" class="btn btn-primary p-l-40 p-r-40">Send</button>
+                        <button type="submit" name="update_data" class="btn btn-primary p-l-40 p-r-40">Update</button>
                     </form>
                     <!-- end email form -->
                 </div>
