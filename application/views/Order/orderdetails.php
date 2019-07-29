@@ -48,137 +48,90 @@ $this->load->view('layout/topmenu');
         border: 6px solid #ff3b3b;
     }
 </style>
+<div id="content" class="content">
+    <section class="" style="min-height: auto;">
 
-<section class="content" style="min-height: auto;">
-
-    <div class="row">
-        <!--title row--> 
-        <div class="col-md-12">
-
-
-
-            <div class="col-md-9">
+        <div class="row">
+            <!--title row--> 
+            <div class="col-md-12">
 
 
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Order No.:<?php echo $ordersdetails['order_data']->order_no; ?></h3>
-                    </div>
+
+                <div class="col-md-9">
 
 
-                    <form role="form" action="#" method="post">
-                        <div class="box-body">
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Order Status</label>
-                                    <?php if ($status!='Other') { ?>
-                                        <input class="form-control" readonly="" name="status" value="<?php echo $status; ?>">
-                                    <?php } else { ?>
-                                        <input class="form-control"  name="status" value="<?php echo $status!='Other'?$status:''; ?>">
-                                    <?php } ?>
-
-                                </div>
-                            </div>
-
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <label>Remark <small>(It will be subject of email.)</small></label>
-                                    <input type="text" class="form-control" placeholder="Remark for order status"  name="remark" required="">
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Description <small>(It will be message body of email.)</small></label>
-                                    <textarea class="form-control" placeholder="Enter Message"  name="description"></textarea>
-                                </div>
-                            </div>
-
+                    <div class="panel panel-default">
+                        <div class="panel-heading with-border">
+                            <h3 class="panel-title">Order No.:<?php echo $ordersdetails['order_data']->order_no; ?></h3>
                         </div>
-                        <!--/.box-body--> 
 
-                        <div class="box-footer ">
-                            <div class="col-md-12 form-group">
-                                <div class="col-md-4" style="    background: #e1e1e1;">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="sendmail" checked="true">
-                                            Notify to customer by mail.
-                                        </label>
+
+                        <form role="form" action="#" method="post">
+                            <div class="panel-body">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Order Status</label>
+                                        <?php if ($status != 'Other') { ?>
+                                            <input class="form-control" readonly="" name="status" value="<?php echo $status; ?>">
+                                        <?php } else { ?>
+                                            <input class="form-control"  name="status" value="<?php echo $status != 'Other' ? $status : ''; ?>">
+                                        <?php } ?>
+
                                     </div>
                                 </div>
-                                <div class="col-md-8">
-                                    <button type="submit" class="btn btn-primary btn-lg" style="    font-size: 13px;" name="submit" value="submit">Submit</button>
 
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label>Remark <small>(It will be subject of email.)</small></label>
+                                        <input type="text" class="form-control" placeholder="Remark for order status"  name="remark" required="">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Description <small>(It will be message body of email.)</small></label>
+                                        <textarea class="form-control" placeholder="Enter Message"  name="description"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--/.panel-body--> 
+
+                            <div class="panel-footer ">
+                                <div class="row form-group">
+                                    <div class="col-md-4" style="   ">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="sendmail" checked="true">
+                                                Notify to customer by mail.
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <button type="submit" class="btn btn-primary btn-lg" style="    font-size: 13px;" name="submit" value="submit">Submit</button>
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <?php
+                    $this->load->view('Order/orderstatusside');
+                    ?>
                 </div>
             </div>
-            <div class="col-md-3">
-                <?php
-                $this->load->view('Order/orderstatusside');
-                ?>
-            </div>
-        </div>
-</section>
+    </section>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="col-md-12">
+    <?php
+    $this->load->view('Order/orderinfocomman');
+    ?> 
 
-            <?php
-            foreach ($user_order_status as $key => $value) {
-                ?>
+    <div class="clearfix"></div>
 
-                <ul class="timeline">
-                    <!--timeline time label--> 
-                    <li class="time-label">
-                        <span class="bg-red">
-                            <?php echo $value->c_date; ?>
-                        </span>
-                    </li>
-                    <!--/.timeline-label--> 
-
-                    <!--timeline item--> 
-                    <li>
-                        <!--timeline icon--> 
-                        <i class="fa fa-envelope bg-blue"></i>
-                        <div class="timeline-item">
-                            <span class="time"><i class="fa fa-clock-o"></i> <?php echo $value->c_time; ?></span>
-
-                            <h3 class="timeline-header"><a href="#"><?php echo $value->status ?></a></h3>
-
-                            <div class="timeline-body">
-                                <?php echo $value->remark; ?><br/>
-                                <?php echo $value->description; ?>
-                            </div>
-
-                            <div class="timeline-footer">
-                                <a class="btn btn-danger btn-xs" href="<?php echo site_url('Order/remove_order_status/' . $value->id . "/" . $order_key); ?>"><i class="fa fa-trash"></i> Remove</a>
-                            </div>
-                        </div>
-                    </li>
-                    <!--END timeline item--> 
-
-                </ul>
-
-                <?php
-            }
-            ?>
-
-        </div>
-    </div>
 </div>
-<?php
-$this->load->view('Order/orderinfocomman');
-?> 
-
-<div class="clearfix"></div>
-
-
 
 
 

@@ -389,7 +389,7 @@ class CMS extends CI_Controller {
 
     public function seoPageSetting() {
         $data = array();
-        $data['title'] = "Social Link";
+        $data['title'] = "Set The Page wise SEO Attributes";
         $data['description'] = "SEO";
         $data['form_title'] = "SEO";
         $data['table_name'] = 'seo_settings';
@@ -426,7 +426,7 @@ class CMS extends CI_Controller {
         $this->load->view('layout/curd', $data);
     }
 
-    public function siteConfigUpdate() {
+    public function siteSEOConfigUpdate() {
         $data = array();
         $blog_data = $this->Curd_model->get_single('configuration_site',1);
         $data['site_data'] = $blog_data;
@@ -443,7 +443,7 @@ class CMS extends CI_Controller {
              redirect("CMS/siteConfigUpdate");
         }
 
-        $this->load->view('authentication/site_update', $data); 
+        $this->load->view('configuration/site_update', $data); 
     }
 
 }

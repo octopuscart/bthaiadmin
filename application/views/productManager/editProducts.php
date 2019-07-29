@@ -1,5 +1,6 @@
 <?php
-$this->load->view('layout/layoutTop');
+$this->load->view('layout/header');
+$this->load->view('layout/topmenu');
 ?>
 <?php
 $session_data = $this->session->userdata('logged_in');
@@ -624,7 +625,7 @@ $session_data = $this->session->userdata('logged_in');
 <script src="<?php echo base_url(); ?>assets_main/tinymce/js/tinymce/tinymce.min.js"></script>
 
 <?php
-$this->load->view('layout/layoutFooter');
+$this->load->view('layout/footer');
 ?> 
 
 <script>

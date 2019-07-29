@@ -1,8 +1,8 @@
 <form action="#" method="get" class="form-inline">
-    <div class="col-md-6">
+    <div class="col-md-7">
         <div class="input-group" id="daterangepicker">
             <input type="text" name="daterange" class="form-control dateFormat"  placeholder="click to select the date range" readonly="" style="    background: #FFFFFF;
-                   opacity: 1;" value="<?php echo $daterange; ?>">
+                   opacity: 1;width:200px;" value="<?php echo $daterange; ?>">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
             </span>
@@ -16,7 +16,7 @@
         }
         ?>
     </div>
-    <div class="col-md-6 text-right">
+    <div class="col-md-5 text-right">
         <h4> Orders from <small><?php echo $daterange; ?></small></h4>
     </div>
 

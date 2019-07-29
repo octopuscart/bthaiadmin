@@ -38,11 +38,12 @@ $this->load->view('layout/topmenu');
 
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-info">
-                <div class="panel-header with-border">
+            <div class="panel panel-default">
+                <div class="panel-heading with-border">
                     <?php
                     $this->load->view('Order/orderdates');
                     ?>
+                    <div  style="clear:both"></div>
                 </div>
                 <!-- /.panel-header -->
                 <div class="panel-body">
@@ -50,8 +51,8 @@ $this->load->view('layout/topmenu');
                     <table id="tableDataOrder" class="table table-bordered  tableDataOrder">
                         <thead>
                             <tr>
-                                <th style="width: 20px">S. NO.</th>
-                                <th style="width:200px">Order Information</th>
+                                <th style="width: 70px">S. No.</th>
+                                <th style="width:250px">Order Information</th>
                                 <th style="width:200px">Customer Information</th>
                                 <th style="width:80px">Items/Qnty.</th>
                                 <th style="width:100px">Sizes</th>

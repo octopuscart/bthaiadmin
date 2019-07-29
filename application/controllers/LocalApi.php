@@ -39,6 +39,33 @@ class LocalApi extends REST_Controller {
             $this->db->update("admin_user", $data);
         }
     }
+    
+   function  updateAppointment_post(){
+       $fieldname = $this->post('name');
+        $value = $this->post('value');
+        $pk_id = $this->post('pk');
+        $tablename = $this->post('appointment_entry');
+        if ($this->checklogin) {
+            $data = array($fieldname => $value);
+            $this->db->set($data);
+            $this->db->where("aid", $pk_id);
+            $this->db->update('appointment_entry', $data);
+        }
+   }
+   
+   
+   function  updateAppointmentTime_post(){
+       $fieldname = $this->post('name');
+        $value = $this->post('value');
+        $pk_id = $this->post('pk');
+        $tablename = $this->post('appointment_entry');
+        if ($this->checklogin) {
+            $data = array($fieldname => $value);
+            $this->db->set($data);
+            $this->db->where("id", $pk_id);
+            $this->db->update('appointment_entry', $data);
+        }
+   }
 
     //function for curd update
     function updateCurd_post() {

@@ -253,6 +253,8 @@ class Order extends CI_Controller {
         $this->load->view('Order/orderdetails', $data);
     }
 
+ 
+
     public function orderdetails_payments($order_key) {
         $order_status = $this->input->get('status');
         $data['status'] = $order_status;
@@ -260,6 +262,7 @@ class Order extends CI_Controller {
             redirect('UserManager/not_granted');
         }
         $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
+      
         $vendor_order_details = $this->Order_model->getVendorsOrder($order_key);
         $data['vendor_order'] = $vendor_order_details;
         if ($order_details) {
@@ -397,13 +400,11 @@ class Order extends CI_Controller {
     }
 
     function order_mail_send($order_id) {
-        $subject = "Order Confirmation - Your Order with www.bespoketailorshk.com [$order_id] has been successfully placed!";
-        $this->Order_model->order_mail($order_id, $subject);
+        $this->Order_model->order_mail($order_id);
     }
 
     function order_mail_send_direct($order_key) {
-        $subject = "Order Confirmation - Your Order with www.bespoketailorshk.com [$order_id] has been successfully placed!";
-        $this->Order_model->order_mail($order_key, $subject);
+        $this->Order_model->order_mail($order_key);
         redirect("Order/orderdetails/$order_key");
     }
 

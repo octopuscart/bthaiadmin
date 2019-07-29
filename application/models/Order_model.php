@@ -163,40 +163,40 @@ class Order_model extends CI_Model {
     function order_mail($order_id, $subject = "") {
         setlocale(LC_MONETARY, 'en_US');
         $order_details = $this->getOrderDetailsV2($order_id, 'key');
-        $emailsender = email_sender;
-        $sendername = email_sender_name;
-        $email_bcc = email_bcc;
+        $emailsender = EMAIL_SENDER;
+        $sendername = EMAIL_SENDER_NAME;
+        $email_bcc = EMAIL_BCC;
 
         if ($order_details) {
             $currentstatus = $order_details['order_status'][0];
             $order_no = $order_details['order_data']->order_no;
-            $this->email->from(email_bcc, $sendername);
+            $this->email->from(EMAIL_BCC, $sendername);
             $this->email->to($order_details['order_data']->email);
-            $this->email->bcc(email_bcc);
-            $subject = sitename." - " . $currentstatus->remark;
+            $this->email->bcc(EMAIL_BCC);
+            $subject = SITE_NAME." - " . $currentstatus->remark;
             $this->email->subject($subject);
-            
-            $checkcode = report_mode;
+            $checkcode = REPORT_MODE;
             if ($checkcode == 0) {
+                ob_clean();
                 echo $this->load->view('Email/order_mail', $order_details, true);
             } else {
                 $this->email->message($this->load->view('Email/order_mail', $order_details, true));
                 $this->email->print_debugger();
-                $result = $this->email->send();
+               echo $result = $this->email->send();
             }
         }
     }
 
     function order_pdf($order_id, $subject = "") {  
         setlocale(LC_MONETARY, 'en_US');
-        $order_details = $this->getOrderDetails($order_id, 0);
+        $order_details = $this->getOrderDetailsV2($order_id, 0);
         if ($order_details) {
             $order_no = $order_details['order_data']->order_no;
             $html = $this->load->view('Email/order_pdf', $order_details, true);
             $html_header = $this->load->view('Email/order_mail_header', $order_details, true);
             $html_footer = $this->load->view('Email/order_mail_footer', $order_details, true);
             $pdfFilePath = $order_no . ".pdf";
-            $checkcode = report_mode;
+            $checkcode = REPORT_MODE;
             if ($checkcode == 0) {
                 echo $html;
             } else {
@@ -219,7 +219,7 @@ class Order_model extends CI_Model {
             $html_header = $this->load->view('Email/order_mail_header', $order_details, true);
             $html_footer = $this->load->view('Email/order_mail_footer', $order_details, true);
             $pdfFilePath = $order_no . "_worker_report.pdf";
-            $checkcode = report_mode;
+            $checkcode = REPORT_MODE;
             if ($checkcode == 0) {
                 echo $html;
             } else {

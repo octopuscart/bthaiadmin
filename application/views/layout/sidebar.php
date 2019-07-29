@@ -61,8 +61,8 @@ array_push($menu_control, $blog_menu);
 
 
 $lookbook_menu = array(
-    "title" => "Lookbook/Style Management",
-    "icon" => "fa fa-edit",
+    "title" => "Lookbook Management",
+    "icon" => "fa fa-image",
     "active" => "",
     "sub_menu" => array(
         "Categories" => site_url("CMS/lookbookCategories"),
@@ -102,7 +102,8 @@ $schedule_menu = array(
     "icon" => "fa fa-calendar",
     "active" => "",
     "sub_menu" => array(
-        "Set Schedule" => site_url("#"),
+        "Set Schedule" => site_url("Appointment/addAppointment"),
+        "Schedule Entry" => site_url("Appointment/listAppointments"),
         "Schedule Report" => site_url("#"),
     ),
 );
@@ -126,9 +127,7 @@ $setting_menu = array(
     "icon" => "fa fa-cogs",
     "active" => "",
     "sub_menu" => array(
-        "Site Edit" => site_url("CMS/siteConfigUpdate"),
         "Add Sliders" => site_url("#"),
-        
     ),
 );
 
@@ -143,7 +142,6 @@ $social_menu = array(
     "active" => "",
     "sub_menu" => array(
         "Social Link" => site_url("CMS/socialLink"),
-      
     ),
 );
 array_push($menu_control, $social_menu);
@@ -154,9 +152,8 @@ $seo_menu = array(
     "icon" => "fa fa-calendar",
     "active" => "",
     "sub_menu" => array(
-        "General" => site_url("CMS/seoPageSetting"),
+        "General" => site_url("CMS/siteSEOConfigUpdate"),
         "Page Wise Setting" => site_url("CMS/seoPageSetting"),
-      
     ),
 );
 array_push($menu_control, $seo_menu);
@@ -186,7 +183,7 @@ foreach ($menu_control as $key => $value) {
                 </div>
                 <div class="info textoverflow" >
 
-<?php echo $userdata['first_name']; ?>
+                    <?php echo $userdata['first_name']; ?>
                     <small class="textoverflow" title="<?php echo $userdata['username']; ?>"><?php echo $userdata['username']; ?></small>
                 </div>
             </li>
@@ -207,7 +204,7 @@ foreach ($menu_control as $key => $value) {
 
                 </ul>
             </li>
-<?php foreach ($menu_control as $mkey => $mvalue) { ?>
+            <?php foreach ($menu_control as $mkey => $mvalue) { ?>
 
                 <li class="has-sub <?php echo $mvalue['active']; ?>">
                     <a href="javascript:;">
@@ -216,17 +213,17 @@ foreach ($menu_control as $key => $value) {
                         <span><?php echo $mvalue['title']; ?></span>
                     </a>
                     <ul class="sub-menu">
-    <?php
-    $submenu = $mvalue['sub_menu'];
-    foreach ($submenu as $key => $value) {
-        ?>
+                        <?php
+                        $submenu = $mvalue['sub_menu'];
+                        foreach ($submenu as $key => $value) {
+                            ?>
                             <li><a href="<?php echo $value; ?>"><?php echo $key; ?></a></li>
                         <?php } ?>
                     </ul>
                 </li>
-                    <?php } ?>
-
-
+            <?php } ?>
+            <li class="nav-header">Tailor Admin V <?php echo PANELVERSION; ?></li>
+            <li class="nav-header">-</li>
         </ul>
         <!-- end sidebar nav -->
     </div>

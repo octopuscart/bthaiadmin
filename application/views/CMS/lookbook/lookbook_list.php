@@ -45,7 +45,7 @@ function truncate($str, $len) {
     <!-- begin breadcrumb -->
     <ol class="breadcrumb pull-right">
         <li><a href="javascript:;">Home</a></li>
-        <li class="active">Blog List</li>
+        <li class="active">Look Book List</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
