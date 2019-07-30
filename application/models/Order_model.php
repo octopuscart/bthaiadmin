@@ -177,7 +177,7 @@ class Order_model extends CI_Model {
             $this->email->subject($subject);
             $checkcode = REPORT_MODE;
             if ($checkcode == 0) {
-                ob_clean();
+//                ob_clean();
                 echo $this->load->view('Email/order_mail', $order_details, true);
             } else {
                 $this->email->message($this->load->view('Email/order_mail', $order_details, true));
