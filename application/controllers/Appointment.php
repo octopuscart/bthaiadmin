@@ -77,7 +77,7 @@ class Appointment extends CI_Controller {
         $this->db->order_by('id desc');
         $query = $this->db->get('appointment_entry');
         $last_id = $query->row();
-        $data = array("last_aid" => $last_id->id + 1);
+        $data = array("last_aid" => $last_id?($last_id->id + 1):1);
         if (isset($_POST['set_date'])) {
             $appId = $this->input->post('aid');
             $from_date = $this->input->post('start_date');
