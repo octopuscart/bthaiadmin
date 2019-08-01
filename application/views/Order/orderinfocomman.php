@@ -1,14 +1,14 @@
 <style>
     tr.invoice_footer td {
-    background: #2d353c;
-    color: white;
-    font-size: 12px;
-}
-     tr.invoice_footer th {
-    background: #2d353c;
-    color: white;
-    font-size: 18px;
-}
+        background: #2d353c;
+        color: white;
+        font-size: 12px;
+    }
+    tr.invoice_footer th {
+        background: #2d353c;
+        color: white;
+        font-size: 18px;
+    }
 </style>
 <div class="row">
     <div class="col-md-12">
@@ -225,7 +225,7 @@
                     </td>
 
                     <td style="text-align: right">
-                        <?php echo $product->price; ?>
+                        <?php echo DEFAULT_PAYMENT == 'No' ? '--' :  $product->price; ?>
                     </td>
 
                     <td style="text-align: right">
@@ -233,7 +233,7 @@
                     </td>
 
                     <td style="text-align: right;">
-                        <?php echo $product->total_price; ?>
+                        <?php echo DEFAULT_PAYMENT == 'No' ? '--' : $product->total_price; ?>
                     </td>
                     </tr>
 
@@ -346,7 +346,7 @@
                             <b>Total Amount in Words:</b><br />
                             <span style="text-transform: capitalize">
                                 <span style="text-transform: capitalize">
-                                    <?php echo $ordersdetails['order_data']->amount_in_word; ?></span>
+                                    <?php echo DEFAULT_PAYMENT == 'No' ? '--' : $ordersdetails['order_data']->amount_in_word; ?></span>
 
                             </span>
                         </td>
@@ -355,7 +355,7 @@
                     <tr class="invoice_footer">
                         <td class="" colspan="2" style="text-align: right">Sub Total</td>
                         <td style="text-align: right;width: 60px">
-                            {{"<?php echo $ordersdetails['order_data']->sub_total_price; ?>"|currency:"<?php echo GLOBAL_CURRENCY; ?> "}}
+                            {{"<?php echo DEFAULT_PAYMENT == 'No' ? '00' :  $ordersdetails['order_data']->sub_total_price; ?>"|currency:"<?php echo GLOBAL_CURRENCY; ?>"}}
                         </td>
                     </tr>
                     <!--                                <tr>
@@ -365,7 +365,7 @@
                     <tr class="invoice_footer">
                         <th colspan="2" style="text-align: right">Total Amount</th>
                         <th style="text-align: right;width: 60px">
-                            {{"<?php echo $ordersdetails['order_data']->total_price; ?>"|currency:"<?php echo GLOBAL_CURRENCY; ?> "}}
+                            {{"<?php  echo DEFAULT_PAYMENT == 'No' ? '00' :  $ordersdetails['order_data']->total_price; ?>"|currency:"<?php echo GLOBAL_CURRENCY; ?>"}}
                         </th>
                     </tr>
 

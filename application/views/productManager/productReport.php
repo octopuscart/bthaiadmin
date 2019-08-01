@@ -1,11 +1,12 @@
 <?php
 $this->load->view('layout/header');
-$this->load->view('layout/topmenu');?>
+$this->load->view('layout/topmenu');
+?>
 
-	
-	<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-	<link href="<?php echo base_url(); ?>assets/plugins/DataTables/css/data-table.css" rel="stylesheet" />
-	<!-- ================== END PAGE LEVEL STYLE ================== -->
+
+<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+<link href="<?php echo base_url(); ?>assets/plugins/DataTables/css/data-table.css" rel="stylesheet" />
+<!-- ================== END PAGE LEVEL STYLE ================== -->
 <style>
     .product_text {
         float: left;
@@ -44,7 +45,7 @@ $this->load->view('layout/topmenu');?>
 <section class="content">
     <div class="">
 
-           <div class="panel panel-inverse">
+        <div class="panel panel-inverse">
             <div class="panel-heading">
                 <h3 class="panel-title">Product Reports</h3>
             </div>
@@ -59,7 +60,13 @@ $this->load->view('layout/topmenu');?>
                             <th style="width:100px;">Title</th>
                             <th style="width:100px;">Color</th>
                             <th style="width:200px;">Short Description</th>
-                            <th >Items Prices</th>
+                            <?php
+                            if (DEFAULT_PAYMENT != 'No') {
+                                ?>
+                                <th >Items Prices</th>
+                                <?php
+                            }
+                            ?>
                             <th style="width: 75px;">Edit</th>
                         </tr>
                     </thead>
@@ -83,7 +90,7 @@ $this->load->view('layout/topmenu');?>
                     <h4 class="modal-title" id="myModalLabel">Add/Change Color</h4>
                 </div>
                 <div class="modal-body">
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" name="save_attr" value="save_attr" class="btn btn-primary">Save</button>
@@ -95,8 +102,8 @@ $this->load->view('layout/topmenu');?>
 </div>
 
 
-	<script src="<?php echo base_url(); ?>assets/plugins/DataTables/js/jquery.dataTables.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/table-manage-default.demo.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/DataTables/js/jquery.dataTables.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/table-manage-default.demo.min.js"></script>
 
 <?php
 $this->load->view('layout/footer');
@@ -104,24 +111,29 @@ $this->load->view('layout/footer');
 <script>
     $(function () {
 
-        $('#tableData').DataTable({
-            "processing": true,
+    $('#tableData').DataTable({
+    "processing": true,
             "serverSide": true,
             "ajax": {
-                url: "<?php echo site_url("ProductManager/productReportApi") ?>",
-                type: 'GET'
+            url: "<?php echo site_url("ProductManager/productReportApi") ?>",
+                    type: 'GET'
             },
             "columns": [
-                {"data": "s_n"},
-                {"data": "image"},
-                {"data": "category"},
-                {"data": "sku"},
-                {"data": "title"},
-                {"data": "color"},
-                {"data": 'short_description'},
-                {"data": "items_prices"},
-                {"data": "edit"}]
-        })
+            {"data": "s_n"},
+            {"data": "image"},
+            {"data": "category"},
+            {"data": "sku"},
+            {"data": "title"},
+            {"data": "color"},
+            {"data": 'short_description'},
+<?php
+if (DEFAULT_PAYMENT != 'No') {
+    ?>
+                {"data": "items_prices"}, <?php } ?>
+
+            {"data": "edit"}]
     })
+    }
+    )
 
 </script>

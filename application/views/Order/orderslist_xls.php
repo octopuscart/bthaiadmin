@@ -28,7 +28,7 @@
                 ?>
                 <tr>
                     <td><?php echo $value->order_no; ?></td>
-                    <td><?php echo $value->total_price; ?></td>
+                    <td><?php echo DEFAULT_PAYMENT == 'No' ? '--' :  $value->total_price; ?></td>
                     <td><?php echo $value->total_quantity; ?></td>
                     <td><?php echo $value->items; ?></td>
                     <td><?php echo $value->measurement_style; ?></td>

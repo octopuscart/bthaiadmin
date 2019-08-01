@@ -553,7 +553,7 @@ class Order extends CI_Controller {
         }
         $filename = 'orders_report_' . $daterange . ".xls";
         ob_clean();
-        header("Content-Disposition: attachment; filename='$filename'");
+        header("Content-Disposition: attachment; filename=$filename");
         header("Content-Type: application/vnd.ms-excel");
         echo $html;
     }

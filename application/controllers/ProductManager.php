@@ -682,7 +682,7 @@ class ProductManager extends CI_Controller {
             $product_folders = explode(", ", product_folders);
             $imageurl = "";
             if (count($product_folders)) {
-                $imageurl = product_image_base . str_replace("folder", $pvalue['folder'], $product_folders[0]);
+                $imageurl = product_image_base . PRODUCT_PATH_PRE . $pvalue['folder'] . PRODUCT_PATH_POST;
             }
 
 
@@ -714,7 +714,9 @@ class ProductManager extends CI_Controller {
             }
 
             $pricetable .= '</table>';
+            if(DEFAULT_PAYMENT!='No'){
             $temparray['items_prices'] = $pricetable;
+            }
 
             $temparray['edit'] = '<a href="' . site_url('ProductManager/edit_product/' . $pvalue['id']) . '" class="btn btn-danger"><i class="fa fa-edit"></i> Edit</a>';
 
@@ -809,7 +811,7 @@ class ProductManager extends CI_Controller {
         foreach ($product_result as $rkey => $rvalue) {
             $imageurl = "";
             if (count($product_folders)) {
-                $imageurl = product_image_base . str_replace("folder", $rvalue->folder, $product_folders[0]);
+                $imageurl = product_image_base . PRODUCT_PATH_PRE . $rvalue->folder . PRODUCT_PATH_POST;
             }
             $rvalue->image = $imageurl;
             array_push($productarray, $rvalue);
@@ -834,7 +836,7 @@ class ProductManager extends CI_Controller {
             }
         }
 
-$product_model = $this->Product_model;
+        $product_model = $this->Product_model;
         $data['product_model'] = $product_model;
         $this->load->view('productManager/productSorting', $data);
     }

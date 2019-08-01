@@ -1,6 +1,7 @@
 <?php
 $this->load->view('layout/header');
-$this->load->view('layout/topmenu');?>
+$this->load->view('layout/topmenu');
+?>
 
 <style>
     .item_headers{
@@ -20,18 +21,24 @@ $this->load->view('layout/topmenu');?>
 <!-- Main content -->
 <section class="content" ng-controller="category_controller">
     <div class="row">
-<div class='col-md-12'>
-        <div class="alert alert-warning alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-warning"></i> Alert!</h4>
-            Defining category items price will effect to products price, need attention to operate this page. 
+        
+      
+        
+        <div class='col-md-12'>
+            <div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-warning"></i> Alert!</h4>
+                Defining category items price will effect to products price, need attention to operate this page. 
+            </div>
         </div>
 
-</div>
+
+
+
         <!--add category-->
         <div class='col-md-4'>
-           <div class="panel panel-inverse">
-                   <div class="panel-heading">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
                     <h3 class="panel-title">Create Price Category</h3>
                 </div>
                 <div class="panel-body">
@@ -88,8 +95,8 @@ $this->load->view('layout/topmenu');?>
 
         <!--add category-->
         <div class='col-md-8'>
-             <div class="panel panel-inverse">
-                   <div class="panel-heading">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
                     <h3 class="panel-title">Price Category</h3>
                 </div>
                 <div class="panel-body">
@@ -99,7 +106,7 @@ $this->load->view('layout/topmenu');?>
                             ?>
                             <tr class="item_headers items_row">
                                 <th colspan="2">
-                                    <?php echo $value->category_name; ?>
+    <?php echo $value->category_name; ?>
                                 </th>
                                 <td>
                                     <form action='#' method="post" class='pull-right'>
@@ -159,17 +166,13 @@ $this->load->view('layout/footer');
 <script>
     var jsondata;
     var selectedcategory;
-
     Admin.controller('category_controller', function ($scope, $http, $filter, $timeout) {
-        $scope.selectedCategory = {
-            "selected": {}, "parents": [],
+    $scope.selectedCategory = {
+    "selected": {}, "parents": [],
             "category_string": "Main Category",
             "category": {'parent_id': '0', 'category_name': '', 'description': '', 'id': ''},
             "operation": "Add Category"
-        };
-
-
-
+    };
     })
 
 

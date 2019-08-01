@@ -19,6 +19,15 @@ $product_menu = array(
         "Product Sorting" => site_url("ProductManager/productSorting"),
     ),
 );
+
+
+
+if (DEFAULT_PAYMENT == 'No') {
+    unset($product_menu['sub_menu']['Items Prices']);
+} else {
+    
+}
+
 array_push($menu_control, $product_menu);
 
 

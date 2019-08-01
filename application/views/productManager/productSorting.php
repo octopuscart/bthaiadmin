@@ -1,6 +1,7 @@
 <?php
 $this->load->view('layout/header');
-$this->load->view('layout/topmenu');?>
+$this->load->view('layout/topmenu');
+?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/treejs/themes/default/style.min.css">
 <script src="<?php echo base_url(); ?>assets/treejs/jstree.min.js"></script>
 <style>
@@ -26,7 +27,7 @@ $this->load->view('layout/topmenu');?>
         <!--list of category-->
         <div class='col-md-3'>
             <div class="panel panel-inverse">
-                   <div class="panel-heading">
+                <div class="panel-heading">
                     <h3 class="panel-title">Categories</h3>
                 </div>
                 <div class="panel-body">
@@ -40,8 +41,8 @@ $this->load->view('layout/topmenu');?>
             </div>
 
 
-              <div class="panel panel-inverse">
-                   <div class="panel-heading">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
                     <h3 class="panel-title">Bulk Change</h3>
                 </div>
                 <div class="panel-body">
@@ -80,18 +81,11 @@ $this->load->view('layout/topmenu');?>
         <div class="col-md-9">
 
             <div class="nav-tabs-custom">
+                
+                <ul class="nav nav-tabs" style="    padding: 10px;">
 
-                <ul class="nav nav-tabs">
-                    <li class="pull-left header"><i class="fa fa-th"></i>{{selectedCategory.category_string}}</li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Show Products <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Published</a></li>
-                            <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Unpublished</a></li>
-                        </ul>
+                    <li>
+                    <h5>{{selectedCategory.category_string}}</h5>
                     </li>
                     <li class="pull-right">
 
@@ -124,7 +118,7 @@ $this->load->view('layout/topmenu');?>
                                     </div><!-- /input-group -->
                                     </p>
                                     <p>
-                                   
+
                                     <div class="btn-group btn-group-sm" style="width: 100%" >
                                         <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Action <span class="caret"></span>
@@ -169,8 +163,8 @@ $this->load->view('layout/topmenu');?>
                 <div class="modal-dialog modal-sm" role="document">
                     <div class="modal-content">
 
-                         <div class="panel panel-inverse">
-                   <div class="panel-heading">
+                        <div class="panel panel-inverse">
+                            <div class="panel-heading">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h3 class="box-title">Change Categories</h3>
                             </div>
@@ -338,7 +332,7 @@ $this->load->view('layout/footer');
                                                         });
                                                     }
 
-                                                    $scope.getProducts($scope.selectedCategory.selected_category)
+                                                    $scope.getProducts(45)
 
 
                                                     $scope.changeIndex = function (product) {

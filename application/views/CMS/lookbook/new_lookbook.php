@@ -43,6 +43,7 @@ $this->load->view('layout/topmenu');
             <div class="wrapper">
                 <div class="p-30 bg-white">
                     <!-- begin email form -->
+                    <?php if($categories){?>
                     <form action="#" method="post" enctype="multipart/form-data">
                         <!-- begin email to -->
                         <label class="control-label" style='font-size: 15px;'>Category: <span id="category_name"><?php echo $categories[0]['category_name'];?></span></label>
@@ -84,6 +85,14 @@ $this->load->view('layout/topmenu');
                         <!-- end email content -->
                         <button type="submit" name="submit_data" class="btn btn-primary p-l-40 p-r-40">Send</button>
                     </form>
+                    <?php
+                    }
+                    else{
+                        echo "<h2>No Category Found<br/><small>Add Category Atleat One Category.</a></h2>";
+                        echo "<a href=". site_url("CMS/lookbookCategories")." class='btn btn-default btn-sm'>Add Category</a>";
+                        
+                    }
+                    ?>
                     <!-- end email form -->
                 </div>
             </div>

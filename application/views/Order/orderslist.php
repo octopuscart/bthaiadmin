@@ -80,7 +80,7 @@ $this->load->view('layout/topmenu');
                                                     </tr>
                                                     <tr>
                                                         <th>Total Amount</th>
-                                                        <td>: {{<?php echo $value->total_price; ?>|currency:" "}}</td>
+                                                        <td>: {{<?php  echo DEFAULT_PAYMENT == 'No' ? '00' :  $value->total_price; ?>|currency:" "}}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Total Products</th>
