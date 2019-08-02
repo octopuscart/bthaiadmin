@@ -132,7 +132,7 @@ class Order extends CI_Controller {
         $data['vendor_orders'] = count($vendororderlist);
         $data['total_order'] = count($orderslistr);
         $data['total_users'] = count($userlist);
-      
+
         $this->load->library('JsonSorting', $orderslistr);
         $orderstatus = $this->jsonsorting->collect_data('status');
         $orderuser = $this->jsonsorting->collect_data('name');
@@ -198,7 +198,7 @@ class Order extends CI_Controller {
             $query = $this->db->get('user_order_status');
             $orderstatuslist = $query->result();
 
-            $currentstatus = $orderstatuslist[0]->status;
+            $currentstatus = $orderstatuslist? $orderstatuslist[0]->status:array();
 
             if ($order_status) {
                 
@@ -207,6 +207,9 @@ class Order extends CI_Controller {
                 switch ($currentstatus) {
                     case "Order Confirmed":
                         redirect("Order/orderdetails_payments/$order_key");
+                        break;
+                    case "Order Enquiry":
+                        redirect("Order/orderdetails_enquiry/$order_key");
                         break;
                     case "Payment Confirmed":
                         redirect("Order/orderdetails_shipping/$order_key");
@@ -252,8 +255,57 @@ class Order extends CI_Controller {
         }
         $this->load->view('Order/orderdetails', $data);
     }
+    
+    public function orderMailTest($order_key) {
+         $this->Order_model->order_mail_confirm($order_key, "");
+    }
 
- 
+    public function orderdetails_enquiry($order_key) {
+        $order_status = $this->input->get('status');
+        $data['status'] = $order_status;
+        if ($this->user_type == 'Customer') {
+            redirect('UserManager/not_granted');
+        }
+        $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
+
+        $vendor_order_details = $this->Order_model->getVendorsOrder($order_key);
+        $data['vendor_order'] = $vendor_order_details;
+        if ($order_details) {
+            $order_id = $order_details['order_data']->id;
+            $data['ordersdetails'] = $order_details;
+
+
+
+            $data['order_key'] = $order_key;
+            $this->db->order_by('id', 'desc');
+            $this->db->where('order_id', $order_id);
+            $query = $this->db->get('user_order_status');
+            $orderstatuslist = $query->result();
+            $data['user_order_status'] = $orderstatuslist;
+            if (isset($_POST['submit'])) {
+                $productattr = array(
+                    'c_date' => date('Y-m-d'),
+                    'c_time' => date('H:i:s'),
+                    'status' => $this->input->post('status'),
+                    'remark' => $this->input->post('remark'),
+                    'description' => $this->input->post('description'),
+                    'order_id' => $order_id
+                );
+                $this->db->insert('user_order_status', $productattr);
+                if ($this->input->post('sendmail') == TRUE) {
+                    try {
+                        $this->Order_model->order_mail_confirm($order_key, "");
+                    } catch (Exception $e) {
+                        echo 'Message: ' . $e->getMessage();
+                    }
+                }
+                redirect("Order/orderdetails/$order_key");
+            }
+        } else {
+            redirect('/');
+        }
+        $this->load->view('Order/orderdetails_enquiry', $data);
+    }
 
     public function orderdetails_payments($order_key) {
         $order_status = $this->input->get('status');
@@ -262,7 +314,7 @@ class Order extends CI_Controller {
             redirect('UserManager/not_granted');
         }
         $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
-      
+
         $vendor_order_details = $this->Order_model->getVendorsOrder($order_key);
         $data['vendor_order'] = $vendor_order_details;
         if ($order_details) {

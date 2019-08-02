@@ -714,8 +714,8 @@ class ProductManager extends CI_Controller {
             }
 
             $pricetable .= '</table>';
-            if(DEFAULT_PAYMENT!='No'){
-            $temparray['items_prices'] = $pricetable;
+            if (DEFAULT_PAYMENT != 'No') {
+                $temparray['items_prices'] = $pricetable;
             }
 
             $temparray['edit'] = '<a href="' . site_url('ProductManager/edit_product/' . $pvalue['id']) . '" class="btn btn-danger"><i class="fa fa-edit"></i> Edit</a>';
@@ -813,6 +813,10 @@ class ProductManager extends CI_Controller {
             if (count($product_folders)) {
                 $imageurl = product_image_base . PRODUCT_PATH_PRE . $rvalue->folder . PRODUCT_PATH_POST;
             }
+            $this->db->where('product_id', $rvalue->id);
+            $query = $this->db->get('product_attribute');
+            $colorslist = $query->result();
+            $rvalue->colors = $colorslist;
             $rvalue->image = $imageurl;
             array_push($productarray, $rvalue);
         }
@@ -839,6 +843,38 @@ class ProductManager extends CI_Controller {
         $product_model = $this->Product_model;
         $data['product_model'] = $product_model;
         $this->load->view('productManager/productSorting', $data);
+    }
+
+    function productColors() {
+
+        if (isset($_POST['apply_category'])) {
+            $productids = $this->input->post('product_id');
+            if (count($productids)) {
+              
+
+                foreach ($productids as $pkey => $pvalue) {
+                    $productattr = array(
+                        'product_id' => $pvalue,
+                        'attribute_id' => $this->input->post('color_id'),
+                        'attribute' => "color",
+                        'attribute_value' => $this->input->post('color_code'),
+                        'attribute_value_id' => ''
+                    );
+                    $this->db->insert('product_attribute', $productattr);
+                }
+            }
+        }
+
+        $this->db->order_by('display_index');
+        $query = $this->db->get('configuration_colors');
+        $colorslist = $query->result();
+        $data['colorslist'] = $colorslist;
+
+
+        $product_model = $this->Product_model;
+        $data['product_model'] = $product_model;
+
+        $this->load->view('productManager/productColor', $data);
     }
 
 }

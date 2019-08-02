@@ -17,6 +17,7 @@ $product_menu = array(
         "Categories" => site_url("ProductManager/categories"),
         "Items Prices" => site_url("ProductManager/categoryItems"),
         "Product Sorting" => site_url("ProductManager/productSorting"),
+        "Product Colors" => site_url("ProductManager/productColors"),
     ),
 );
 

@@ -65,7 +65,7 @@ $this->load->view('layout/topmenu');
                         </div>
                         <!-- end email to -->
                         <!-- begin email subject -->
-                        <label class="control-label">Subject:</label>
+                        <label class="control-label">Style No.:</label>
                         <div class="m-b-15">
                             <input type="text" class="form-control" name="title" required="" />
                         </div>

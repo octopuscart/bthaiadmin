@@ -19,13 +19,21 @@ $this->load->view('layout/topmenu');
         background: #fff;
         color: black;
     }
+    .colordiv_box{
+        width:100%;
+        height: 20px;
+    }
+    .colordiv_product{
+        padding: 10px;
+        float: left;
+    }
 </style>
 <!-- Main content -->
 <section class="content" ng-controller="category_controller">
     <div class="row">
 
         <!--list of category-->
-        <div class='col-md-3'>
+        <div class='col-md-2'>
             <div class="panel panel-inverse">
                 <div class="panel-heading">
                     <h3 class="panel-title">Categories</h3>
@@ -47,7 +55,13 @@ $this->load->view('layout/topmenu');
                 </div>
                 <div class="panel-body">
                     <form method="post" action="#">
-                        <input type="hidden" name="category_id" value="{{selectedCategory2.selected_category}}">
+                        <div ng-if="selectedCategory2.selected_color">
+                            <div class="colordiv" style="background:  {{colorlist[selectedCategory2.selected_color]['code']}};    padding: 20px;    border: 1px solid #000;"></div>
+                            <p class="textoverflow text-center">{{colorlist[selectedCategory2.selected_color]['title']}}</p>
+                        </div>
+                        <input type="hidden" name="color_id" value="{{selectedCategory2.selected_color}}">
+
+                        <input type="hidden" name="color_code" value="{{colorlist[selectedCategory2.selected_color]['code']}}">
                         <div class="row">
                             <div class="col-sm-6 col-md-4 productitem" style="padding-bottom: 10px;" id="{{product.id}}" atrindex ="{{$index}}" atrd_index ="{{product.display_index}}" ng-repeat="product in productdata.products| filter : {
                                     checked:'true'
@@ -56,11 +70,11 @@ $this->load->view('layout/topmenu');
                                 <input type="hidden" name="product_id[]" value="{{product.id}}">
                             </div>
                         </div>
-                        {{selectedCategory2.category_string}}
                         <br/>
 
-                        <div class="btn-group btn-group-sm" role="group" aria-label="..." >
-                            <button type="button" class="btn  btn-default" data-toggle="modal" data-target="#categorymodel" ng-click="changeCategory(product)">Change Category</button>
+
+
+                        <div class="btn-group btn-group-sm" role="group" aria-label="..."  ng-if="selectedCategory2.selected_color">
                             <button type="submit" name="apply_category" value="apply" class="btn btn-default">Apply</button>
                         </div>
                     </form>
@@ -75,15 +89,28 @@ $this->load->view('layout/topmenu');
         </div>
         <!--end of list category-->
 
+        <div class="col-md-3">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Colors</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <?php foreach ($colorslist as $key => $value) { ?>
+
+                            <label class="col-md-3" style="background:<?php echo $value->code; ?>;padding:15px;" title="<?php echo $value->title; ?>">
+                                <input type="radio" ng-model="selectedCategory2.selected_color" name="color_id" value="<?php echo $value->id; ?>" ><br/>
+                            </label>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-
-        <div class="col-md-9">
-
+        <div class="col-md-7">
             <div class="nav-tabs-custom">
-
                 <ul class="nav nav-tabs" style="    padding: 10px;">
-
                     <li>
                         <h5>{{selectedCategory.category_string}}</h5>
                     </li>
@@ -96,7 +123,6 @@ $this->load->view('layout/topmenu');
                     </li>
                 </ul>
                 <div class="tab-content">
-
                     <div class="row" id="sortable">
                         <div class="col-sm-6 col-md-3 productitem" id="{{product.id}}" atrindex ="{{$index}}" atrd_index ="{{product.display_index}}" ng-repeat="product in productdata.products| filter : {
                                     title:searchproduct
@@ -105,37 +131,15 @@ $this->load->view('layout/topmenu');
                                 <img src="{{product.image}}" alt="..." style="height: 150px">
                                 <div class="caption">
                                     <h3>{{product.title}}</h3>
-                                    <p>
-                                    <div class="input-group input-group-sm">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button" ng-click="changeIndex(product)">Set Index</button>
-                                        </span>
-                                        <input type="text" class="form-control" ng-model="product.display_index">
-                                        <span class="input-group-addon">
-                                            <input type="checkbox" aria-label="..." ng-model="product.checked">
-                                        </span>
-
-                                    </div><!-- /input-group -->
-                                    </p>
-                                    <p>
-
-                                    <div class="btn-group btn-group-sm" style="width: 100%" >
-                                        <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Action <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><button class="btn  btn-default" data-toggle="modal" data-target="#categorymodel" ng-click="changeCategory(product)">Change Category</button></li>
-
-                                            <li role="separator" class="divider"></li>
-                                            <li><button class="btn btn-default" ng-if="product.status == 1" ng-click="publishing(product, 0)">Unpublish</button></li>
-                                            <li><button class="btn  btn-default" ng-if="product.status == 0" ng-click="publishing(product, 1)">>Publish</button></li>
-
-                                        </ul>
+                                    <div class="colordiv_box">
+                                        <div class="colordiv_product" ng-repeat="colorl in product.colors" style="background:{{colorl.attribute_value}};padding:10px;"></div>
                                     </div>
+                                    <div class="input-group input-group-sm">
+                                        <label>
+                                            <input type="checkbox"  aria-label="..." ng-model="product.checked"> Check This
+                                        </label>
+                                    </div><!-- /input-group -->
 
-
-
-                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -212,15 +216,24 @@ $this->load->view('layout/footer');
                                                         "operation": "Add Category",
                                                         "selected_category": 0
                                                     };
+
+                                                    $scope.colorlist = {};
+                                                    var colorjson = <?php echo json_encode($colorslist); ?>;
+                                                    for (color in colorjson) {
+                                                        console.log(color);
+                                                        var colorobj = colorjson[color];
+                                                        $scope.colorlist[colorobj['id']] = colorobj;
+                                                    }
+
+
+
                                                     var url = "<?php echo base_url(); ?>index.php/ProductManager/category_api";
                                                     $http.get(url).then(function (rdata) {
                                                         $scope.categorydata = rdata.data;
                                                         $('#using_json_2').jstree({'core': {
                                                                 'data': $scope.categorydata.tree
                                                             }});
-                                                        $('#using_json_3').jstree({'core': {
-                                                                'data': $scope.categorydata.tree
-                                                            }});
+
                                                     })
 
                                                     $scope.resetData = function () {
@@ -255,57 +268,18 @@ $this->load->view('layout/footer');
                                                             $("#parent_id").val(objdata.id);
                                                             $scope.selectedCategory.category_string = catsst.join("->")
                                                         }, 100)
-                                                    })
-
-                                                    //edit data
-                                                    $scope.editData = function () {
-                                                        console.log($scope.selectedCategory.selected.id);
-                                                        $scope.selectedCategory.operation = "Edit";
-                                                        var cobj = $scope.categorydata.list[$scope.selectedCategory.selected.id];
-                                                        $scope.selectedCategory.category.parent_id = cobj.id;
-                                                        $scope.selectedCategory.category.category_name = cobj.text;
-                                                        $scope.selectedCategory.category.description = cobj.description;
-                                                    }
-                                                    //edit data
+                                                    });
 
 
 
-                                                    //delete data
-                                                    $scope.deleteData = function (cateid) {
-                                                        var url = "<?php echo base_url(); ?>index.php/ProductManager/categorie_delete/" + cateid;
-                                                        $http.get(url).then(function (rdata) {
-                                                            window.location.reload();
-                                                        })
-                                                    }
                                                     //end of delete data
                                                     $scope.selectedCategory2 = {"selected": {}, "parents": [],
                                                         "category_string": "Main Category",
                                                         "category_string2": "Main Category",
                                                         "category": {'parent_id': '0', 'category_name': '', 'description': '', 'id': ''},
                                                         "operation": "Add Category",
-                                                        "selected_category": 0
+                                                        "selected_color": 0
                                                     };
-                                                    $(document).on("click", "#using_json_3 [selectcategory]", function (event) {
-                                                        var catid = $(this).attr("selectcategory");
-                                                        var objdata = $('#using_json_3').jstree('get_node', catid);
-                                                        var catlist = objdata.parents;
-                                                        $scope.selectedCategory2.selected_category = catid;
-                                                        $("#categorymodel").modal("hide");
-                                                        $timeout(function () {
-                                                            $scope.selectedCategory2.selected = objdata;
-                                                            var catsst = [];
-                                                            for (i = catlist.length + 1; i >= 0; i--) {
-                                                                var catid = catlist[i];
-                                                                var catstr = $scope.categorydata.list[catid];
-                                                                if (catstr) {
-                                                                    catsst.push(catstr.text);
-                                                                }
-                                                            }
-                                                            catsst.push(objdata.text);
-                                                            $("#parent_id").val(objdata.id);
-                                                            $scope.selectedCategory2.category_string = catsst.join("->")
-                                                        }, 100)
-                                                    })
 
                                                     $scope.productdata = {'products': [], 'product_count': 0, 'productscounter': [], 'selectedproduct': {}, };
                                                     $scope.getProducts = function (category_id) {
@@ -326,32 +300,10 @@ $this->load->view('layout/footer');
                                                                     num_page_links_to_display: 5,
                                                                 });
                                                             }, 1500)
-
-
-
                                                         });
                                                     }
 
                                                     $scope.getProducts(45)
-
-
-                                                    $scope.changeIndex = function (product) {
-                                                        var cindex = product.display_index;
-                                                        var ids = product.id;
-                                                        var url = "<?php echo base_url(); ?>index.php/ProductManager/productSortingChangeIndexApi/" + ids + "/" + cindex;
-                                                        $http.get(url).then(function (rdata) {
-                                                            $scope.getProducts($scope.selectedCategory.selected_category)
-                                                        })
-                                                    }
-
-                                                    $scope.publishing = function (product, status) {
-                                                        var status = status;
-                                                        var ids = product.id;
-                                                        var url = "<?php echo base_url(); ?>index.php/ProductManager/productSortingChangeStatusApi/" + ids + "/" + status;
-                                                        $http.get(url).then(function (rdata) {
-                                                            $scope.getProducts($scope.selectedCategory.selected_category)
-                                                        })
-                                                    }
 
 
 

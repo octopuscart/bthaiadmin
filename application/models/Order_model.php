@@ -10,6 +10,68 @@ class Order_model extends CI_Model {
         $this->load->database();
     }
 
+    function convert_num_word($number) {
+        $no = round($number);
+        $point = round($number - $no, 2) * 100;
+        $hundred = null;
+        $digits_1 = strlen($no);
+        $i = 0;
+        $str = array();
+        $wordsz = array('0' => 'zero', '1' => 'one', '2' => 'two',
+            '3' => 'three', '4' => 'four', '5' => 'five', '6' => 'six',
+            '7' => 'seven', '8' => 'eight', '9' => 'nine',);
+        $words = array('0' => '', '1' => 'one', '2' => 'two',
+            '3' => 'three', '4' => 'four', '5' => 'five', '6' => 'six',
+            '7' => 'seven', '8' => 'eight', '9' => 'nine',
+            '10' => 'ten', '11' => 'eleven', '12' => 'twelve',
+            '13' => 'thirteen', '14' => 'fourteen',
+            '15' => 'fifteen', '16' => 'sixteen', '17' => 'seventeen',
+            '18' => 'eighteen', '19' => 'nineteen', '20' => 'twenty',
+            '30' => 'thirty', '40' => 'forty', '50' => 'fifty',
+            '60' => 'sixty', '70' => 'seventy',
+            '80' => 'eighty', '90' => 'ninety');
+        $digits = array('', 'hundred', 'thousand', 'lakh', 'crore');
+        while ($i < $digits_1) {
+            $divider = ($i == 2) ? 10 : 100;
+            $number = floor($no % $divider);
+            $no = floor($no / $divider);
+            $i += ($divider == 10) ? 1 : 2;
+            if ($number) {
+                $plural = (($counter = count($str)) && $number > 9) ? 's' : null;
+                $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+                $str [] = ($number < 21) ? $words[$number] .
+                        " " . $digits[$counter] . $plural . " " . $hundred :
+                        $words[floor($number / 10) * 10]
+                        . " " . $words[$number % 10] . " "
+                        . $digits[$counter] . $plural . " " . $hundred;
+            } else
+                $str[] = null;
+        }
+        $str = array_reverse($str);
+        $result = implode('', $str);
+        $result = $result ? $result : $wordsz[$result / 10];
+        $points = ($point) ?
+                " and " . $wordsz[$point / 10] . " " .
+                $wordsz[$point = $point % 10] : '';
+        return "Only " . GLOBAL_CURRENCY . $result . " " . ($points ? "" . $points . " Cents" : "") . "";
+    }
+
+    function recalculateOrder($order_id) {
+        $this->db->select('sum(total_price) as total_price');
+        $this->db->where('order_id', $order_id);
+        $query = $this->db->get('cart');
+        $cart_items = $query->row();
+
+        $totalPrice = $cart_items->total_price;
+        $orderupdate = array(
+            'amount_in_word' => $this->convert_num_word($totalPrice),
+            'sub_total_price' => $totalPrice,
+            'total_price' => $totalPrice);
+        $this->db->set($orderupdate);
+        $this->db->where("id", $order_id);
+        $this->db->update('user_order');
+    }
+
 //get order details  
     public function getOrderDetails($key_id, $is_key = 0) {
         $order_data = array();
@@ -173,7 +235,7 @@ class Order_model extends CI_Model {
             $this->email->from(EMAIL_BCC, $sendername);
             $this->email->to($order_details['order_data']->email);
             $this->email->bcc(EMAIL_BCC);
-            $subject = SITE_NAME." - " . $currentstatus->remark;
+            $subject = SITE_NAME . " - " . $currentstatus->remark;
             $this->email->subject($subject);
             $checkcode = REPORT_MODE;
             if ($checkcode == 0) {
@@ -182,12 +244,39 @@ class Order_model extends CI_Model {
             } else {
                 $this->email->message($this->load->view('Email/order_mail', $order_details, true));
                 $this->email->print_debugger();
-               echo $result = $this->email->send();
+                echo $result = $this->email->send();
             }
         }
     }
 
-    function order_pdf($order_id, $subject = "") {  
+    function order_mail_confirm($order_id, $subject = "") {
+        setlocale(LC_MONETARY, 'en_US');
+        $order_details = $this->getOrderDetailsV2($order_id, 'key');
+        $emailsender = EMAIL_SENDER;
+        $sendername = EMAIL_SENDER_NAME;
+        $email_bcc = EMAIL_BCC;
+
+        if ($order_details) {
+            $currentstatus = $order_details['order_status'][0];
+            $order_no = $order_details['order_data']->order_no;
+            $this->email->from(EMAIL_BCC, $sendername);
+            $this->email->to($order_details['order_data']->email);
+            $this->email->bcc(EMAIL_BCC);
+            $subject = SITE_NAME . " - " . $currentstatus->remark;
+            $this->email->subject($subject);
+            $checkcode = REPORT_MODE;
+            if ($checkcode == 0) {
+//                ob_clean();
+                echo $this->load->view('Email/order_mail_confirm', $order_details, true);
+            } else {
+                $this->email->message($this->load->view('Email/order_mail_confirm', $order_details, true));
+                $this->email->print_debugger();
+                echo $result = $this->email->send();
+            }
+        }
+    }
+
+    function order_pdf($order_id, $subject = "") {
         setlocale(LC_MONETARY, 'en_US');
         $order_details = $this->getOrderDetailsV2($order_id, 0);
         if ($order_details) {

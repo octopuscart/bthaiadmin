@@ -41,9 +41,12 @@
                                     <?php echo $value->remark; ?><br />
                                     <?php echo $value->description; ?>
                                 </p>
+                                <?php if($key){?>
                                 <a class="btn btn-danger btn-xs"
                                    href="<?php echo site_url('Order/remove_order_status/' . $value->id . "/" . $order_key); ?>"><i
                                         class="fa fa-trash"></i> Remove</a>
+                                        <?php
+                                }?>
                             </div>
 
                         </div>
@@ -73,8 +76,8 @@
             <a class="btn btn-success btn-sm m-b-10"
                href="<?php echo site_url("order/order_pdf/" . $ordersdetails['order_data']->id) ?>"><i
                     class="fa fa-download "></i> Order PDF</a>
-            <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i
-                    class="fa fa-print m-r-5"></i> Print</a>
+<!--            <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i
+                    class="fa fa-print m-r-5"></i> Print</a>-->
         </span>
         <?php echo $ordersdetails['order_data']->order_no; ?>
     </div>
@@ -225,7 +228,13 @@
                     </td>
 
                     <td style="text-align: right">
-                        <?php echo DEFAULT_PAYMENT == 'No' ? '--' :  $product->price; ?>
+                        <?php
+                        if(DEFAULT_PAYMENT == 'No'){
+                        ?>
+                        <span id="cart_price<?php echo $product->id;?>" data-type="text" data-pk="<?php echo $product->id;?>" data-name="price" data-value="<?php echo $product->price;?>" data-url="<?php echo site_url("LocalApi/cartUpdate"); ?>" data-params ={'quantity':'<?php echo $product->quantity; ?>'} data-original-title="Enter Price." class="m-l-5 editable editable-click" tabindex="-1" data-toggle="#edit_contact_no" ><?php echo $product->price;?></span><button class="btn btn-xs btn-link edit_detail" ><i class="fa fa-pencil"></i>Edit</button>
+
+
+                        <?php } else{ echo $product->price;} ?>
                     </td>
 
                     <td style="text-align: right">
@@ -233,7 +242,7 @@
                     </td>
 
                     <td style="text-align: right;">
-                        <?php echo DEFAULT_PAYMENT == 'No' ? '--' : $product->total_price; ?>
+                        <?php echo $product->total_price; ?>
                     </td>
                     </tr>
 
@@ -346,7 +355,7 @@
                             <b>Total Amount in Words:</b><br />
                             <span style="text-transform: capitalize">
                                 <span style="text-transform: capitalize">
-                                    <?php echo DEFAULT_PAYMENT == 'No' ? '--' : $ordersdetails['order_data']->amount_in_word; ?></span>
+                                    <?php echo  $ordersdetails['order_data']->amount_in_word; ?></span>
 
                             </span>
                         </td>
@@ -355,7 +364,7 @@
                     <tr class="invoice_footer">
                         <td class="" colspan="2" style="text-align: right">Sub Total</td>
                         <td style="text-align: right;width: 60px">
-                            {{"<?php echo DEFAULT_PAYMENT == 'No' ? '00' :  $ordersdetails['order_data']->sub_total_price; ?>"|currency:"<?php echo GLOBAL_CURRENCY; ?>"}}
+                            {{"<?php echo  $ordersdetails['order_data']->sub_total_price; ?>"|currency:"<?php echo GLOBAL_CURRENCY; ?>"}}
                         </td>
                     </tr>
                     <!--                                <tr>
@@ -365,7 +374,7 @@
                     <tr class="invoice_footer">
                         <th colspan="2" style="text-align: right">Total Amount</th>
                         <th style="text-align: right;width: 60px">
-                            {{"<?php  echo DEFAULT_PAYMENT == 'No' ? '00' :  $ordersdetails['order_data']->total_price; ?>"|currency:"<?php echo GLOBAL_CURRENCY; ?>"}}
+                            {{"<?php echo  $ordersdetails['order_data']->total_price; ?>"|currency:"<?php echo GLOBAL_CURRENCY; ?>"}}
                         </th>
                     </tr>
 

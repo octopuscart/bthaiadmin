@@ -44,6 +44,21 @@ define('DEFAULT_PAYMENT', $globleConnectCheckout['default_payment_mode']);
 define('PRODUCT_PATH_PRE', $globleConnectCheckout['product_path_pre']);
 define('PRODUCT_PATH_POST', $globleConnectCheckout['product_path_post']);
 
+$baselink = 'http://' . $_SERVER['SERVER_NAME'];
+
+if (strpos($baselink, '192.168')) {
+    $islocal = true;
+     $baselinkmainsite = 'http://' . $_SERVER['SERVER_NAME'] . $configuration['localpath']."/index.php/";;
+} elseif (strpos($baselink, 'localhost')) {
+    $islocal = true;
+    $baselinkmainsite = 'http://' . $_SERVER['SERVER_NAME'] . $configuration['localpath']."/index.php/";
+} else {
+    $baselinkmainsite = $configuration['site_url'];
+}
+define('MAIN_WEBSITE', $baselinkmainsite);
+
+
+
 /*
   |--------------------------------------------------------------------------
   | Display Debug backtrace
