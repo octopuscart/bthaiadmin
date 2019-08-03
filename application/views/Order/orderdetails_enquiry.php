@@ -74,14 +74,14 @@ $this->load->view('layout/topmenu');
                             <div class="panel-body">
 
 
-                                <input class="form-control"  name="status" value="Order Confirmation Requested From Client." type='hidden'>
+                                <input class="form-control"  name="status" value="Order Confirmation" type='hidden'>
 
 
 
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Remark <small>(It will be subject of email.)</small></label>
-                                        <input type="text" class="form-control" placeholder="Remark for order status" value="Order Confirmation"  name="remark" required="">
+                                        <input type="text" class="form-control" placeholder="Remark for order status" value="Order Confirmation Has Been Requested From Client."  name="remark" required="">
                                     </div>
                                 </div>
 
