@@ -1,3 +1,4 @@
+<link href="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" />
 <form action="#" method="get" class="form-inline">
     <div class="col-md-7">
         <div class="input-group" id="daterangepicker">
@@ -21,3 +22,6 @@
     </div>
 
 </form>
+
+    <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/moment.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>

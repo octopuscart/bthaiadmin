@@ -10,6 +10,9 @@
         font-size: 18px;
     }
 </style>
+<link href="<?php echo base_url(); ?>assets/plugins/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
+<script src="<?php echo base_url(); ?>assets/plugins/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+
 <div class="row">
     <div class="col-md-12">
         <div class="">
@@ -41,12 +44,12 @@
                                     <?php echo $value->remark; ?><br />
                                     <?php echo $value->description; ?>
                                 </p>
-                                <?php if($key){?>
-                                <a class="btn btn-danger btn-xs"
-                                   href="<?php echo site_url('Order/remove_order_status/' . $value->id . "/" . $order_key); ?>"><i
-                                        class="fa fa-trash"></i> Remove</a>
-                                        <?php
-                                }?>
+                                <?php if ($key != (count($user_order_status) - 1)) { ?>
+                                    <a class="btn btn-danger btn-xs"
+                                       href="<?php echo site_url('Order/remove_order_status/' . $value->id . "/" . $order_key); ?>"><i
+                                            class="fa fa-trash"></i> Remove</a>
+                                    <?php }
+                                    ?>
                             </div>
 
                         </div>
@@ -229,12 +232,16 @@
 
                     <td style="text-align: right">
                         <?php
-                        if(DEFAULT_PAYMENT == 'No'){
+                        if (DEFAULT_PAYMENT == 'No') {
+                            ?>
+                            <span id="cart_price<?php echo $product->id; ?>" data-type="text" data-pk="<?php echo $product->id; ?>" data-name="price" data-value="<?php echo $product->price; ?>" data-url="<?php echo site_url("LocalApi/cartUpdate"); ?>" data-params ={'quantity':'<?php echo $product->quantity; ?>'} data-original-title="Enter Price." class="m-l-5 editable editable-click" tabindex="-1" data-toggle="#edit_contact_no" ><?php echo $product->price; ?></span><button class="btn btn-xs btn-link edit_detail" ><i class="fa fa-pencil"></i>Edit</button>
+
+
+                            <?php
+                        } else {
+                            echo $product->price;
+                        }
                         ?>
-                        <span id="cart_price<?php echo $product->id;?>" data-type="text" data-pk="<?php echo $product->id;?>" data-name="price" data-value="<?php echo $product->price;?>" data-url="<?php echo site_url("LocalApi/cartUpdate"); ?>" data-params ={'quantity':'<?php echo $product->quantity; ?>'} data-original-title="Enter Price." class="m-l-5 editable editable-click" tabindex="-1" data-toggle="#edit_contact_no" ><?php echo $product->price;?></span><button class="btn btn-xs btn-link edit_detail" ><i class="fa fa-pencil"></i>Edit</button>
-
-
-                        <?php } else{ echo $product->price;} ?>
                     </td>
 
                     <td style="text-align: right">
@@ -355,7 +362,7 @@
                             <b>Total Amount in Words:</b><br />
                             <span style="text-transform: capitalize">
                                 <span style="text-transform: capitalize">
-                                    <?php echo  $ordersdetails['order_data']->amount_in_word; ?></span>
+                                    <?php echo $ordersdetails['order_data']->amount_in_word; ?></span>
 
                             </span>
                         </td>
@@ -364,7 +371,7 @@
                     <tr class="invoice_footer">
                         <td class="" colspan="2" style="text-align: right">Sub Total</td>
                         <td style="text-align: right;width: 60px">
-                            {{"<?php echo  $ordersdetails['order_data']->sub_total_price; ?>"|currency:"<?php echo GLOBAL_CURRENCY; ?>"}}
+                            {{"<?php echo $ordersdetails['order_data']->sub_total_price; ?>"|currency:"<?php echo GLOBAL_CURRENCY; ?>"}}
                         </td>
                     </tr>
                     <!--                                <tr>
@@ -374,7 +381,7 @@
                     <tr class="invoice_footer">
                         <th colspan="2" style="text-align: right">Total Amount</th>
                         <th style="text-align: right;width: 60px">
-                            {{"<?php echo  $ordersdetails['order_data']->total_price; ?>"|currency:"<?php echo GLOBAL_CURRENCY; ?>"}}
+                            {{"<?php echo $ordersdetails['order_data']->total_price; ?>"|currency:"<?php echo GLOBAL_CURRENCY; ?>"}}
                         </th>
                     </tr>
 
@@ -423,3 +430,26 @@
 
 
 
+<script>
+$(function () {
+    setTimeout(function () {
+        $('.edit_detail').click(function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            
+            $($(this).prev()).editable({
+             
+                success: function (response, newValue) {
+                    console.log("sdfsdf")
+                    window.location.reload();
+                    if (response.status == 'error')
+                        return response.msg; //msg will be shown in editable form
+                }
+            }
+            );
+    $($(this).prev()).editable('toggle');
+        });
+    }, 1500)
+
+})
+</script>  

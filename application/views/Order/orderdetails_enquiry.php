@@ -140,12 +140,4 @@ $this->load->view('layout/topmenu');
 $this->load->view('layout/footer');
 ?>
 
-<script>
-    $(function () {
-        $('.edit_detail').click(function (e) {
-            e.stopPropagation();
-            e.preventDefault();
-            $($(this).prev()).editable('toggle');
-        });
-    })
-</script>        
+      
