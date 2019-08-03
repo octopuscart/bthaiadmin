@@ -96,7 +96,7 @@ array_push($menu_control, $lookbook_menu);
 //array_push($menu_control, $cms_menu);
 
 
-$msg_menu = array(
+$msg_menu2 = array(
     "title" => "Message Management",
     "icon" => "fa fa-envelope",
     "active" => "",
@@ -105,6 +105,17 @@ $msg_menu = array(
         "Send Mail/Newsletter (Txn.)" => site_url("#"),
     ),
 );
+
+$msg_menu = array(
+    "title" => "Message Management",
+    "icon" => "fa fa-envelope",
+    "active" => "",
+    "sub_menu" => array(
+//        "Report Configuration" => site_url("Configuration/reportConfiguration"),
+    ),
+);
+
+
 array_push($menu_control, $msg_menu);
 
 $schedule_menu = array(
@@ -130,14 +141,15 @@ $user_menu = array(
 );
 
 
-array_push($menu_control, $user_menu);
+//array_push($menu_control, $user_menu);
 
 $setting_menu = array(
     "title" => "Settings",
     "icon" => "fa fa-cogs",
     "active" => "",
     "sub_menu" => array(
-        "Add Sliders" => site_url("#"),
+        "System Log" => site_url("Services/systemLogReport"),
+        "Report Configuration" => site_url("Configuration/reportConfiguration"),
     ),
 );
 

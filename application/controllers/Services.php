@@ -62,9 +62,13 @@ class Services extends CI_Controller {
         $this->load->view("Appointment/setnew", $data);
     }
     
-     function appointment_report(){
+     function systemLogReport(){
         $data = array();
-        $this->load->view("Appointment/report", $data);
+        $this->db->order_by('id', 'desc');
+        $query = $this->db->get('system_log');
+        $systemlog = $query->result();
+        $data['systemlog'] = $systemlog;
+        $this->load->view("Services/systemLogReport", $data);
     }
 
 }

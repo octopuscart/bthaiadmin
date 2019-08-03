@@ -127,6 +127,14 @@ class LocalApi extends REST_Controller {
             $order_details = $this->Order_model->recalculateOrder($cart_items->order_id);
         }
     }
+    
+    function notificationUpdate_get() {
+        $this->db->order_by('id', 'desc');
+        $this->db->limit(5);
+        $query = $this->db->get('system_log');
+        $systemlog = $query->result_array();
+        $this->response($systemlog);
+    }
 
 }
 

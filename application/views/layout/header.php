@@ -28,7 +28,7 @@
         );
         foreach ($styleSheetArray as $title => $stylesheet) {
             ?>
-                    <!-- ================== <?php echo $title ?> ================== -->
+                            <!-- ================== <?php echo $title ?> ================== -->
             <link href="<?php echo base_url(); ?><?php echo $stylesheet; ?>" rel="stylesheet" />
             <?php
         }
@@ -40,7 +40,7 @@
         <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-        	<script src="<?php echo base_url(); ?>assets/plugins/moment/moment.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.min.js"></script>
         <!--[if lt IE 9]>
                 <script src="assets/crossbrowserjs/html5shiv.js"></script>
                 <script src="assets/crossbrowserjs/respond.min.js"></script>
@@ -56,21 +56,22 @@
         <!-- ================== END BASE JS ================== -->
         <!--angular js-->
         <script src="<?php echo base_url(); ?>assets/angular/angular.min.js"></script>
+        
 
     </head>
     <body class="" ng-app="Admin">
 
         <script>
             var Admin = angular.module('Admin', []).config(function ($interpolateProvider, $httpProvider) {
-                //$interpolateProvider.startSymbol('{$');
-                //$interpolateProvider.endSymbol('$}');
-                $httpProvider.defaults.headers.common = {};
-                $httpProvider.defaults.headers.post = {};
-
+            //$interpolateProvider.startSymbol('{$');
+            //$interpolateProvider.endSymbol('$}');
+            $httpProvider.defaults.headers.common = {};
+            $httpProvider.defaults.headers.post = {};
             });
+            var rootBaseUrl = '<?php echo site_url("/"); ?>';
         </script>
         <!-- begin #page-loader -->
         <div id="page-loader" class="fade in"><span class="spinner"></span></div>
         <!-- end #page-loader -->
         <!-- begin #page-container -->
-        <div id="page-container" class="page-sidebar-fixed page-header-fixed">
+        <div id="page-container" class="page-sidebar-fixed page-header-fixed" ng-controller="rootController">

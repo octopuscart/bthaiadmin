@@ -14,6 +14,29 @@ class Configuration extends CI_Controller {
         $this->user_type = $this->session->logged_in['user_type'];
     }
 
+    public function reportConfiguration() {
+        $data = array();
+        $this->db->order_by('id', 'desc');
+        $query = $this->db->get('configuration_report');
+        $systemlog = $query->row();
+        $data['configuration_report'] = $systemlog;
+
+
+
+        if (isset($_POST['update_data'])) {
+            $confArray = array(
+                "email_header" => $this->input->post("email_header"),
+                "email_footer" => $this->input->post("email_footer"),
+                "pdf_report_header" => $this->input->post("pdf_report_header"),
+            );
+            $this->db->update('configuration_report', $confArray);
+            redirect("Configuration/reportConfiguration");
+        }
+
+
+        $this->load->view("configuration/reportConfiguration", $data);
+    }
+
     public function migration() {
         if ($this->db->table_exists('mailchimp_list')) {
             // table exists
@@ -293,8 +316,8 @@ CREATE TABLE `lookbook` (
 
 ');
         }
-        
-           if ($this->db->table_exists('conf_social_link')) {
+
+        if ($this->db->table_exists('conf_social_link')) {
             // table exists
         } else {
             $this->db->query('   
@@ -309,9 +332,6 @@ CREATE TABLE `conf_social_link` (
 
 ');
         }
-        
-        
-        
     }
 
 }
