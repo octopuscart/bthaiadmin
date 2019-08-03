@@ -51,8 +51,7 @@ class UserManager extends CI_Controller {
 
         $this->load->view('userManager/usersReport', $data);
     }
-    
-    
+
     public function usersReportManager() {
         $data['users_vendor'] = $this->User_model->user_reports("Vendor");
         $data['users_customer'] = $this->User_model->user_reports("Customer");
@@ -71,7 +70,7 @@ class UserManager extends CI_Controller {
 
         $data['users_all'] = $this->User_model->user_reports("User");
 
-        $filename = 'customers_report_' .  date('Ymd') . ".xls";
+        $filename = 'customers_report_' . date('Ymd') . ".xls";
         $html = $this->load->view('userManager/userProfileRecordXls', $data, TRUE);
         ob_clean();
         header("Content-Disposition: attachment; filename='$filename'");
@@ -122,7 +121,7 @@ class UserManager extends CI_Controller {
                 $last_name = $this->input->post('last_name');
 
                 $contact_no = $this->input->post('contact_no');
-       
+
                 $post_data = array(
                     'first_name' => $first_name,
                     'last_name' => $last_name,
@@ -131,7 +130,6 @@ class UserManager extends CI_Controller {
                     'password2' => $password,
                     'image' => $picture,
                     'password' => $pwd,
-
                     'contact_no' => $contact_no,
                     'op_date_time' => $op_date_time
                 );
@@ -202,7 +200,7 @@ class UserManager extends CI_Controller {
         $this->load->view('userManager/profile_update_info', $data);
     }
 
-    public function user_details($user_id = 0) {
+    public function user_details2($user_id = 0) {
         $user_model = $this->User_model;
         $config['upload_path'] = 'assets_main/userimages';
         $config['allowed_types'] = '*';
@@ -214,7 +212,7 @@ class UserManager extends CI_Controller {
         $this->db->where('user_id', $user_id);
         $query = $this->db->get('user_order');
         $orderlist = $query->result();
-$orderslistr = [];
+        $orderslistr = [];
         foreach ($orderlist as $key => $value) {
             $this->db->order_by('id', 'desc');
             $this->db->where('order_id', $value->id);
@@ -391,6 +389,87 @@ $orderslistr = [];
             redirect('UserManager/adminDebit#' . $this->input->post('user_id'));
         }
         $this->load->view('userManager/adminDebit');
+    }
+
+    function user_details($user_id) {
+        $data = array();
+        // echo password_hash('rasmuslerdorf', PASSWORD_DEFAULT)."\n";
+        $userid = $user_id;
+        $query = $this->db->get_where("admin_users", array("id" => $userid));
+        $userdata = $query->row();
+        $data['userdata'] = $userdata;
+
+
+        $query = $this->db->get("country");
+        $countrydata = $query->result_array();
+        $data['country'] = $countrydata;
+
+        $config['upload_path'] = 'assets/profile_image';
+        $config['allowed_types'] = '*';
+        if (isset($_POST['submit'])) {
+            $picture = '';
+
+            if (!empty($_FILES['picture']['name'])) {
+                $temp1 = rand(100, 1000000);
+                $config['overwrite'] = TRUE;
+                $ext1 = explode('.', $_FILES['picture']['name']);
+                $ext = strtolower(end($ext1));
+                $file_newname = $temp1 . "$userid." . $ext;
+                $picture = $file_newname;
+                $config['file_name'] = $file_newname;
+                //Load upload library and initialize configuration
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('picture')) {
+                    $uploadData = $this->upload->data();
+                    $picture = $uploadData['file_name'];
+                } else {
+                    $picture = '';
+                }
+            }
+            $this->db->set('image', $picture);
+            $this->db->where('id', $userid); //set column_name and value in which row need to update
+            $this->db->update('admin_users');
+            $this->userdata['image'] = $picture;
+
+            redirect("UserManager/user_details/$user_id");
+        }
+
+        if (isset($_POST['changePassword'])) {
+            $c_password = $this->input->post('c_password');
+            $n_password = $this->input->post('n_password');
+            $r_password = $this->input->post('r_password');
+            $dc_password = $userdata->password;
+
+            if ($r_password == $n_password) {
+                $message = array(
+                    'title' => 'Password Changed.',
+                    'text' => 'Your password has been changed successfully.',
+                    'show' => true,
+                    'icon' => 'happy.png'
+                );
+                $this->session->set_flashdata("checklogin", $message);
+
+
+                $passowrd = array("password" => md5($n_password), "password2" => $n_password);
+                $this->db->set($passowrd);
+                $this->db->where("id", $userid);
+                $this->db->update("admin_users");
+
+                redirect("UserManager/user_details/$user_id");
+            } else {
+                $message = array(
+                    'title' => 'Password Error.',
+                    'text' => 'Entered password does not match.',
+                    'show' => true,
+                    'icon' => 'warn.png'
+                );
+                $this->session->set_flashdata("checklogin", $message);
+            }
+        }
+
+
+        $this->load->view('userManager/profile', $data);
     }
 
 }

@@ -11,6 +11,10 @@ class LocalApi extends REST_Controller {
         $this->load->model('Order_model');
     }
 
+    function testGet_get() {
+        print_r($this->checklogin['user_type']);
+    }
+
     //function for user settingt
     function updateUserSession_post() {
         $fieldname = $this->post('name');
@@ -22,9 +26,23 @@ class LocalApi extends REST_Controller {
             $this->db->where("id", $pk_id);
             $this->db->update("admin_users", $data);
             if (isset($this->checklogin[$fieldname])) {
+
                 $this->checklogin[$fieldname] = $value;
                 $this->session->set_userdata('logged_in', $this->checklogin);
             }
+        }
+    }
+
+    function updateUserClient_post() {
+        $fieldname = $this->post('name');
+        $value = $this->post('value');
+        $pk_id = $this->post('pk');
+        if ($this->checklogin) {
+            $data = array($fieldname => $value);
+            $this->db->set($data);
+            $this->db->where("id", $pk_id);
+            $this->db->update("admin_users", $data);
+           
         }
     }
 
@@ -127,7 +145,7 @@ class LocalApi extends REST_Controller {
             $order_details = $this->Order_model->recalculateOrder($cart_items->order_id);
         }
     }
-    
+
     function notificationUpdate_get() {
         $this->db->order_by('id', 'desc');
         $this->db->limit(5);

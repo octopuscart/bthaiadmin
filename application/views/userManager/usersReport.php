@@ -1,6 +1,7 @@
 <?php
 $this->load->view('layout/header');
-$this->load->view('layout/topmenu');?>?>
+$this->load->view('layout/topmenu');
+?>?>
 <style>
     .product_text {
         float: left;
@@ -42,8 +43,12 @@ function userReportFunction($users) {
                 <th style="width: 75px;">Name</th>
                 <th style="width: 100px;">Email </th>
                 <th style="width: 100px;">Contact No.</th>
+                <th style="width: 100px;">Gender </th>
+                <th style="width: 100px;">Birth Date </th>
+                <th style="width: 100px;">Profession </th>
+                <th style="width: 100px;">Country </th>
                 <th style="width: 100px;">Reg. Date/Time</th>
-<!--                <th style="width: 75px;">Edit</th>-->
+                <th style="width: 75px;">Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -57,28 +62,17 @@ function userReportFunction($users) {
                         <td><?php echo $count; ?></td>
 
                         <td>
-                            <?php
-                            if ($value->image) {
-                                ?>
-                                <img src="<?php echo base_url(); ?>assets_main/userimages/<?php echo $value->image; ?>" style="height:51px;">
-                            <?php } else {
-                                
-                                $avatar = $value->gender=='Female'?"avatar3":"avatar5";
-                                
-                                ?>
-                                <img src="<?php echo base_url(); ?>assets_main/dist/img/<?php echo $avatar;?>.png" style="height:51px;">
 
-                            <?php }
-                            ?>
+
+                            <img src = '<?php echo base_url(); ?>assets/profile_image/<?php echo $value->image; ?>' alt = "" class = "media-object rounded-corner" style = "    width: 30px;background: url(<?php echo base_url(); ?>assets/emoji/user.png);    height: 30px;background-size: cover;" />
+
+
 
                         </td>
 
                         <td>
                             <span class="">
                                 <b><span class="seller_tag"><?php echo $value->first_name; ?> <?php echo $value->last_name; ?></span></b>
-                                <br/>
-                                <i class="fa fa-<?php echo strtolower($value->gender); ?>"></i>  <?php echo $value->gender; ?>
-                                <br/>(<?php echo $value->profession?$value->profession:'----'; ?>)
                             </span>
                         </td>
 
@@ -96,7 +90,30 @@ function userReportFunction($users) {
                                 <?php echo $value->contact_no; ?>
                             </span>
                         </td>
+                        <td>
+                            <span class="">
 
+                                <?php echo $value->gender; ?>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="">
+
+                                <?php echo $value->birth_date; ?>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="">
+
+                                <?php echo $value->profession; ?>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="">
+
+                                <?php echo $value->country; ?>
+                            </span>
+                        </td>
 
 
                         <td>
@@ -105,9 +122,9 @@ function userReportFunction($users) {
                             </span>
                         </td>
 
-<!--                        <td>
-                            <a href="<?php echo '../userManager/user_details/' . $value->id; ?>" class="btn btn-danger"><i class="fa fa-eye "></i> View</a>
-                        </td>-->
+                        <td>
+                            <a href="<?php echo site_url('userManager/user_details/' . $value->id); ?>" class="btn btn-danger"><i class="fa fa-eye "></i> View</a>
+                        </td>
                     </tr>
                     <?php
                     $count++;
@@ -124,13 +141,18 @@ function userReportFunction($users) {
 <section class="content">
     <div class="">
 
-          <div class="panel panel-inverse">
-                   <div class="panel-heading">
-                <h3 class="panel-title">Users Reports</h3>
-                <div class="panel-tools pull-right">
-                    <a class="btn btn-success " href="<?php echo site_url('userManager/user_profile_record_xls/all'); ?>"  targer="_blank">
-                        <i class="fa fa-file-excel-o"></i>  Export Data
-                    </a>
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Users Reports
+                    <span class="pull-right label label-success">
+                        <a class="btn btn-success btn-xs" href="<?php echo site_url('userManager/user_profile_record_xls/all'); ?>"  targer="_blank">
+                            <i class="fa fa-file-excel-o"></i>  Export Data
+                        </a>
+                    </span>
+                </h3>
+                <div class="panel-tools">
+
                 </div>
 
             </div>

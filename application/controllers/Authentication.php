@@ -11,10 +11,6 @@ class Authentication extends CI_Controller {
 
     public function index() {
         $data = array();
-
-
-
-
         $data['login_user'] = $this->session->userdata('logged_in');
         $userdata = $this->userdata;
         if ($userdata) {
