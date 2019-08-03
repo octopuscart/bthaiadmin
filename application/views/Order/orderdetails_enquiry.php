@@ -74,7 +74,7 @@ $this->load->view('layout/topmenu');
                             <div class="panel-body">
 
 
-                                <input class="form-control"  name="status" value="Order Confirmation" type='hidden'>
+                                <input class="form-control"  name="status" value="Order Confirmation Requested From Client." type='hidden'>
 
 
 
