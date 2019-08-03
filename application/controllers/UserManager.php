@@ -33,7 +33,10 @@ class UserManager extends CI_Controller {
     }
 
     public function not_granted() {
-        $this->load->view('errors/html/error_404_c');
+        $userdata = array();
+        $this->session->unset_userdata($userdata);
+        $this->session->sess_destroy();
+        $this->load->view('errors/404');
     }
 
     public function usersReport() {

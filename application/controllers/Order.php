@@ -163,6 +163,23 @@ class Order extends CI_Controller {
         $data['salesgraph'] = $salesgraph;
 
 
+        
+        $this->db->order_by('id', 'desc');
+        $this->db->limit(10);
+        $query = $this->db->get('admin_users');
+        $systemlog = $query->result_array();
+        
+        $data['latestusers'] = $systemlog;
+
+
+        $this->db->order_by('id', 'desc');
+        $this->db->limit(10);
+        $query = $this->db->get('system_log');
+        $systemlog = $query->result_array();
+        
+        $data['systemlog'] = $systemlog;
+
+
         $this->load->view('Order/dashboard', $data);
     }
 
@@ -198,7 +215,7 @@ class Order extends CI_Controller {
             $query = $this->db->get('user_order_status');
             $orderstatuslist = $query->result();
 
-            $currentstatus = $orderstatuslist? $orderstatuslist[0]->status:array();
+            $currentstatus = $orderstatuslist ? $orderstatuslist[0]->status : array();
 
             if ($order_status) {
                 
@@ -255,9 +272,9 @@ class Order extends CI_Controller {
         }
         $this->load->view('Order/orderdetails', $data);
     }
-    
+
     public function orderMailTest($order_key) {
-         $this->Order_model->order_mail_confirm($order_key, "");
+        $this->Order_model->order_mail_confirm($order_key, "");
     }
 
     public function orderdetails_enquiry($order_key) {

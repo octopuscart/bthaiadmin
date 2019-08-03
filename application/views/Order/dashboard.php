@@ -1,6 +1,7 @@
 <?php
 $this->load->view('layout/header');
 $this->load->view('layout/topmenu');
+
 function truncate($str, $len) {
     $tail = max(0, $len - 10);
     $trunk = substr($str, 0, $tail);
@@ -40,7 +41,7 @@ function truncate($str, $len) {
                 <div class="stats-icon"><i class="fa fa-pencil-square"></i></div>
                 <div class="stats-info">
                     <h4>Total Orders</h4>
-                    <p><?php echo count($orderslist);?></p>	
+                    <p><?php echo count($orderslist); ?></p>	
                 </div>
                 <!--                <div class="stats-link">
                                     <a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -54,7 +55,7 @@ function truncate($str, $len) {
                 <div class="stats-icon"><i class="fa fa-usd"></i></div>
                 <div class="stats-info">
                     <h4>Total Amount</h4>
-                    <p><?php echo $total_amount;?></p>	
+                    <p><?php echo $total_amount; ?></p>	
                 </div>
                 <!--                <div class="stats-link">
                                     <a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -68,7 +69,7 @@ function truncate($str, $len) {
                 <div class="stats-icon"><i class="fa fa-users"></i></div>
                 <div class="stats-info">
                     <h4>Registered User</h4>
-                    <p><?php echo $total_users;?></p>	
+                    <p><?php echo $total_users; ?></p>	
                 </div>
                 <!--                <div class="stats-link">
                                     <a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -119,7 +120,6 @@ function truncate($str, $len) {
                         <ul class="media-list media-list-with-divider">
                             <?php
                             foreach ($blog_data as $key => $value) {
-                                
                                 ?>   
                                 <li class="media media-lg">
                                     <a href="javascript:;" class="pull-left">
@@ -138,32 +138,32 @@ function truncate($str, $len) {
                 </div>
                 <div class="tab-pane fade" id="purchase">
                     <div class="height-sm" data-scrollbar="true">
-                        
-                        
-                        <table class="table">
-                 <thead>
-                            <tr>
-                                <th style="width: 20px">S. NO.</th>
-                                <th style="width:250px">Order Information</th>
-                                <th style="width:200px">Customer Information</th>
-                            
-                                <th>Status</th>
-                                <th></th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            if (count($orderslist)) {
-                                $count = 1;
-                                foreach ($orderslist as $key => $value) {
-                                    ?>
-                                    <tr style="border-bottom: 1px solid #000;">
-                                        <td>
-                                            <?php echo $count; ?>
-                                        </td>
-                                        <td>
-                                      
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20px">S. NO.</th>
+                                    <th style="width:250px">Order Information</th>
+                                    <th style="width:200px">Customer Information</th>
+
+                                    <th>Status</th>
+                                    <th></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (count($orderslist)) {
+                                    $count = 1;
+                                    foreach ($orderslist as $key => $value) {
+                                        ?>
+                                        <tr style="border-bottom: 1px solid #000;">
+                                            <td>
+                                                <?php echo $count; ?>
+                                            </td>
+                                            <td>
+
                                                 <table class="small_table">
                                                     <tr>
                                                         <th>Order No.</th>
@@ -178,11 +178,11 @@ function truncate($str, $len) {
                                                         <td>: {{<?php echo $value->total_quantity; ?>}}</td>
                                                     </tr>
                                                 </table>
-                                        
-                                        </td>
 
-                                        <td>
-                                           
+                                            </td>
+
+                                            <td>
+
                                                 <b> <?php echo $value->name; ?></b>
                                                 <table class="small_table">
                                                     <tr>
@@ -198,32 +198,32 @@ function truncate($str, $len) {
                                                         <td> <?php echo $value->city . ", " . $value->country; ?></td>
                                                     </tr>
                                                 </table>
-                                          
-                                        </td>
-                                        
 
-                                        
-                                        <td>
-                                            <?php
-                                            echo "" . $value->status . "<br/>";
-                                            echo $value->status_datetime;
-                                            ?>
-                                        </td>
-                                        <td>
-                                            <a href="<?php echo site_url("order/orderdetails/".$value->order_key);?>" class="btn btn-primary btn-sm" style="    margin-top: 20%;">Update <i class="fa fa-arrow-circle-right"></i></a>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                    $count++;
-                                }
-                            } else {
-                                ?>
-                            <h4><i class="fa fa-warning"></i> No order found</h4>
-                            <?php
-                        }
-                        ?>
+                                            </td>
 
-                        </tbody>
+
+
+                                            <td>
+                                                <?php
+                                                echo "" . $value->status . "<br/>";
+                                                echo $value->status_datetime;
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <a href="<?php echo site_url("order/orderdetails/" . $value->order_key); ?>" class="btn btn-primary btn-sm" style="    margin-top: 20%;">Update <i class="fa fa-arrow-circle-right"></i></a>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                        $count++;
+                                    }
+                                } else {
+                                    ?>
+                                <h4><i class="fa fa-warning"></i> No order found</h4>
+                                <?php
+                            }
+                            ?>
+
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -253,65 +253,25 @@ function truncate($str, $len) {
                 <!-- begin panel -->
                 <div class="panel panel-inverse" data-sortable-id="index-4">
                     <div class="panel-heading">
-                        <h4 class="panel-title">New Registered Users <span class="pull-right label label-success">24 new users</span></h4>
+                        <h4 class="panel-title">New Registered Users <span class="pull-right label label-success"><?php echo $total_users; ?> users</span></h4>
                     </div>
                     <ul class="registered-users-list clearfix">
+                        <?php
+                        foreach ($latestusers as $ukey => $uvalue) {
+                            ?>
                         <li>
-                            <a href="javascript:;"><img src="<?php echo base_url(); ?>assets/img/user-5.jpg" alt="" /></a>
+                            <a href="javascript:;"><img src="<?php echo base_url(); ?>assets/img/defaultuser.png" alt="" /></a>
                             <h4 class="username text-ellipsis">
-                                Savory Posh
-                                <small>Algerian</small>
+                                <?php echo $uvalue['first_name'];?> <?php echo $uvalue['last_name'];?>
+                                <small><?php echo $uvalue['email'];?></small>
                             </h4>
                         </li>
-                        <li>
-                            <a href="javascript:;"><img src="<?php echo base_url(); ?>assets/img/user-3.jpg" alt="" /></a>
-                            <h4 class="username text-ellipsis">
-                                Ancient Caviar
-                                <small>Korean</small>
-                            </h4>
-                        </li>
-                        <li>
-                            <a href="javascript:;"><img src="<?php echo base_url(); ?>assets/img/user-1.jpg" alt="" /></a>
-                            <h4 class="username text-ellipsis">
-                                Marble Lungs
-                                <small>Hong Kong</small>
-                            </h4>
-                        </li>
-                        <li>
-                            <a href="javascript:;"><img src="<?php echo base_url(); ?>assets/img/user-8.jpg" alt="" /></a>
-                            <h4 class="username text-ellipsis">
-                                Blank Bloke
-                                <small>Japanese</small>
-                            </h4>
-                        </li>
-                        <li>
-                            <a href="javascript:;"><img src="<?php echo base_url(); ?>assets/img/user-2.jpg" alt="" /></a>
-                            <h4 class="username text-ellipsis">
-                                Hip Sculling
-                                <small>Cuban</small>
-                            </h4>
-                        </li>
-                        <li>
-                            <a href="javascript:;"><img src="<?php echo base_url(); ?>assets/img/user-6.jpg" alt="" /></a>
-                            <h4 class="username text-ellipsis">
-                                Flat Moon
-                                <small>Nepalese</small>
-                            </h4>
-                        </li>
-                        <li>
-                            <a href="javascript:;"><img src="<?php echo base_url(); ?>assets/img/user-4.jpg" alt="" /></a>
-                            <h4 class="username text-ellipsis">
-                                Packed Puffs
-                                <small>Malaysian></small>
-                            </h4>
-                        </li>
-                        <li>
-                            <a href="javascript:;"><img src="<?php echo base_url(); ?>assets/img/user-9.jpg" alt="" /></a>
-                            <h4 class="username text-ellipsis">
-                                Clay Hike
-                                <small>Swedish</small>
-                            </h4>
-                        </li>
+                        <?php
+                        }
+                        ?>
+
+                        
+
                     </ul>
                     <div class="panel-footer text-center">
                         <a href="javascript:;" class="text-inverse">View All</a>
@@ -406,25 +366,23 @@ function truncate($str, $len) {
                 </div>
                 <div class="panel-body p-0">
                     <ul class="todolist">
-                        <li class="active">
-                            <a href="javascript:;" class="todolist-container active" data-click="todolist">
-                                <div class="todolist-input"><i class="fa fa-square-o"></i></div>
-                                <div class="todolist-title">Visit to Australia.</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" class="todolist-container" data-click="todolist">
-                                <div class="todolist-input"><i class="fa fa-square-o"></i></div>
-                                <div class="todolist-title">Appointment made by Mr. Adam Smith.</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" class="todolist-container" data-click="todolist">
-                                <div class="todolist-input"><i class="fa fa-square-o"></i></div>
-                                <div class="todolist-title">Review on Zegna Stock.</div>
-                            </a>
-                        </li>
-                        
+
+                        <?php
+                        foreach ($systemlog as $klog => $vlog) {
+                            ?>   
+                            <li>
+                                <a href="javascript:;" class="todolist-container" data-click="todolist">
+                                    <div class="todolist-input"><i class="fa fa-square-o"></i></div>
+                                    <div class="todolist-title"><?php echo $vlog['log_detail']; ?> (<?php echo $vlog['log_datetime']; ?>)</div>
+                                </a>
+                            </li> 
+                            <?php
+                        }
+                        ?>
+
+
+
+
                     </ul>
                 </div>
             </div>
@@ -459,11 +417,11 @@ $this->load->view('layout/footer');
 <!-- ================== END PAGE LEVEL JS ================== -->
 
 <script>
-    $(document).ready(function () {
-     
-        Dashboard.init();
-        DashboardV2.init();
-    });
+$(document).ready(function () {
+    
+    Dashboard.init();
+    DashboardV2.init();
+});
 </script>
 <script>
     $(function () {
