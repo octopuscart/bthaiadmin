@@ -307,55 +307,55 @@ $this->load->view('layout/topmenu');
                         ?>
                     </div>
                 </div>
-                
+
                 <!--user log-->
                 <div class="tab-pane fade" id="userLog">
                     <h3 class="m-t-10"><i class="fa fa-list-ol"></i> User Log </h3>
                     <div class="row">
-                    <table id="tableDataOrder" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th style="width: 20px;">S.N.</th>
-                                <th style="width:50px;">Activity Type</th>
-                                <th style="width: 75px;">Details</th>
-                                <th style="width: 100px;">Date Time </th>
+                        <table id="tableDataOrder" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20px;">S.N.</th>
+                                    <th style="width:50px;">Activity Type</th>
+                                    <th style="width: 75px;">Details</th>
+                                    <th style="width: 100px;">Date Time </th>
 
                 <!--                <th style="width: 75px;">Edit</th>-->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            if (count($systemlog)) {
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (count($systemlog)) {
 
-                                $count = 1;
-                                foreach ($systemlog as $key => $value) {
-                                    ?>
-                                    <tr>
-                                        <td style="width: 20px;"><?php echo $count; ?></td>
-
-
-
-                                        <td>
-                                            <?php echo $value->log_type; ?>
-                                        </td>
-
-                                        <td>
-                                            <?php echo $value->log_detail; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $value->log_datetime; ?>
-                                        </td>
+                                    $count = 1;
+                                    foreach ($systemlog as $key => $value) {
+                                        ?>
+                                        <tr>
+                                            <td style="width: 20px;"><?php echo $count; ?></td>
 
 
 
-                                    </tr>
-                                    <?php
-                                    $count++;
+                                            <td>
+                                                <?php echo $value->log_type; ?>
+                                            </td>
+
+                                            <td>
+                                                <?php echo $value->log_detail; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $value->log_datetime; ?>
+                                            </td>
+
+
+
+                                        </tr>
+                                        <?php
+                                        $count++;
+                                    }
                                 }
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <!--end of user log-->                
