@@ -22,9 +22,9 @@ $this->load->view('layout/topmenu');
     <h1 class="page-header"><?php echo $userdata->first_name; ?> <?php echo $userdata->last_name; ?> <small><?php echo $userdata->email; ?> </small></h1>
     <!-- end page-header -->
     <!-- begin profile-container -->
-    <div class="profile-container">
+    <div class="profile-container" style="background: #d2cbcb;">
         <!-- begin profile-section -->
-        <div class="profile-section">
+        <div class="profile-section" style="background: #fff;">
             <!-- begin profile-left -->
             <div class="profile-left">
                 <!-- begin profile-image -->
@@ -56,7 +56,7 @@ $this->load->view('layout/topmenu');
                     <div class="checkbox m-b-5 m-t-0" >
                         <label><input type="checkbox" id="edit_toggle" /> Edit Profile Information</label>
                     </div>
-                   
+
                     <div class="checkbox m-b-0">
                         <button class="btn btn-xs btn-link" data-toggle="modal" data-target="#changePassword"><i class="fa fa-lock"></i> Change Your Password</button>
                     </div>
@@ -166,7 +166,149 @@ $this->load->view('layout/topmenu');
             <!-- end profile-right -->
         </div>
         <!-- end profile-section -->
+
+        <div class="" style="margin-top: 10px">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#userAddress" data-toggle="tab">Address</a></li>
+                <li class=""><a href="#usersOrders" data-toggle="tab">Orders List</a></li>
+                <li class=""><a href="#userMeasurements" data-toggle="tab">Measurements</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="userAddress">
+                    <h3 class="m-t-10"><i class="fa fa-location-arrow"></i> User Address </h3>
+                    <div class="">
+                        <div class="row">
+                            <?php
+                            if (count($user_address_details)) {
+                                ?>
+                                <?php
+                                foreach ($user_address_details as $key => $value) {
+                                    ?>
+                                    <div class="col-md-12">
+                                        <?php if ($value['status'] == 'default') { ?> 
+                                            <div class="checkcart <?php echo $value['status']; ?> ">
+                                                <i class="fa fa-check fa-2x"></i>
+                                            </div>
+                                        <?php } ?> 
+                                        <div class=" address_block <?php echo $value['status']; ?> ">
+                                            <p>
+                                                <?php echo $value['address1']; ?>,<br/>
+                                                <?php echo $value['address2']; ?>,<br/>
+                                                <?php echo $value['city']; ?>, <?php echo $value['state']; ?> 
+                                            </p>
+                                            <?php if ($value['status'] != 'default') { ?> 
+                                                <a href="<?php echo site_url("Account/address/?setAddress=" . $value['id']); ?>" class="btn btn-default btn-small address_button">Set As Default</a>
+                                            <?php } ?> 
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            } else {
+                                ?>
+                                <h4><i class="fa fa-warning"></i> Please Add Shipping Address</h4>
+
+                                <?php
+                            }
+                            ?>
+                        </div> 
+                    </div>    
+                </div>
+
+                <div class="tab-pane fade" id="usersOrders">
+                    <h3 class="m-t-10"><i class="fa fa-list"></i> Orders List </h3>
+                    <div class="row">
+                        <?php
+                        foreach ($orderslist as $key => $value) {
+                            ?>
+                            <div class="row  "> 
+                                <div class="pricing">
+
+                                    <article class="order_box" style="padding: 10px">
+                                        <div class="col-md-12">
+                                            <h6>
+                                                Order No. #<?php echo $value->order_no; ?>
+                                                <span style="float: right;margin: 0px">
+                                                    <i class="fa fa-calendar"></i><?php echo $value->order_date; ?>  <?php echo $value->order_time; ?>
+                                                </span>
+                                            </h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            Total Amount: {{<?php echo $value->total_price; ?>|currency:"<?php echo GLOBAL_CURRENCY; ?> "}}
+                                            <br/>
+                                            Total Products: {{<?php echo $value->total_quantity; ?>}}
+                                        </div>
+                                        <div class="col-md-4">
+                                            Status: <?php echo $value->status; ?>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="<?php echo site_url('order/orderdetails/' . $value->order_key); ?>" class="btn btn-inverse btn-small" style="margin: 0px;    float: right;">View Order</a>
+                                        </div>
+                                    </article>
+
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="userMeasurements">
+                    <h3 class="m-t-10"><i class="fa fa-list-ol"></i> User Measurements </h3>
+                    <div class="row">
+                        <?php
+                        foreach ($measurements as $key => $value) {
+                            ?>
+                            <div class="measurementbox  "> 
+                                <div class="pricing">
+
+                                    <article class="row" style="padding: 10px">
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <h6 class="pull-left">
+                                                    Profile. #<?php echo $value['profile']; ?> <small> <?php echo $value['datetime']; ?></small>
+                                                </h6>
+                                                <a role="button" class="btn btn-xs btn-default  btn-xs pull-right" data-toggle="collapse" data-parent="#accordion" href="#collapsemeasurements<?php echo $value['id']; ?>" aria-expanded="true" aria-controls="collapseOne" style="    margin: 5px 0px;
+                                                   padding: 4px;">
+                                                    View Measurement
+                                                </a>
+                                            </div>
+                                            <div id="collapsemeasurements<?php echo $value['id']; ?>" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="panel-body" style="padding:10px 0px;">
+                                                            <?php
+                                                            echo "<ul class='list-group'>";
+                                                            $measurements_items = $value['measurements'];
+                                                            foreach ($measurements_items as $keym => $valuem) {
+
+                                                                echo "<li class='list-group-item'>" . $keym . " <span class='badge'>" . $valuem . "</span></li>";
+                                                            }
+                                                            echo "</ul>";
+                                                            ?>                             
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
+
+
+
 </div>
 
 
@@ -216,23 +358,23 @@ $this->load->view('layout/footer');
 
 
 <script>
-    $(function () {
+$(function () {
 <?php
 $checklogin = $this->session->flashdata('checklogin');
 if ($checklogin['show']) {
     ?>
-            $.gritter.add({
-                title: '<?php echo $checklogin['title']; ?>',
-                text: '<?php echo $checklogin['text']; ?>',
-                image: '<?php echo base_url(); ?>assets/emoji/<?php echo $checklogin['icon']; ?>',
-                            sticky: true,
-                            time: '',
-                            class_name: 'my-sticky-class'
-                        });
+        $.gritter.add({
+            title: '<?php echo $checklogin['title']; ?>',
+            text: '<?php echo $checklogin['text']; ?>',
+            image: '<?php echo base_url(); ?>assets/emoji/<?php echo $checklogin['icon']; ?>',
+                        sticky: true,
+                        time: '',
+                        class_name: 'my-sticky-class'
+                    });
     <?php
 }
 ?>
-                })
+            })
 </script>
 
 <script>

@@ -393,7 +393,57 @@ class UserManager extends CI_Controller {
 
     function user_details($user_id) {
         $data = array();
-        // echo password_hash('rasmuslerdorf', PASSWORD_DEFAULT)."\n";
+
+        //User Orders ------------
+        $this->db->where('user_id', $user_id);
+        $query = $this->db->get('user_order');
+        $orderlist = $query->result();
+        $orderslistr = [];
+        foreach ($orderlist as $key => $value) {
+            $this->db->order_by('id', 'desc');
+            $this->db->where('order_id', $value->id);
+            $query = $this->db->get('user_order_status');
+            $status = $query->row();
+            $value->status = $status ? $status->status : $value->status;
+            array_push($orderslistr, $value);
+        }
+        $data['orderslist'] = $orderslistr;
+        //User Order -------
+        //
+        //User Address ----------
+        $this->db->where('user_id', $user_id);
+        $this->db->order_by('status', 'desc');
+        $query = $this->db->get('shipping_address');
+        $addresslist = $query->result_array();
+        $data['user_address_details'] = $addresslist;
+        //User Address ----------
+        //
+        //User Measurements --------
+        $this->db->where('user_id', $user_id);
+        $query = $this->db->get('custom_measurement_profile');
+        $measurement_items = $query->result_array();
+        $measurement_array = array();
+        foreach ($measurement_items as $mskey => $msvalue) {
+            $msid = $msvalue['id'];
+            $this->db->where('custom_measurement_profile', $msid);
+            $this->db->order_by('display_index');
+            $query = $this->db->get('custom_measurement');
+            $measurements = $query->result_array();
+            $tempmes = array();
+            $measurement_array[$msvalue['id']] = $msvalue;
+            foreach ($measurements as $mk => $mv) {
+                $mestitle = $mv['measurement_key'];
+                $mesvalue = $mv['measurement_value'];
+                $tempmes[$mestitle] = $mesvalue;
+            }
+            $measurement_array[$msid]['measurements'] = $tempmes;
+        }
+        $data['measurements'] = $measurement_array;
+
+        // Usermeasurement
+
+
+
         $userid = $user_id;
         $query = $this->db->get_where("admin_users", array("id" => $userid));
         $userdata = $query->row();

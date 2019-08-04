@@ -259,22 +259,25 @@ function truncate($str, $len) {
                         <?php
                         foreach ($latestusers as $ukey => $uvalue) {
                             ?>
-                        <li>
-                            <a href="javascript:;"><img src="<?php echo base_url(); ?>assets/img/defaultuser.png" alt="" /></a>
-                            <h4 class="username text-ellipsis">
-                                <?php echo $uvalue['first_name'];?> <?php echo $uvalue['last_name'];?>
-                                <small><?php echo $uvalue['email'];?></small>
-                            </h4>
-                        </li>
-                        <?php
+                            <li>
+                                <a href="javascript:;">
+                                    <img src = '<?php echo base_url(); ?>assets/profile_image/<?php echo $uvalue['image']; ?>' alt = ""  style = "background: url(<?php echo base_url(); ?>assets/emoji/user.png);  width:60px;  height: 60px;background-size: cover;float: left;" />
+
+                                </a>
+                                <h4 class="username text-ellipsis" style="float: left;">
+                                    <?php echo $uvalue['first_name']; ?> <?php echo $uvalue['last_name']; ?>
+                                    <small><?php echo $uvalue['country']; ?></small>
+                                </h4>
+                            </li>
+                            <?php
                         }
                         ?>
 
-                        
+
 
                     </ul>
                     <div class="panel-footer text-center">
-                        <a href="javascript:;" class="text-inverse">View All</a>
+                        <a href="<?php echo site_url("UserManager/usersReport");?>" class="text-inverse">View All</a>
                     </div>
                 </div>
                 <!-- end panel -->
@@ -418,7 +421,7 @@ $this->load->view('layout/footer');
 
 <script>
 $(document).ready(function () {
-    
+
     Dashboard.init();
     DashboardV2.init();
 });
