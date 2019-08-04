@@ -375,16 +375,43 @@ class CMS extends CI_Controller {
 
 
         $categories_data = $this->Curd_model->get('conf_social_link');
+
+        $socialLinks = array(
+            "Facebook" => array("title" => "Facebook", "icon" => "", "display_index" => 1),
+            "Twitter" => array("title" => "Twitter", "icon" => "", "display_index" => 2),
+            "Instagram" => array("title" => "Instagram", "icon" => "", "display_index" => 3),
+            "TripAdvisor" => array("title" => "TripAdvisor", "icon" => "", "display_index" => 4),
+            "Pinterest" => array("title" => "Pinterest", "icon" => "", "display_index" => 5),
+            "YouTube" => array("title" => "YouTube", "icon" => "", "display_index" => 6),
+            "Tumblr" => array("title" => "Tumblr", "icon" => "", "display_index" => 7),
+            "LinkedIn" => array("title" => "LinkedIn", "icon" => "", "display_index" => 8),
+        );
+        foreach ($socialLinks as $sskey => $ssvalue) {
+            
+            $this->db->where('title', $sskey);
+            $query = $this->db->get('conf_social_link');
+            $systemlog = $query->result();
+            if($systemlog){
+                
+            }
+            else{
+                
+                unset($ssvalue["icon"]);
+                $this->Curd_model->insert('conf_social_link', $ssvalue);
+            }
+        }
+
+
         $data['list_data'] = $categories_data;
 
         $fields = array(
             "title" => array("title" => "Social Account", "width" => "200px"),
-            "link_url" => array("title" => "URL", "width" => "200px"),
+            "link_url" => array("title" => "URL", "width" => "300px"),
         );
 
         $data['fields'] = $fields;
         $data['form_attr'] = $form_attr;
-        $this->load->view('layout/curd', $data);
+        $this->load->view('configuration/socialLinks', $data);
     }
 
     public function seoPageSetting() {
@@ -395,8 +422,8 @@ class CMS extends CI_Controller {
         $data['table_name'] = 'seo_settings';
         $form_attr = array(
             "seo_title" => array("title" => "Title", "required" => true, "place_holder" => "Title", "type" => "text", "default" => ""),
-            "seo_description" => array("title" => "Description", "required" => true, "place_holder" => "Description", "type" => "text", "default" => ""),
-            "seo_keywords" => array("title" => "Keywords", "required" => true, "place_holder" => "Keywords", "type" => "text", "default" => ""),
+            "seo_description" => array("title" => "Description", "required" => true, "place_holder" => "Description", "type" => "textarea", "default" => ""),
+            "seo_keywords" => array("title" => "Keywords", "required" => true, "place_holder" => "Keywords", "type" => "textarea", "default" => ""),
             "seo_url" => array("title" => "Page URL", "required" => false, "place_holder" => "Link", "type" => "text", "default" => ""),
         );
 
@@ -428,22 +455,21 @@ class CMS extends CI_Controller {
 
     public function siteSEOConfigUpdate() {
         $data = array();
-        $blog_data = $this->Curd_model->get_single('configuration_site',1);
+        $blog_data = $this->Curd_model->get_single('configuration_site', 1);
         $data['site_data'] = $blog_data;
-        if(isset($_POST['update_data'])){
-          $blogArray = array(
-      
-            "seo_keywords" => $this->input->post("keyword"),
-            "seo_title" => $this->input->post("title"),
-             "seo_desc" => $this->input->post("description"),
-         );
+        if (isset($_POST['update_data'])) {
+            $blogArray = array(
+                "seo_keywords" => $this->input->post("keyword"),
+                "seo_title" => $this->input->post("title"),
+                "seo_desc" => $this->input->post("description"),
+            );
 
-          $this->db->where('id', 1);
-         $this->db->update('configuration_site', $blogArray);
-             redirect("CMS/siteConfigUpdate");
+            $this->db->where('id', 1);
+            $this->db->update('configuration_site', $blogArray);
+            redirect("CMS/siteConfigUpdate");
         }
 
-        $this->load->view('configuration/site_update', $data); 
+        $this->load->view('configuration/site_update', $data);
     }
 
 }
