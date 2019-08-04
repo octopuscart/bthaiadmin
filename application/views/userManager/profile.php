@@ -10,6 +10,11 @@ $this->load->view('layout/topmenu');
 <link href="<?php echo base_url(); ?>assets/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
 <link href="<?php echo base_url(); ?>assets/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
 
+<link href="<?php echo base_url(); ?>assets/plugins/DataTables/css/data-table.css" rel="stylesheet" />
+
+<script src="<?php echo base_url(); ?>assets/plugins/DataTables/js/jquery.dataTables.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/table-manage-default.demo.min.js"></script>
+
 <!-- begin #content -->
 <div id="content" class="content">
     <!-- begin breadcrumb -->
@@ -172,6 +177,7 @@ $this->load->view('layout/topmenu');
                 <li class="active"><a href="#userAddress" data-toggle="tab">Address</a></li>
                 <li class=""><a href="#usersOrders" data-toggle="tab">Orders List</a></li>
                 <li class=""><a href="#userMeasurements" data-toggle="tab">Measurements</a></li>
+                <li class=""><a href="#userLog" data-toggle="tab">User Log</a>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade active in" id="userAddress">
@@ -301,6 +307,60 @@ $this->load->view('layout/topmenu');
                         ?>
                     </div>
                 </div>
+                
+                <!--user log-->
+                <div class="tab-pane fade" id="userLog">
+                    <h3 class="m-t-10"><i class="fa fa-list-ol"></i> User Log </h3>
+                    <div class="row">
+                    <table id="tableDataOrder" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 20px;">S.N.</th>
+                                <th style="width:50px;">Activity Type</th>
+                                <th style="width: 75px;">Details</th>
+                                <th style="width: 100px;">Date Time </th>
+
+                <!--                <th style="width: 75px;">Edit</th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (count($systemlog)) {
+
+                                $count = 1;
+                                foreach ($systemlog as $key => $value) {
+                                    ?>
+                                    <tr>
+                                        <td style="width: 20px;"><?php echo $count; ?></td>
+
+
+
+                                        <td>
+                                            <?php echo $value->log_type; ?>
+                                        </td>
+
+                                        <td>
+                                            <?php echo $value->log_detail; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $value->log_datetime; ?>
+                                        </td>
+
+
+
+                                    </tr>
+                                    <?php
+                                    $count++;
+                                }
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                <!--end of user log-->                
+
+
             </div>
 
         </div>
@@ -431,4 +491,16 @@ foreach ($country as $key => $value) {
 
 
     })
+</script>
+
+<script>
+    $(function () {
+
+        $('#tableDataOrder').DataTable({
+            language: {
+                "search": "Apply filter _INPUT_ to table"
+            }
+        })
+    })
+
 </script>

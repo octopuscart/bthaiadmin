@@ -439,8 +439,15 @@ class UserManager extends CI_Controller {
             $measurement_array[$msid]['measurements'] = $tempmes;
         }
         $data['measurements'] = $measurement_array;
-
         // Usermeasurement
+        
+        //User Log
+        $this->db->order_by('id', 'desc');
+        $this->db->where('user_id', $user_id);
+        $query = $this->db->get('system_log');
+        $systemlog = $query->result();
+        $data['systemlog'] = $systemlog;
+        //User Log
 
 
 
