@@ -163,12 +163,12 @@ class Order extends CI_Controller {
         $data['salesgraph'] = $salesgraph;
 
 
-        
+
         $this->db->order_by('id', 'desc');
         $this->db->limit(10);
         $query = $this->db->get('admin_users');
         $systemlog = $query->result_array();
-        
+
         $data['latestusers'] = $systemlog;
 
 
@@ -176,7 +176,7 @@ class Order extends CI_Controller {
         $this->db->limit(10);
         $query = $this->db->get('system_log');
         $systemlog = $query->result_array();
-        
+
         $data['systemlog'] = $systemlog;
 
 
@@ -309,6 +309,17 @@ class Order extends CI_Controller {
                     'order_id' => $order_id
                 );
                 $this->db->insert('user_order_status', $productattr);
+
+
+                $orderlog = array(
+                    'log_type' => $this->input->post('status'),
+                    'log_datetime' => date('Y-m-d H:i:s'),
+                    'user_id' => "",
+                    'order_id' => $order_id,
+                    'log_detail' => $this->input->post('remark'),
+                );
+                $this->db->insert('system_log', $orderlog);
+
                 if ($this->input->post('sendmail') == TRUE) {
                     try {
                         $this->Order_model->order_mail_confirm($order_key, "");
@@ -354,6 +365,14 @@ class Order extends CI_Controller {
                 );
                 $this->db->insert('user_order_status', $productattr);
 
+                $orderlog = array(
+                    'log_type' => "Payment Confirmed",
+                    'log_datetime' => date('Y-m-d H:i:s'),
+                    'user_id' => "",
+                    'order_id' => $order_id,
+                    'log_detail' => $this->input->post('remark'),
+                );
+                $this->db->insert('system_log', $orderlog);
 
                 $productattr = array(
                     'status' => "Payment Confirmed",
@@ -453,6 +472,16 @@ class Order extends CI_Controller {
                     'order_id' => $order_id
                 );
                 $this->db->insert('user_order_status', $productattr);
+
+                $orderlog = array(
+                    'log_type' => "Order Shipped",
+                    'log_datetime' => date('Y-m-d H:i:s'),
+                    'user_id' => "",
+                    'order_id' => $order_id,
+                    'log_detail' => $description1,
+                );
+                $this->db->insert('system_log', $orderlog);
+
                 if ($this->input->post('sendmail') == TRUE) {
                     try {
                         $this->Order_model->order_mail($order_key, "");

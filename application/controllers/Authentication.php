@@ -45,6 +45,16 @@ class Authentication extends CI_Controller {
                         'image' => $checkuser->image,
                     );
                     $this->session->set_userdata('logged_in', $sess_data);
+
+                    $orderlog = array(
+                        'log_type' => "Login",
+                        'log_datetime' => date('Y-m-d H:i:s'),
+                        'user_id' => $checkuser->id,
+                        'order_id' => "",
+                        'log_detail' => "Admin Login Succesful",
+                    );
+                    $this->db->insert('system_log', $orderlog);
+
                     $message = array(
                         'title' => 'Login Succesful',
                         'text' => "Let's start doing...",
@@ -130,6 +140,15 @@ class Authentication extends CI_Controller {
                     );
                     $this->session->set_flashdata("checklogin", $message);
 
+                    $orderlog = array(
+                        'log_type' => "Password Changed",
+                        'log_datetime' => date('Y-m-d H:i:s'),
+                        'user_id' => $userid,
+                        'order_id' => "",
+                        'log_detail' => 'Your password has been changed successfully.',
+                    );
+                    $this->db->insert('system_log', $orderlog);
+
 
                     $passowrd = array("password" => md5($n_password), "password2" => $n_password);
                     $this->db->set($passowrd);
@@ -165,6 +184,16 @@ class Authentication extends CI_Controller {
         $userdata = array();
         $this->session->unset_userdata($userdata);
         $this->session->sess_destroy();
+
+        $orderlog = array(
+            'log_type' => "Log Out",
+            'log_datetime' => date('Y-m-d H:i:s'),
+            'user_id' => "",
+            'order_id' => "",
+            'log_detail' => 'Admin logout from system.',
+        );
+        $this->db->insert('system_log', $orderlog);
+
         redirect('Authentication', 'refresh');
     }
 
