@@ -225,6 +225,12 @@ class Order extends CI_Controller {
                     case "Order Confirmed":
                         redirect("Order/orderdetails_payments/$order_key");
                         break;
+                    
+                    
+                    case "Order Verifiaction":
+                        redirect("Order/orderdetails_payments/$order_key?status=Pending");
+                        break;
+                    
                     case "Order Enquiry":
                         redirect("Order/orderdetails_enquiry/$order_key");
                         break;

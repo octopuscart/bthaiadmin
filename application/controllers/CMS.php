@@ -405,8 +405,8 @@ class CMS extends CI_Controller {
         $data['list_data'] = $categories_data;
 
         $fields = array(
-            "title" => array("title" => "Social Account", "width" => "200px"),
-            "link_url" => array("title" => "URL", "width" => "300px"),
+            "title" => array("title" => "Social Account", "width" => "200px", "edit"=>0),
+            "link_url" => array("title" => "URL", "width" => "300px", "edit"=>1),
         );
 
         $data['fields'] = $fields;

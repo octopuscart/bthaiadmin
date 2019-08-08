@@ -88,10 +88,10 @@ function truncate($str, $len) {
                     <h5 class="title"><a href='<?php echo site_url('CMS/lookbookDetails/' . $value['id']); ?>'><?php echo truncate($value['title'], 100); ?></a></h5>
              
 
-                    <div class="desc">
+                    <div class="desc" style="height: auto">
                         <?php echo truncate($value['description'], 200); ?>                
                     </div>
-                    <hr/>
+                    <hr style="margin:5px 0px;"/>
                     <a href="<?php echo site_url('CMS/lookbookDetails/' . $value['id']); ?>" class="" style='margin-top: 10px;'><i class='fa fa-edit'></i> Edit</a>
 
                 </div>

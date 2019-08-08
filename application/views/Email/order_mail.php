@@ -323,7 +323,7 @@
 
 
                 <tr>
-                    <td colspan="6" style="font-size: 12px;">
+                    <td colspan="6" style="font-size: 12px;padding:0px;">
 
 
 
