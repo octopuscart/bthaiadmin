@@ -8,7 +8,6 @@ $this->load->view('layout/header');
     <!-- begin news-feed -->
     <div class="news-feed">
         <div class="news-image">
-            <img src="<?php echo base_url(); ?>assets/img/login-bg/bg1.jpg" data-id="login-cover-image" alt="" />
         </div>
         <div class="news-caption">
             <h4 class="caption-title"><i class="fa fa-diamond text-success"></i> <?php echo SEO_TITLE; ?></h4>
