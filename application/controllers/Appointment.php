@@ -24,7 +24,7 @@ class Appointment extends CI_Controller {
         $this->load->view('Appointment/appointmentSetting', $data);
     }
 
-    public function deleteAppointment($appId) {
+    public function deleteAppointment($aid) {
         $this->db->where('aid', $aid);
         $query = $this->db->delete('appointment_entry');
         redirect('Appointment/listAppointments');

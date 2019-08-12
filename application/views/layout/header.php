@@ -28,7 +28,7 @@
         );
         foreach ($styleSheetArray as $title => $stylesheet) {
             ?>
-                            <!-- ================== <?php echo $title ?> ================== -->
+                                    <!-- ================== <?php echo $title ?> ================== -->
             <link href="<?php echo base_url(); ?><?php echo $stylesheet; ?>" rel="stylesheet" />
             <?php
         }
@@ -54,9 +54,17 @@
         <script src="<?php echo base_url(); ?>assets/plugins/pace/pace.min.js"></script>
         <link href="<?php echo base_url(); ?>assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />	
         <!-- ================== END BASE JS ================== -->
+
+
         <!--angular js-->
         <script src="<?php echo base_url(); ?>assets/angular/angular.min.js"></script>
-        
+
+        <!--custom style-->
+        <style>
+<?php echo HEADERCSS; ?>
+        </style>
+        <!--custom style-->
+
 
     </head>
     <body class="" ng-app="Admin">

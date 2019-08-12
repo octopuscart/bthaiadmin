@@ -29,6 +29,12 @@ try {
         $globleConnectCheckout = $row;
     }
     
+    $stmt = $conn->prepare('SELECT * FROM theme_css');
+    $stmt->execute();
+    while ($row = $stmt->fetch()) {
+        $globleConnectTheme = $row;
+    }
+    
 } catch (PDOException $e) {
     
 }

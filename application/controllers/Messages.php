@@ -11,12 +11,12 @@ class Messages extends CI_Controller {
         $this->load->model('Order_model');
         $this->load->library('session');
 
-        $apikey = MAILCHIMP_APIKEY;
-        $apiendpoint = MAILCHIMP_APIENDPOINT;
-
-        $params = array('api_key' => $apikey, 'api_endpoint' => $apiendpoint);
-
-        $this->load->library('mailchimp_library', $params);
+     //   $apikey = MAILCHIMP_APIKEY;
+      //  $apiendpoint = MAILCHIMP_APIENDPOINT;
+//
+//        $params = array('api_key' => $apikey, 'api_endpoint' => $apiendpoint);
+//
+//        $this->load->library('mailchimp_library', $params);
 
 
         $session_user = $this->session->userdata('logged_in');
@@ -532,10 +532,8 @@ class Messages extends CI_Controller {
 
     public function sendSingleEmailSES() {
         $this->load->library('email');
-        echo $receiver_email ="tailor123hk@gmail.com";
+        echo $receiver_email = "tailor123hk@gmail.com";
         //sendgrid setting
-       
-
         //sendgrid setting
         $this->email->initialize(array(
             'protocol' => 'smtp',
@@ -545,7 +543,7 @@ class Messages extends CI_Controller {
             'smtp_port' => 587,
             'crlf' => "\r\n",
             'newline' => "\r\n",
-            "smtp_crypto"=>"tls",
+            "smtp_crypto" => "tls",
         ));
 
 
@@ -558,6 +556,28 @@ class Messages extends CI_Controller {
         echo $this->email->send();
         print "hello";
         print_r($this->email->print_debugger());
+    }
+
+    public function testmail() {
+        setlocale(LC_MONETARY, 'en_US');
+        $emailsender = EMAIL_SENDER;
+        $sendername = EMAIL_SENDER_NAME;
+        $email_bcc = EMAIL_BCC;
+
+        $this->email->from(EMAIL_BCC, $sendername);
+        $this->email->to("octopuscartltd@gmail.com");
+        $this->email->bcc(EMAIL_BCC);
+        $subject = "U.S.A Secule September 2019";
+        $this->email->subject($subject);
+        $checkcode = REPORT_MODE;
+        if ($checkcode == 0) {
+//                ob_clean();
+            echo $this->load->view('Email/general',array(), true);
+        } else {
+            $this->email->message($this->load->view('Email/general', array(), true));
+            $this->email->print_debugger();
+            echo $result = $this->email->send();
+        }
     }
 
 }

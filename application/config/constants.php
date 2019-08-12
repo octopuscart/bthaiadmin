@@ -44,6 +44,13 @@ define('DEFAULT_PAYMENT', $globleConnectCheckout['default_payment_mode']);
 define('PRODUCT_PATH_PRE', $globleConnectCheckout['product_path_pre']);
 define('PRODUCT_PATH_POST', $globleConnectCheckout['product_path_post']);
 
+define('HEADERCSS', $globleConnectTheme['style_css']);
+
+
+
+
+
+
 $baselink = 'http://' . $_SERVER['SERVER_NAME'];
 
 if (strpos($baselink, '192.168')) {
