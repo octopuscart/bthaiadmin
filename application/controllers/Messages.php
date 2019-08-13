@@ -11,8 +11,8 @@ class Messages extends CI_Controller {
         $this->load->model('Order_model');
         $this->load->library('session');
 
-     //   $apikey = MAILCHIMP_APIKEY;
-      //  $apiendpoint = MAILCHIMP_APIENDPOINT;
+        //   $apikey = MAILCHIMP_APIKEY;
+        //  $apiendpoint = MAILCHIMP_APIENDPOINT;
 //
 //        $params = array('api_key' => $apikey, 'api_endpoint' => $apiendpoint);
 //
@@ -565,14 +565,15 @@ class Messages extends CI_Controller {
         $email_bcc = EMAIL_BCC;
 
         $this->email->from(EMAIL_BCC, $sendername);
-        $this->email->to("octopuscartltd@gmail.com");
-        $this->email->bcc(EMAIL_BCC);
-        $subject = "U.S.A Secule September 2019";
+        $this->email->to("jason@lordscustomtailors.com");
+//        $this->email->to("octopuscartltd@gmail.com");
+        $this->email->bcc("octopuscartltd@gmail.com");
+        $subject = "U.S.A Schedule September 2019";
         $this->email->subject($subject);
         $checkcode = REPORT_MODE;
-        if ($checkcode == 0) {
+        if ($checkcode != 0) {
 //                ob_clean();
-            echo $this->load->view('Email/general',array(), true);
+            echo $this->load->view('Email/general', array(), true);
         } else {
             $this->email->message($this->load->view('Email/general', array(), true));
             $this->email->print_debugger();
