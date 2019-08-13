@@ -234,6 +234,7 @@ class Order_model extends CI_Model {
             $order_no = $order_details['order_data']->order_no;
             $this->email->from(EMAIL_BCC, $sendername);
             $this->email->to($order_details['order_data']->email);
+            $this->email->cc(EMAILCC);
             $this->email->bcc(EMAIL_BCC);
             $subject = SITE_NAME . " - " . $currentstatus->remark;
             $this->email->subject($subject);
@@ -261,6 +262,7 @@ class Order_model extends CI_Model {
             $order_no = $order_details['order_data']->order_no;
             $this->email->from(EMAIL_BCC, $sendername);
             $this->email->to($order_details['order_data']->email);
+            $this->email->cc(EMAILCC);
             $this->email->bcc(EMAIL_BCC);
             $subject = SITE_NAME . " - " . $currentstatus->remark;
             $this->email->subject($subject);
