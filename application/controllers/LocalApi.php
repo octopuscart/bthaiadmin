@@ -176,7 +176,16 @@ class LocalApi extends REST_Controller {
 
     function inboxOrderMail_get() {
         $this->Order_model->orderInboxEmail();
-        $this->response(array());
+        $this->response();
+    }
+    
+    
+     function inboxOrderMailIndb_get() {
+        $this->db->order_by('id', 'desc');
+        $this->db->where('seen', "0");
+        $query = $this->db->get('web_order_email');
+        $systemlog = $query->result_array();
+        $this->response($systemlog);
     }
 
     function inboxOrderMaildb_get() {

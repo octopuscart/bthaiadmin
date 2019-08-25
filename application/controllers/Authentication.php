@@ -51,7 +51,9 @@ class Authentication extends CI_Controller {
                         'log_datetime' => date('Y-m-d H:i:s'),
                         'user_id' => $checkuser->id,
                         'order_id' => "",
-                        'log_detail' => "Admin Login Succesful",
+                        'log_detail' => $checkuser->user_type." Login Succesful",
+                        "process_by"=>$checkuser->id,
+                        "process_user"=>$username
                     );
                     $this->db->insert('system_log', $orderlog);
 

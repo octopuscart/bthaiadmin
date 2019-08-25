@@ -111,79 +111,89 @@ function truncate($str, $len) {
             </div>
 
             <ul class="nav nav-tabs nav-tabs-inverse nav-justified nav-justified-mobile" data-sortable-id="index-2">
-                <li class="active"><a href="#latest-post" data-toggle="tab"><i class="fa fa-picture-o m-r-5"></i> <span class="hidden-xs">Latest Post</span></a></li>
-                <li class=""><a href="#purchase" data-toggle="tab"><i class="fa fa-shopping-cart m-r-5"></i> <span class="hidden-xs">Purchase</span></a></li>
+                                <li class="active"><a href="#purchase" data-toggle="tab"><i class="fa fa-shopping-cart m-r-5"></i> <span class="hidden-xs">Orders</span></a></li>
+
+                <li ><a href="#latest-post" data-toggle="tab"><i class="fa fa-envelope m-r-5"></i> <span class="hidden-xs">Unseen Email</span></a></li>
             </ul>
             <div class="tab-content" data-sortable-id="index-3">
-                <div class="tab-pane fade active in" id="latest-post">
+                <div class="tab-pane fade " id="latest-post">
                     <div class="height-sm" data-scrollbar="true">
                         <ul class="media-list media-list-with-divider">
-                            <?php
-                            foreach ($blog_data as $key => $value) {
-                                ?>   
-                                <li class="media media-lg">
-                                    <a href="javascript:;" class="pull-left">
-                                        <img class="media-object" src="<?php echo base_url(); ?>assets/blog_images/<?php echo $value['image']; ?>" alt=""  style="height:100px;width:100px"/>
-                                    </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading"><a href='<?php echo site_url('CMS/blogDetails/' . $value['id']); ?>'><?php echo truncate($value['title'], 100); ?></a></h4>
-                                        <?php echo truncate($value['description'], 200); ?>    
-                                    </div>
-                                </li>
-                                <?php
-                            }
-                            ?>
+                           <li class="list-group-item inverse  " ng-repeat="mail in orderGlobleCheck.unseenemail">
+                    <a href="<?php echo site_url("Order/orderInboxDetails/"); ?>{{mail.id}}">
+                        <div class="email-checkbox">
+                            <label>
+                                <i class="fa fa-square-o"></i>
+                                <input type="checkbox" data-checked="email-checkbox" />
+                            </label>
+                        </div>
+                        <!--                    <a href="email_detail.html" class="email-user">
+                                                <img src="assets/img/user-14.jpg" alt="" />
+                                            </a>-->
+                        <div class="email-info">
+                            <span class="email-time"><i class="fa fa-calendar-o"></i> {{mail.datetime}}</span>
+                            <h5 class="email-title">
+                                {{mail.subject}}
+
+                                <span class="label label-danger f-s-10" ng-if="mail.seen == '0'">New</span>
+                            </h5>
+                            <p class="email-desc">
+                                <span class="fromemail">{{mail.from_email}}</span>
+                                <span class="datetime"></span>
+                            </p>
+                        </div>
+                    </a>
+                </li>
                         </ul>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="purchase">
+                <div class="tab-pane fade active in" id="purchase">
                     <div class="height-sm" data-scrollbar="true">
 
 
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 20px">S. NO.</th>
-                                    <th style="width:250px">Order Information</th>
-                                    <th style="width:200px">Customer Information</th>
+                     <table id="tableDataOrder" class="table table-bordered  tableDataOrder">
+                        <thead>
+                            <tr>
+                                <th style="width: 70px">S. No.</th>
+                                <th style="width:250px">Order Information</th>
+                                <th style="width:200px">Customer Information</th>
 
-                                    <th>Status</th>
-                                    <th></th>
+                                <th></th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                if (count($orderslist)) {
-                                    $count = 1;
-                                    foreach ($orderslist as $key => $value) {
-                                        ?>
-                                        <tr style="border-bottom: 1px solid #000;">
-                                            <td>
-                                                <?php echo $count; ?>
-                                            </td>
-                                            <td>
-
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (count($orderslist)) {
+                                $count = 1;
+                                foreach ($orderslist as $key => $value) {
+                                    ?>
+                                    <tr style="border-bottom: 1px solid #000;">
+                                        <td>
+                                            <?php echo $count; ?>
+                                        </td>
+                                        <td>
+                                      
                                                 <table class="small_table">
                                                     <tr>
                                                         <th>Order No.</th>
-                                                        <td>: <?php echo $value->order_no; ?></td>
+                                                        <td>: <?php echo $value->id; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Total Amount</th>
-                                                        <td>: {{<?php echo $value->total_price; ?>|currency:" "}}</td>
+                                                        <th>Guest(s)</th>
+                                                        <td>: <?php  echo $value->people; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Total Products</th>
-                                                        <td>: {{<?php echo $value->total_quantity; ?>}}</td>
+                                                        <th>Table No.</th>
+                                                        <td>: {{<?php echo $value->select_table; ?>}}</td>
                                                     </tr>
                                                 </table>
+                                        
+                                        </td>
 
-                                            </td>
-
-                                            <td>
-
-                                                <b> <?php echo $value->name; ?></b>
+                                        <td>
+                                           
+                                                <b> <?php echo $value->first_name . " ".$value->last_name; ?></b>
                                                 <table class="small_table">
                                                     <tr>
                                                         <th><i class="fa fa-envelope"></i> &nbsp; </th>
@@ -191,40 +201,31 @@ function truncate($str, $len) {
                                                     </tr>
                                                     <tr>
                                                         <th><i class="fa fa-phone"></i>  &nbsp;</th>
-                                                        <td> <?php echo $value->contact_no; ?></td>
+                                                        <td> <?php echo $value->contact; ?></td>
                                                     </tr>
-                                                    <tr>
-                                                        <th><i class="fa fa-map-marker"></i> &nbsp; </th>
-                                                        <td> <?php echo $value->city . ", " . $value->country; ?></td>
-                                                    </tr>
+                                                    
                                                 </table>
+                                          
+                                        </td>
+                                        
 
-                                            </td>
+                                        
+                                        <td>
+                                            <a href="<?php echo site_url("order/orderdetails/".$value->id);?>" class="btn btn-primary btn-sm" style="    margin-top: 20%;">Update <i class="fa fa-arrow-circle-right"></i></a>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                    $count++;
+                                }
+                            } else {
+                                ?>
+                            <h4><i class="fa fa-warning"></i> No order found</h4>
+                            <?php
+                        }
+                        ?>
 
-
-
-                                            <td>
-                                                <?php
-                                                echo "" . $value->status . "<br/>";
-                                                echo $value->status_datetime;
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <a href="<?php echo site_url("order/orderdetails/" . $value->order_key); ?>" class="btn btn-primary btn-sm" style="    margin-top: 20%;">Update <i class="fa fa-arrow-circle-right"></i></a>
-                                            </td>
-                                        </tr>
-                                        <?php
-                                        $count++;
-                                    }
-                                } else {
-                                    ?>
-                                <h4><i class="fa fa-warning"></i> No order found</h4>
-                                <?php
-                            }
-                            ?>
-
-                            </tbody>
-                        </table>
+                        </tbody>
+                    </table>
                     </div>
                 </div>
 

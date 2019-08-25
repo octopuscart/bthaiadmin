@@ -167,6 +167,7 @@ function userReportFunction($users) {
                     <div class="" style="padding:20px">
                         <?php userReportFunction($users_all); ?>
                     </div>
+                    <div style="clear: both"></div>
                 </div>
 
 

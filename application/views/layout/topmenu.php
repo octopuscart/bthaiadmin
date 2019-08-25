@@ -30,7 +30,35 @@ if ($userdata) {
                     </div>
                 </form>
             </li>
-                        <button class="" id="soundButton" ng-click="playSound()" style="opacity: 0">Click</button>
+            <button class="" id="soundButton" ng-click="playSound()" style="opacity: 0">Click</button>
+            <li class="dropdown">
+                <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
+                    <i class="fa fa-envelope"></i>
+                    <span class="label">{{orderGlobleCheck.unseenemail.length}}</span>
+                </a>
+                <ul class="dropdown-menu media-list pull-right animated fadeInDown">
+                    <li class="dropdown-header">Unseen Emails ({{orderGlobleCheck.unseenemail.length}})</li>
+
+
+
+                    <li class="media" ng-repeat="emails in orderGlobleCheck.unseenemail">
+                        <a href="javascript:;">
+                            <div class="media-left"><i class="fa fa-calendar media-object bg-red"></i></div>
+                            <div class="media-body">
+                                <h6 class="media-heading textoverflow">{{emails.subject}}</h6>
+                                <div class="text-muted f-s-11">{{emails.datetime}}</div>
+                            </div>
+                        </a>
+                    </li>
+
+
+
+                    <li class="dropdown-footer text-center">
+                        <a href="<?php echo site_url("Order/orderInbox");?>">View more</a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="dropdown">
                 <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
                     <i class="fa fa-bell-o"></i>

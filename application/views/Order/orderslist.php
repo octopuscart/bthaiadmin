@@ -53,11 +53,10 @@ $this->load->view('layout/topmenu');
                             <tr>
                                 <th style="width: 70px">S. No.</th>
                                 <th style="width:250px">Order Information</th>
-                                <th style="width:200px">Customer Information</th>
-                                <th style="width:80px">Items/Qnty.</th>
-                                <th style="width:100px">Sizes</th>
+                                <th style="width:300px">Customer Information</th>
+                              
                                 <th>Status</th>
-                                <th></th>
+                                <th style="width:100px"></th>
 
                             </tr>
                         </thead>
@@ -108,16 +107,7 @@ $this->load->view('layout/topmenu');
                                         </td>
                                         
 
-                                        <td>
-                                            <table class="small_table">
-                                               
-                                            </table>
-                                        </td>
-<td>
-                                         
-                                              
-                                          
-                                        </td>
+                                      
                                         <td>
                                             <?php
                                             echo "" . $value->status . "<br/>";
@@ -193,10 +183,10 @@ $this->load->view('layout/footer');
         }, function (start, end, label) {
             $('input[name=daterange]').val(start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
-//        $('#tableDataOrder').DataTable({
-//            "language": {
-//                "search": "Search Order By Email, Order No., Order Date Etc."
-//            }
-//        })
+        $('#tableDataOrder').DataTable({
+            "language": {
+                "search": "Search Order By Email, Order No., Order Date Etc."
+            }
+        })
     })
 </script>

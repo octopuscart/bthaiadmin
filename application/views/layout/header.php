@@ -33,6 +33,10 @@
             <?php
         }
         ?>
+            
+            <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+	<link href="<?php echo base_url(); ?>assets/plugins/DataTables/css/data-table.css" rel="stylesheet" />
+	<!-- ================== END PAGE LEVEL STYLE ================== -->
 
         <!-- end page container -->	
         <!-- ================== BEGIN BASE JS ================== -->
@@ -41,6 +45,7 @@
         <script src="<?php echo base_url(); ?>assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.min.js"></script>
+        	<script src="<?php echo base_url(); ?>assets/plugins/DataTables/js/jquery.dataTables.js"></script>
         <!--[if lt IE 9]>
                 <script src="assets/crossbrowserjs/html5shiv.js"></script>
                 <script src="assets/crossbrowserjs/respond.min.js"></script>
@@ -105,8 +110,15 @@
                                     <h4 class="list-group-item-heading"><i class="fa fa-user"></i>{{order.first_name}} {{order.last_name}}</h4>
                                     <p class="list-group-item-text"><i class="fa fa-clock-o"></i> {{order.select_date}} {{order.select_time}}</p>
                                     <p class="list-group-item-text"><b>Source:<b/><span>{{order.order_source}}</span>, <b>Guest(s):<b/><span>{{order.people}}</span></p>
-                                </a>
+                                </a> 
+                                
+                                
+                                <a href="<?php echo site_url("Order/orderInbox");?>" class="list-group-item" ng-if="orderGlobleCheck.unseenemail.length">
+                                    <h4 class="list-group-item-heading"><i class="fa fa-envelope"></i> Unseen Mails: <span class="badge">{{orderGlobleCheck.unseenemail.length}}</span></h4>
+                                </a> 
+                                
                             </div>
+                           
                         </div>
                         <div class="modal-footer">
                             <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>

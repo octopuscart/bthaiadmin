@@ -11,6 +11,7 @@ class Order extends CI_Controller {
         $this->load->model('Order_model');
         $this->curd = $this->load->model('Curd_model');
         $session_user = $this->session->userdata('logged_in');
+        $this->session_user = $session_user;
         if ($session_user) {
             $this->user_id = $session_user['login_id'];
         } else {
@@ -54,8 +55,7 @@ class Order extends CI_Controller {
 
         $this->db->order_by('id', 'desc');
         $this->db->where('order_date between "' . $date1 . '" and "' . $date2 . '"');
-        $query = $this->db->get('user_order');
-
+        $query = $this->db->get('web_order');
         $orderlist = $query->result();
         $orderslistr = [];
         foreach ($orderlist as $key => $value) {
@@ -63,27 +63,19 @@ class Order extends CI_Controller {
             $this->db->where('order_id', $value->id);
             $query = $this->db->get('user_order_status');
             $status = $query->row();
-            $value->status = $status ? $status->status : $value->status;
-            $value->status_datetime = $status ? $status->c_date . " " . $status->c_time : $value->order_date . " " . $value->order_time;
-            $this->db->order_by('id', 'desc');
-            $this->db->where('order_id', $value->id);
-            $query = $this->db->get('cart');
-            $cartdata = $query->result();
-            $tempdata = array();
-            $itemarray = array();
-            foreach ($cartdata as $key1 => $value1) {
-                array_push($tempdata, $value1->item_name . "(" . $value1->quantity . ")");
-                $itemarray[$value1->item_name] = $value1->quantity;
-            }
-            $value->itemsarray = $itemarray;
-            $value->items = implode(", ", $tempdata);
+            $value->status = $status ? $status->status : $value->status = $status ? $status->status : "--";
+            ;
+            $value->status_datetime = $status ? $status->c_date . " " . $status->c_time : $value->order_date;
+
+            $value->itemsarray = array();
+            $value->items = implode(", ", array());
             array_push($orderslistr, $value);
         }
         $data['orderslist'] = $orderslistr;
 
 
         $data['exportdata'] = 'no';
-        if ($this->user_type != 'Admin') {
+        if ($this->user_type == '') {
             redirect('UserManager/not_granted');
         }
         $date1 = date('Y-m-') . "01";
@@ -220,7 +212,14 @@ class Order extends CI_Controller {
                 $usertype = $order_details['order_data']->usertype;
                 $ordertype = $order_details['order_data']->booking_type;
                 $ordertsource = $order_details['order_data']->order_source;
-                $this->db->set("status", "1");
+
+                $updateStatus = array(
+                    "status" => "1",
+                    "process_by" => $this->session_user['login_id'],
+                    "process_user" => $this->session_user['username'],
+                );
+
+                $this->db->set($updateStatus);
                 $this->db->where("id", $order_id);
                 $this->db->update('web_order');
 
@@ -231,9 +230,24 @@ class Order extends CI_Controller {
                     'status' => "Received",
                     'user_id' => $usertype,
                     'remark' => "Order $ordertype From $ordertsource",
+                    "process_by" => $this->session_user['login_id'],
+                    "process_user" => $this->session_user['username'],
                 );
                 $this->db->insert('user_order_status', $order_status_data);
-                redirect("Order/orderdetails/$order_key/?status=Confirmed");
+
+                $orderlog = array(
+                    'log_type' => "Order Received",
+                    'log_datetime' => date('Y-m-d H:i:s'),
+                    'user_id' => "",
+                    'order_id' => $order_id,
+                    'log_detail' => "Order Received " . " Order $ordertype From $ordertsource",
+                    "process_by" => $this->session_user['login_id'],
+                    "process_user" => $this->session_user['username'],
+                );
+                $this->db->insert('system_log', $orderlog);
+
+
+                redirect("Order/orderdetails/$order_key");
             }
 
             $currentstatus = $orderstatuslist ? $orderstatuslist[0]->status : array();
@@ -269,9 +283,24 @@ class Order extends CI_Controller {
                     'status' => $this->input->post('status'),
                     'remark' => $this->input->post('remark'),
                     'description' => $this->input->post('description'),
-                    'order_id' => $order_id
+                    'order_id' => $order_id,
+                    "process_by" => $this->session_user['login_id'],
+                    "process_user" => $this->session_user['username'],
                 );
                 $this->db->insert('user_order_status', $productattr);
+
+                $orderlog = array(
+                    'log_type' => $this->input->post('status'),
+                    'log_datetime' => date('Y-m-d H:i:s'),
+                    'user_id' => "",
+                    'order_id' => $order_id,
+                    'log_detail' => $this->input->post('status')." " . $this->input->post('remark'),
+                    "process_by" => $this->session_user['login_id'],
+                    "process_user" => $this->session_user['username'],
+                );
+                $this->db->insert('system_log', $orderlog);
+
+
                 if ($this->input->post('sendmail') == TRUE) {
                     try {
                         $this->Order_model->order_mail($order_key, "");
@@ -797,6 +826,31 @@ class Order extends CI_Controller {
         $query = $this->db->get('web_order_email');
         $emaildetail = $query->row();
         $data['emaildetail'] = $emaildetail;
+
+
+
+        $orderlog = array(
+            'log_type' => "Email ",
+            'log_datetime' => date('Y-m-d H:i:s'),
+            'user_id' => "",
+            'order_id' => "",
+            'log_detail' => "Email Received ",
+            "process_by" => $this->session_user['login_id'],
+            "process_user" => $this->session_user['username'],
+        );
+        $this->db->insert('system_log', $orderlog);
+
+
+        $updateStatus = array(
+            "seen" => "1",
+            "process_by" => $this->session_user['login_id'],
+            "process_user" => $this->session_user['username'],
+        );
+
+        $this->db->set($updateStatus);
+        $this->db->where("id", $msg_id);
+        $this->db->update('web_order_email');
+
         $this->load->view('Order/orderinboxdetail', $data);
     }
 

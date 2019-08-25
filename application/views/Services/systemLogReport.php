@@ -47,6 +47,7 @@ function userReportFunction($users) {
                 <th style="width: 20px;">S.N.</th>
                 <th style="width:50px;">Activity Type</th>
                 <th style="width: 75px;">Details</th>
+                <th style="width: 75px;">Process By</th>
                 <th style="width: 100px;">Date Time </th>
 
                 <!--                <th style="width: 75px;">Edit</th>-->
@@ -66,10 +67,14 @@ function userReportFunction($users) {
 
                         <td>
                             <?php echo $value->log_type; ?>
+                               <?php echo $value->order_id?"order No:".$value->order_id:""; ?>
                         </td>
 
                         <td>
                             <?php echo $value->log_detail; ?>
+                        </td>
+                        <td>
+                            <?php echo $value->process_user; ?>
                         </td>
                         <td>
                             <?php echo $value->log_datetime; ?>

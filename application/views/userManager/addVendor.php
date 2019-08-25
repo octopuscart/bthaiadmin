@@ -1,5 +1,6 @@
 <?php
-$this->load->view('layout/layoutTop');
+$this->load->view('layout/header');
+$this->load->view('layout/topmenu');
 ?>
 <style>
     .product_image{
@@ -17,51 +18,42 @@ $this->load->view('layout/layoutTop');
 <section class="content">
     <div class="">
 
-        <div class="box box-danger">
-            <div class="box-header">
-                <h3 class="box-title">Add Vendor / Manager </h3>
+        <div class="panel panel-danger">
+            <div class="panel-header">
+              
             </div>
-            <div class="box-body">
+            <div class="panel-body">
+                  <h3 >Add Manager </h3>
                 <form action="#" method="post" enctype="multipart/form-data">
 
-                    
 
-                   <?php
-                   if($message){
-                   ?>
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-                        <?php echo $message;?>
-                    </div>
-                    <?php 
-                   }
+
+                    <?php
+                    if ($message) {
+                        ?>
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                            <?php echo $message; ?>
+                        </div>
+                        <?php
+                    }
                     ?>
 
 
                     <div class="row">
 
-                        <div class="col-md-4">
-                            <div class="thumbnail">
-                                <div class="product_image product_image_back" style="background: url(<?php echo (base_url() . "assets_main/" . default_image); ?>)">
-                                </div>
-                                <div class="caption">
-                                    <div class="form-group">
-                                        <label for="image1">Upload Store Image</label>
-                                        <input type="file" name="picture" />           
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="col-md-8">
                             <div class="col-md-12">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label >User Type</label>
                                         <select name="user_type" class="form-control">
-                                             <?php if($user_type=='Admin'){;?><
-                                            <option>Manager</option>
-                                             <?php }?>
+                                            <?php if ($user_type == 'Admin') {
+; ?><
+                                                <option>Manager</option>
+<?php } ?>
                                         </select>
                                     </div>
                                 </div>
@@ -98,7 +90,7 @@ $this->load->view('layout/layoutTop');
                                     </div>
                                 </div>
 
-                               
+
 
                                 <div class="col-md-12">
                                     <button type="submit" name="submit" class="btn btn-primary">Add User</button>
@@ -106,6 +98,7 @@ $this->load->view('layout/layoutTop');
                             </div>
                         </div>
                     </div>
+                    <div style="clear:both"></div>
                 </form>
             </div>
         </div>
@@ -116,6 +109,7 @@ $this->load->view('layout/layoutTop');
 
 
 <?php
-$this->load->view('layout/layoutFooter');
+$this->load->view('layout/footer');
 ?> 
+
 

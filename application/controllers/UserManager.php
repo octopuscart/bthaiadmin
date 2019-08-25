@@ -25,7 +25,7 @@ class UserManager extends CI_Controller {
         } else {
             $data['users'] = [];
         }
-        if ($this->user_type != 'Admin') {
+        if ($this->user_type != '') {
             redirect('UserManager/not_granted');
         }
 
@@ -85,23 +85,7 @@ class UserManager extends CI_Controller {
         $data['user_type'] = $this->user_type;
         if (isset($_POST['submit'])) {
             $picture = '';
-            if (!empty($_FILES['picture']['name'])) {
-                $temp1 = rand(100, 1000000);
-                $ext1 = explode('.', $_FILES['picture']['name']);
-                $ext = strtolower(end($ext1));
-                $file_newname = $temp1 . "1." . $ext;
-                ;
-                $config['file_name'] = $file_newname;
-                //Load upload library and initialize configuration
-                $this->load->library('upload', $config);
-                $this->upload->initialize($config);
-                if ($this->upload->do_upload('picture')) {
-                    $uploadData = $this->upload->data();
-                    $picture = $uploadData['file_name'];
-                } else {
-                    $picture = '';
-                }
-            }
+            
 
             $email = $this->input->post('email');
 
