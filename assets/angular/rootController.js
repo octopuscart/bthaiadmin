@@ -30,7 +30,7 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
                 }
                 if ($scope.orderGlobleCheck.unseen == 1) {
                     $("#modal-notification").modal("show");
-//                 $scope.playSound();
+                 $scope.playSound();
                 }
             })
 
