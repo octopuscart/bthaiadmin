@@ -76,15 +76,15 @@ $this->load->view('layout/topmenu');
                                                 <table class="small_table">
                                                     <tr>
                                                         <th>Order No.</th>
-                                                        <td>: <?php echo $value->order_no; ?></td>
+                                                        <td>: <?php echo $value->id; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Total Amount</th>
-                                                        <td>: {{<?php  echo $value->total_price; ?>|currency:" "}}</td>
+                                                        <td>: <?php  echo $value->people; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Total Products</th>
-                                                        <td>: {{<?php echo $value->total_quantity; ?>}}</td>
+                                                        <th>Table No.</th>
+                                                        <td>: {{<?php echo $value->select_table; ?>}}</td>
                                                     </tr>
                                                 </table>
                                         
@@ -92,7 +92,7 @@ $this->load->view('layout/topmenu');
 
                                         <td>
                                            
-                                                <b> <?php echo $value->name; ?></b>
+                                                <b> <?php echo $value->first_name . " ".$value->last_name; ?></b>
                                                 <table class="small_table">
                                                     <tr>
                                                         <th><i class="fa fa-envelope"></i> &nbsp; </th>
@@ -100,12 +100,9 @@ $this->load->view('layout/topmenu');
                                                     </tr>
                                                     <tr>
                                                         <th><i class="fa fa-phone"></i>  &nbsp;</th>
-                                                        <td> <?php echo $value->contact_no; ?></td>
+                                                        <td> <?php echo $value->contact; ?></td>
                                                     </tr>
-                                                    <tr>
-                                                        <th><i class="fa fa-map-marker"></i> &nbsp; </th>
-                                                        <td> <?php echo $value->city . ", " . $value->country; ?></td>
-                                                    </tr>
+                                                    
                                                 </table>
                                           
                                         </td>
@@ -113,19 +110,12 @@ $this->load->view('layout/topmenu');
 
                                         <td>
                                             <table class="small_table">
-                                                <?php
-                                                $items = $value->itemsarray;
-                                                foreach ($items as $k => $v) {
-                                                    echo "<tr><th>$k</th><td>: $v</td></tr>";
-                                                }
-                                                ?>
+                                               
                                             </table>
                                         </td>
 <td>
                                          
-                                                <?php
-                                                echo $value->measurement_style;
-                                                ?>
+                                              
                                           
                                         </td>
                                         <td>
@@ -135,7 +125,7 @@ $this->load->view('layout/topmenu');
                                             ?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo site_url("order/orderdetails/".$value->order_key);?>" class="btn btn-primary btn-sm" style="    margin-top: 20%;">Update <i class="fa fa-arrow-circle-right"></i></a>
+                                            <a href="<?php echo site_url("order/orderdetails/".$value->id);?>" class="btn btn-primary btn-sm" style="    margin-top: 20%;">Update <i class="fa fa-arrow-circle-right"></i></a>
                                         </td>
                                     </tr>
                                     <?php
@@ -203,10 +193,10 @@ $this->load->view('layout/footer');
         }, function (start, end, label) {
             $('input[name=daterange]').val(start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
-        $('#tableDataOrder').DataTable({
-            "language": {
-                "search": "Search Order By Email, Order No., Order Date Etc."
-            }
-        })
+//        $('#tableDataOrder').DataTable({
+//            "language": {
+//                "search": "Search Order By Email, Order No., Order Date Etc."
+//            }
+//        })
     })
 </script>

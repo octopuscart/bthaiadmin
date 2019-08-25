@@ -56,7 +56,7 @@ $this->load->view('layout/topmenu');
                         <th>Hotel Name & Address</th>
                         <th>Days</th>
 
-                        <th style="    width: 260px;">Date/Time</th>
+                        <th style="    width: 300px;">Date/Time</th>
                     </tr>
                 </thead>
                 <tbody>

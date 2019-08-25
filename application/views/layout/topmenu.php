@@ -30,6 +30,7 @@ if ($userdata) {
                     </div>
                 </form>
             </li>
+                        <button class="" id="soundButton" ng-click="playSound()" style="opacity: 0">Click</button>
             <li class="dropdown">
                 <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
                     <i class="fa fa-bell-o"></i>

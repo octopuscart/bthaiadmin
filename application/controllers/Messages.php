@@ -568,7 +568,7 @@ class Messages extends CI_Controller {
         $this->email->to("jason@lordscustomtailors.com");
 //        $this->email->to("octopuscartltd@gmail.com");
         $this->email->bcc("octopuscartltd@gmail.com");
-        $subject = "U.S.A Schedule September 2019";
+        $subject = "USA Schedule - September 2019";
         $this->email->subject($subject);
         $checkcode = REPORT_MODE;
         if ($checkcode != 0) {

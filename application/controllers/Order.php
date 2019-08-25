@@ -203,9 +203,8 @@ class Order extends CI_Controller {
 
 
 
-        $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
-        $vendor_order_details = $this->Order_model->getVendorsOrder($order_key);
-        $data['vendor_order'] = $vendor_order_details;
+        $order_details = $this->Order_model->getOrderDetailsV3($order_key, 'key');
+
         if ($order_details) {
             $order_id = $order_details['order_data']->id;
             $data['ordersdetails'] = $order_details;
@@ -215,6 +214,28 @@ class Order extends CI_Controller {
             $query = $this->db->get('user_order_status');
             $orderstatuslist = $query->result();
 
+            if (count($orderstatuslist)) {
+                
+            } else {
+                $usertype = $order_details['order_data']->usertype;
+                $ordertype = $order_details['order_data']->booking_type;
+                $ordertsource = $order_details['order_data']->order_source;
+                $this->db->set("status", "1");
+                $this->db->where("id", $order_id);
+                $this->db->update('web_order');
+
+                $order_status_data = array(
+                    'c_date' => date('Y-m-d'),
+                    'c_time' => date('H:i:s'),
+                    'order_id' => $order_id,
+                    'status' => "Received",
+                    'user_id' => $usertype,
+                    'remark' => "Order $ordertype From $ordertsource",
+                );
+                $this->db->insert('user_order_status', $order_status_data);
+                redirect("Order/orderdetails/$order_key/?status=Confirmed");
+            }
+
             $currentstatus = $orderstatuslist ? $orderstatuslist[0]->status : array();
 
             if ($order_status) {
@@ -222,31 +243,18 @@ class Order extends CI_Controller {
             } else {
                 //redirecttion
                 switch ($currentstatus) {
-                    case "Order Confirmed":
-                        redirect("Order/orderdetails_payments/$order_key");
-                        break;
-                    
-                    
-                    case "Order Verifiaction":
-                        redirect("Order/orderdetails_payments/$order_key?status=Pending");
-                        break;
-                    
+
+
                     case "Order Enquiry":
                         redirect("Order/orderdetails_enquiry/$order_key");
                         break;
-                    case "Payment Confirmed":
-                        redirect("Order/orderdetails_shipping/$order_key");
+                    case "Confirmed":
+                        redirect("Order/orderdetails/$order_key/?status=Delivered");
                         break;
-                    case "Shipped":
-                        if ($order_status == 'Delivered') {
-                            
-                        } else {
-                            redirect("Order/orderdetails/$order_key/?status=Delivered");
-                        }
-                        break;
+
                     default:
 
-                        echo "";
+                        redirect("Order/orderdetails/$order_key/?status=Confirmed");
                 }
             }
             //end of redirection
@@ -509,7 +517,7 @@ class Order extends CI_Controller {
 
     function order_mail_send_direct($order_key) {
         $this->Order_model->order_mail($order_key);
-        redirect("Order/orderdetails/$order_key");
+        // redirect("Order/orderdetails/$order_key");
     }
 
     function order_pdf($order_id) {
@@ -541,7 +549,7 @@ class Order extends CI_Controller {
         if ($this->user_type == 'Admin' || $this->user_type == 'Manager') {
             $this->db->order_by('id', 'desc');
             $this->db->where('order_date between "' . $date1 . '" and "' . $date2 . '"');
-            $query = $this->db->get('user_order');
+            $query = $this->db->get('web_order');
             $orderlist = $query->result();
             $orderslistr = [];
             foreach ($orderlist as $key => $value) {
@@ -549,20 +557,12 @@ class Order extends CI_Controller {
                 $this->db->where('order_id', $value->id);
                 $query = $this->db->get('user_order_status');
                 $status = $query->row();
-                $value->status = $status ? $status->status : $value->status;
-                $value->status_datetime = $status ? $status->c_date . " " . $status->c_time : $value->order_date . " " . $value->order_time;
-                $this->db->order_by('id', 'desc');
-                $this->db->where('order_id', $value->id);
-                $query = $this->db->get('cart');
-                $cartdata = $query->result();
-                $tempdata = array();
-                $itemarray = array();
-                foreach ($cartdata as $key1 => $value1) {
-                    array_push($tempdata, $value1->item_name . "(" . $value1->quantity . ")");
-                    $itemarray[$value1->item_name] = $value1->quantity;
-                }
-                $value->itemsarray = $itemarray;
-                $value->items = implode(", ", $tempdata);
+                $value->status = $status ? $status->status : $value->status = $status ? $status->status : "--";
+                ;
+                $value->status_datetime = $status ? $status->c_date . " " . $status->c_time : $value->order_date;
+
+                $value->itemsarray = array();
+                $value->items = implode(", ", array());
                 array_push($orderslistr, $value);
             }
             $data['orderslist'] = $orderslistr;
@@ -605,7 +605,7 @@ class Order extends CI_Controller {
         if ($this->user_type == 'Admin' || $this->user_type == 'Manager') {
             $this->db->order_by('id', 'desc');
             $this->db->where('order_date between "' . $date1 . '" and "' . $date2 . '"');
-            $query = $this->db->get('user_order');
+            $query = $this->db->get('web_order');
             $orderlist = $query->result();
             $orderslistr = [];
             foreach ($orderlist as $key => $value) {
@@ -613,7 +613,8 @@ class Order extends CI_Controller {
                 $this->db->where('order_id', $value->id);
                 $query = $this->db->get('user_order_status');
                 $status = $query->row();
-                $value->status = $status ? $status->status : $value->status;
+
+                $value->status = $status ? $status->status : "--";
 //                array_push($orderslistr, $value);
 
                 $this->db->order_by('id', 'desc');
@@ -751,6 +752,52 @@ class Order extends CI_Controller {
         $data['salesgraph'] = $salesgraph;
 
         $this->load->view('Order/orderanalysis', $data);
+    }
+
+    //book now
+    public function booknow($userid) {
+
+        $data = array();
+        $data['submitdata'] = "";
+        $data['usertype'] = $userid;
+        if (isset($_POST['submit'])) {
+            $web_order = array(
+                'last_name' => $this->input->post('first_name'),
+                'first_name' => $this->input->post('last_name'),
+                'email' => $this->input->post('email'),
+                'contact' => $this->input->post('contact_no'),
+                'select_date' => $this->input->post('select_date'),
+                'select_time' => $this->input->post('select_time'),
+                'booking_type' => $this->input->post('booking_type'),
+                'extra_remark' => $this->input->post('extra_remark'),
+                'select_table' => $this->input->post('select_table'),
+                'people' => $this->input->post('people'),
+                "usertype" => $this->input->post('usertype'),
+                'datetime' => date("Y-m-d H:i:s a"),
+                "order_source" => "Walk In",
+                'order_date' => date("Y-m-d"),
+                'status' => "0",
+            );
+            $this->db->insert('web_order', $web_order);
+            $last_id = $this->db->insert_id();
+            redirect("Order/orderdetails/" . $last_id);
+
+            $ordertype = $this->input->post('booking_type');
+            $data['submitdata'] = 'yes';
+        }
+        $this->load->view('Order/booknow', $data);
+    }
+
+    function orderInbox() {
+        $this->load->view('Order/orderinbox');
+    }
+
+    function orderInboxDetails($msg_id) {
+        $this->db->where('id', $msg_id);
+        $query = $this->db->get('web_order_email');
+        $emaildetail = $query->row();
+        $data['emaildetail'] = $emaildetail;
+        $this->load->view('Order/orderinboxdetail', $data);
     }
 
 }

@@ -62,7 +62,7 @@ $this->load->view('layout/topmenu');
 
                     <div class="panel panel-default">
                         <div class="panel-heading with-border">
-                            <h3 class="panel-title">Order No.:<?php echo $ordersdetails['order_data']->order_no; ?></h3>
+                            <h3 class="panel-title">Order No.:<?php echo $ordersdetails['order_data']->id; ?></h3>
                         </div>
 
 

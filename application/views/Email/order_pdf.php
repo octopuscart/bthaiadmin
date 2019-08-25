@@ -5,69 +5,61 @@ echo PDF_HEADER;
 <table class="detailstable" align="center" border="0" cellpadding="0" cellspacing="0" width="700" style="background: #fff;margin-top:20px;">
     <tr>
         <td style="width: 50%" >
-            <div style="float:left;width: 300px;height: 200px">
-                <b>Shipping Address</b><br/>
+            <div style="float:left;width: 300px;height: 150px">
 
-                <table class="gn_table" style="border-top: 1px solid;margin-top: 5px; ">
+                <table class="gn_table">
                     <tr>
                         <td colspan="2">
-                            <span style="text-transform: capitalize;margin-top: 10px;"> 
-                                <?php echo $order_data->name; ?>
-                            </span> <br/>
-                            <div style="    padding: 5px 0px;">
-                                <?php echo $order_data->address1; ?><br/>
-                                <?php echo $order_data->address2; ?><br/>
-                                <?php echo $order_data->state; ?>
-                                <?php echo $order_data->city; ?>
-
-                                <?php echo $order_data->country; ?> <?php echo $order_data->zipcode; ?>
-
-                            </div>
+                            <b>Guest Information</b><br/><hr/>
                         </td>
                     </tr>
                     <tr>
-                        <th style="text-align: left;">Email</th>
-                        <td>:  <?php echo $order_data->email; ?> </td>
+                        <th>Name</th>
+                        <td>: <?php echo $order_data->first_name; ?> <?php echo $order_data->last_name; ?> </td>
                     </tr>
                     <tr>
-                        <th style="text-align: left;    width: 95px;">Contact No.</th>
-                        <td>:  <?php echo $order_data->contact_no; ?> </td>
+                        <th>Email</th>
+                        <td>: <?php echo $order_data->email; ?> </td>
                     </tr>
+                    <tr>
+                        <th>Contact No.</th>
+                        <td>: <?php echo $order_data->contact; ?> </td>
+                    </tr>
+
                 </table>
             </div>
 
         </td>
         <td style="width: 30%" >
-            <div style="float:right;width: 300px;height: 200px">
-                <b>Order Information</b><br/>
-                <table class="gn_table" style="border-top: 1px solid;margin-top: 5px; ">
+            <div style="float:right;width: 300px;height: 150px">
+                <table class="gn_table">
                     <tr>
-                        <th style="text-align: left;">Order No.</th>
-                        <td>:  <?php echo $order_data->order_no; ?> </td>
-                    </tr>
-                    <tr>
-                        <th style="text-align: left;">Date/Time</th>
-                        <td>:  <?php echo $order_data->order_date; ?> <?php echo $order_data->order_time; ?>  </td>
-                    </tr>
-                    <tr>
-                        <th style="text-align: left;">Payment Mode</th>
-                        <td>:  <?php echo $order_data->payment_mode; ?> </td>
-                    </tr>
-                    <tr>
-                        <th style="text-align: left;">Txn No.</th>
-                        <td>:  
-                            <?php echo $payment_details['txn_id'] ? $payment_details['txn_id'] : '---'; ?> 
+                        <td colspan="2">
+                            <b>Order Information</b><br/><hr/>
                         </td>
                     </tr>
                     <tr>
-                        <th style="text-align: left;">Status</th>
-                        <td>:  <?php
+                        <th>Order No.</th>
+                        <td>: <?php echo $order_data->id; ?> </td>
+                    </tr>
+                    <tr>
+                        <th>Date/Time</th>
+                        <td>: <?php echo $order_data->datetime; ?>   </td>
+                    </tr>
+<tr>
+                                <th>Order Source</th>
+                                <td>: <?php echo $order_data->order_source; ?>   </td>
+                            </tr>
+
+                    <tr>
+                        <th>Status</th>
+                        <td>: <?php
                             if ($order_status) {
                                 echo end($order_status)->status;
                             } else {
                                 echo "Pending";
                             }
-                            ?>  </td>
+                            ?> </td>
                     </tr>
                 </table>
 
@@ -75,148 +67,46 @@ echo PDF_HEADER;
         </td>
     </tr>
 </table>
-<table class="carttable"   align="center" border="0" cellpadding="0" cellspacing="0" width="700" style="background: #fff;">
-
-
+<table class="boooking"   align="center" border="1" cellpadding="0" cellspacing="0" width="700" style="background: #fff;padding:20px">
     <tr style="font-weight: bold">
-        <td colspan="6"  style="text-align: left;padding: 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;background: rgb(225, 225, 225);">
-            <h3>Order Description</h3>
+        <td colspan="2"  style="text-align: center;width: 33%;    padding: 25px;">
+            <div class="thumbnail">
+                <img src="<?php echo base_url(); ?>assets/booking/time.svg" alt="..." style="height: 50px;">
+                <div class="caption">
+                    <h3>Date/Time</h3>
+                    <p><?php echo $order_data->select_date; ?> <?php echo $order_data->select_time; ?></p>
+                </div>
+            </div>
+        </td>
+        <td colspan="2"  style="text-align: center;width: 33%;    padding: 25px;">
+            <div class="thumbnail">
+                <img src="<?php echo base_url(); ?>assets/booking/table.png" alt="..." style="height: 50px;">
+                <div class="caption">
+                    <h3>Table</h3>
+                    <p><?php echo $order_data->select_table; ?></p>
+                </div>
+            </div>
+        </td>
+        <td colspan="2" style="text-align: center;width: 33%;    padding: 25px;">
+            <div class="thumbnail">
+                <img src="<?php echo base_url(); ?>assets/booking/profile.png" alt="..." style="height: 50px;">
+                <div class="caption">
+                    <h3><?php echo $order_data->booking_type; ?></h3>
+                    <p>Guest(s): <?php echo $order_data->people; ?></p>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr style="" >
+        <td colspan="6" style="text-align: left;padding: 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;font-size: 10px;">
+            Note:<br/>
+            1. Received the above merchandise in fine condition & correct quantity.<br/>
+            2. Goods once sold can not be returned.<br/>
+            3. This is computer generated receipt, bear no CHOP.
 
         </td>
 
     </tr>
-    <tr style="font-weight: bold">
-        <td style="width: 20px;text-align: right;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 0px 10px;">S.No.</td>
-        <td colspan="2"  style="text-align: center;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 0px 10px;">Product(s)</td>
-
-        <td style="text-align: right;width: 100px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 0px 10px;">Price</td>
-        <td style="text-align: right;width: 60px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 0px 10px;">Qnty.</td>
-        <td style="text-align: right;width: 150px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 0px 10px;">Total</td>
-    </tr>
-    <!--cart details-->
-    <?php
-    foreach ($cart_data as $key => $product) {
-        ?>
-        <tr style="border: 1px solid #000">
-            <td style="padding: 0px 10px;text-align: right;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">
-                <?php echo $key + 1; ?>
-            </td>
-
-            <td style="width: 50px;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">
-        <center> 
-            <img src=" <?php echo $product->file_name; ?>" style="height: 50px;">
-        </center>
-    </td>
-
-    <td style="width: 200px;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">
-        <?php echo $product->title; ?> - <?php echo $product->item_name; ?><br/>
-        <small style="font-size: 10px;">(<?php echo $product->sku; ?>)</small>
-
-
-    </td>
-
-    <td style="text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">
-        <?php echo $product->price; ?>
-    </td>
-
-    <td style="text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">
-        <?php echo $product->quantity; ?>
-    </td>
-
-    <td style="text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">
-        <?php
-        echo GLOBAL_CURRENCY . " " . number_format($product->total_price, 2, '.', '');
-        ?>
-
-
-
-    </td>
-    </tr>
-    <tr>
-        <td colspan="6" style="border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 10px 10px;">
-
-            <table style="width: 100%">
-                <tr> <td colspan="2" style="text-align: left;padding: 5px;background: rgb(225, 225, 225);">
-                        <b>Style Details:</b> <?php echo $product->title; ?> - <?php echo $product->item_name; ?>
-                    </td></tr>
-
-                <?php
-                foreach ($product->custom_dict as $key => $value) {
-                    echo "<tr><td style='width: 300px;border-bottom:1px solid #c0c0c0;padding-left:20px;'>$key</td><td style='border-bottom:1px solid #c0c0c0'> $value</td></tr>";
-                }
-                ?>  
-            </table>
-        </td>
-    </tr>
-    <?php
-}
-?>
-
-<tr>
-    <td colspan="6" style="width: 20px;text-align: left;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 10px;">
-
-        <table style="width: 100%">
-            <tr> <td colspan="2" style="text-align: left;padding: 5px;background: rgb(225, 225, 225);">
-                    <b>Size(s):</b> <?php echo $order_data->measurement_style; ?>
-                </td></tr>
-            <?php
-            if (count($measurements_items)) {
-                foreach ($measurements_items as $keym => $valuem) {
-                    $mvalues = explode(" ", $valuem['measurement_value']);
-                    echo "<tr><td style='width: 300px;border-bottom:1px solid #c0c0c0;padding-left:20px;'>" . $valuem['measurement_key'] . "</td><td style='border-bottom:1px solid #c0c0c0'>" . $mvalues[0] . " <span style='margin-left: 1px;
-    padding: 0;
-    font-size: 10px;
-
-    position: absolute;
-    margin-top: -5px;
-    width: 20px;'>" . $mvalues[1] . '"</span>' . "</td></tr>";
-                }
-            }
-            ?>  
-        </table>
-    </td>
-</tr>
-<!--end of cart details-->
-<tr style="" >
-    <td rowspan="5" colspan="3" style="text-align: left;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">
-        <b>Amount in Words:</b><br/>
-        <?php
-        echo  ucwords($order_data->amount_in_word);
-        ?>
-
-
-    </td>
-
-</tr>
-
-
-<tr style="">
-    <td colspan="2" style="text-align: right;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">Sub Total</td>
-    <td style="text-align: right;width: 60px;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;"><?php echo GLOBAL_CURRENCY . " " . number_format($order_data->sub_total_price, 2, '.', ''); ?> </td>
-</tr>
-<tr style="">
-    <td colspan="2" style="text-align: right;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">Shipping Amount</td>
-    <td style="text-align: right;width: 60px;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;"><?php echo GLOBAL_CURRENCY . " " . number_format($order_data->credit_price, 2, '.', ''); ?> </td>
-</tr>
-<tr style="">
-    <td colspan="2" style="text-align: right;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">Coupon Discount</td>
-    <td style="text-align: right;width: 60px;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;"><?php echo GLOBAL_CURRENCY . " " . number_format($order_data->credit_price, 2, '.', ''); ?> </td>
-</tr>
-<tr style="">
-    <td colspan="2" style="text-align: right;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">Toal Amount</td>
-    <td style="text-align: right;width: 60px;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;"><?php echo GLOBAL_CURRENCY . " " . number_format($order_data->total_price, 2, '.', ''); ?> </td>
-</tr>
-
-<tr style="" >
-    <td colspan="6" style="text-align: left;padding: 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;font-size: 10px;">
-        Note:<br/>
-        1. Received the above merchandise in fine condition & correct quantity.<br/>
-        2. Goods once sold can not be returned.<br/>
-        3. This is computer generated receipt, bear no CHOP.
-
-    </td>
-
-</tr>
 
 
 

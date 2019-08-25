@@ -84,8 +84,9 @@
             <table class="carttable"  border-color= "#9E9E9E" align="center"  cellpadding="0" cellspacing="0" width="700" style="background: #fff;">
                 <tr>
                     <td>
-                        <img src="https://www.lordscustomtailors.com/assets/images/finalTemplateV24.jpg" style="width:100%" />
-
+                        <a href="https://www.lordscustomtailors.com" target="_blank">
+                            <img src="https://www.lordscustomtailors.com/assets/images/finalTemplateV25.jpg" style="width:100%" />
+                        </a>
                     </td>
                 </tr>          
 

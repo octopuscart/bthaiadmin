@@ -9,5 +9,78 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
     $http.get(notify_url).then(function (rdata) {
         $scope.rootData.notifications = rdata.data;
     }, function () {})
+
+    $scope.orderGlobleCheck = {"unssen": 0, "unseendata": "", "sound": ""}
+
+    $scope.orderGlobleCheck.sound = document.getElementById("alertSound");
+
+
+    $scope.checkUnseenOrder = function () {
+        
+        
+        
+        
+        var order_status_url = rootBaseUrl + "localApi/checkUnseenOrder";
+        $http.get(order_status_url).then(function (rdata) {
+            console.log(rootAssetUrl);
+
+            $scope.orderGlobleCheck.unseendata = rdata.data;
+            if (rdata.data.length) {
+                $scope.orderGlobleCheck.unseen = 1;
+                $("#modal-notification").modal("show");
+//                 $scope.playSound();
+
+            }
+        })
+        
+        var inboxOrderMail = rootBaseUrl + "localApi/inboxOrderMail";
+        $http.get(inboxOrderMail).then(function (rdata) {
+ 
+        })
+        
+        
+    }
+
+
+
+    $scope.$watch("orderGlobleCheck.unseen", function (n, o) {
+        if (n == 1) {
+            $("#modal-notification").modal("show");
+        }
+    })
+
+
+
+    $scope.playSound = function () {
+        var promise = $scope.orderGlobleCheck.sound.play();
+        if (promise !== undefined) {
+            promise.then(_ => {
+                // Autoplay started!
+            }).catch(error => {
+                // Autoplay was prevented.
+                // Show a "Play" button so that user can start playback.
+            });
+        }
+    }
+
+
+
+
+
+    var orderpath = window.location.pathname;
+    var orderlist = orderpath.split("orderdetails")
+    if (orderlist.length == 2) {
+    } else {
+        $interval(function () {
+            $scope.checkUnseenOrder();
+        }, 5000)
+        $scope.checkUnseenOrder();
+    }
+
 })
+
+
+
+
+
 

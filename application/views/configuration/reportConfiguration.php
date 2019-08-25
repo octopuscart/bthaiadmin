@@ -37,20 +37,20 @@ $this->load->view('layout/topmenu');
                         <!--tags-->
                         <label class="control-label">Email Header:</label>
                         <div class="m-b-15">
-                            <textarea  class="textarea form-control ckeditor"   rows="8" name="email_header" required=""><?php echo $configuration_report->email_header; ?></textarea>
+                            <textarea  class="textarea form-control ckeditor"   rows="8" name="email_header" ><?php echo $configuration_report->email_header; ?></textarea>
                         </div>
 
                         <!-- begin email content -->
                         <label class="control-label">Email Footer:</label>
                         <div class="m-b-15">
-                            <textarea  class="textarea form-control ckeditor"   rows="8" name="email_footer" required=""><?php echo $configuration_report->email_footer; ?></textarea>
+                            <textarea  class="textarea form-control ckeditor"   rows="8" name="email_footer" ><?php echo $configuration_report->email_footer; ?></textarea>
                         </div>
 
 
                         <div class="m-b-15">
                             <label class="control-label">Report Header:</label>
                             <div class="m-b-15">
-                                <textarea  class="textarea form-control ckeditor"   rows="8" name="pdf_report_header" required=""><?php echo $configuration_report->pdf_report_header; ?></textarea>
+                                <textarea  class="textarea form-control ckeditor"   rows="8" name="pdf_report_header" ><?php echo $configuration_report->pdf_report_header; ?></textarea>
                             </div>
                         </div>
                         <!-- end email subject -->

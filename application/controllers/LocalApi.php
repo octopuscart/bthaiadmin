@@ -42,7 +42,6 @@ class LocalApi extends REST_Controller {
             $this->db->set($data);
             $this->db->where("id", $pk_id);
             $this->db->update("admin_users", $data);
-           
         }
     }
 
@@ -146,10 +145,43 @@ class LocalApi extends REST_Controller {
         }
     }
 
+    //function for order update
+    function orderUpdate_post() {
+        $fieldname = $this->post('name');
+        $value = $this->post('value');
+        $pk_id = $this->post('pk');
+        if ($this->checklogin) {
+            $data = array($fieldname => $value);
+            $this->db->set($data);
+            $this->db->where("id", $pk_id);
+            $this->db->update("web_order");
+        }
+    }
+
     function notificationUpdate_get() {
         $this->db->order_by('id', 'desc');
         $this->db->limit(5);
         $query = $this->db->get('system_log');
+        $systemlog = $query->result_array();
+        $this->response($systemlog);
+    }
+
+    function checkUnseenOrder_get() {
+        $this->db->order_by('id', 'desc');
+        $this->db->where('status', "0");
+        $query = $this->db->get('web_order');
+        $systemlog = $query->result_array();
+        $this->response($systemlog);
+    }
+
+    function inboxOrderMail_get() {
+        $this->Order_model->orderInboxEmail();
+        $this->response(array());
+    }
+
+    function inboxOrderMaildb_get() {
+        $this->db->order_by('id', 'desc');
+        $query = $this->db->get('web_order_email');
         $systemlog = $query->result_array();
         $this->response($systemlog);
     }

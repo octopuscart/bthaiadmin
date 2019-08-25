@@ -186,6 +186,38 @@ class Order_model extends CI_Model {
         return $order_data;
     }
 
+    public function getOrderDetailsV3($key_id, $is_key = 0) {
+        $order_data = array();
+
+        $this->db->where('id', $key_id);
+
+        $query = $this->db->get('web_order');
+        $order_details = $query->row();
+        $payment_details = array("payment_mode" => "", "txn_id" => "", "payment_date" => "");
+
+        if ($order_details) {
+
+            $this->db->order_by('id', 'desc');
+            $this->db->where('order_id', $order_details->id);
+            $query = $this->db->get('user_order_status');
+            $userorderstatus = $query->result();
+            $order_data['order_status'] = $userorderstatus;
+
+
+
+            $order_id = $order_details->id;
+            $order_data['order_data'] = $order_details;
+            $this->db->where('order_id', $order_details->id);
+            $query = $this->db->get('cart');
+            $cart_items = $query->result();
+
+            $order_data['payment_details'] = array();
+            $order_data['cart_data'] = array();
+//            $order_data['amount_in_word'] = $this->convert_num_word($order_data['order_data']->total_price);
+        }
+        return $order_data;
+    }
+
     public function getVendorsOrder($key_id) {
         $order_data = array();
         $this->db->where('order_key', $key_id);
@@ -224,14 +256,14 @@ class Order_model extends CI_Model {
 
     function order_mail($order_id, $subject = "") {
         setlocale(LC_MONETARY, 'en_US');
-        $order_details = $this->getOrderDetailsV2($order_id, 'key');
+        $order_details = $this->getOrderDetailsV3($order_id, 'key');
         $emailsender = EMAIL_SENDER;
         $sendername = EMAIL_SENDER_NAME;
         $email_bcc = EMAIL_BCC;
 
         if ($order_details) {
             $currentstatus = $order_details['order_status'][0];
-            $order_no = $order_details['order_data']->order_no;
+            $order_no = $order_details['order_data']->id;
             $this->email->from(EMAIL_BCC, $sendername);
             $this->email->to($order_details['order_data']->email);
             $this->email->cc(EMAILCC);
@@ -239,13 +271,14 @@ class Order_model extends CI_Model {
             $subject = SITE_NAME . " - " . $currentstatus->remark;
             $this->email->subject($subject);
             $checkcode = REPORT_MODE;
+            $orderhtml = $this->load->view('Email/order_mail', $order_details, true);
             if ($checkcode == 0) {
 //                ob_clean();
-                echo $this->load->view('Email/order_mail', $order_details, true);
+                echo $orderhtml;
             } else {
-                $this->email->message($this->load->view('Email/order_mail', $order_details, true));
-                $this->email->print_debugger();
-                echo $result = $this->email->send();
+                //   $this->email->message($orderhtml);
+                //   $this->email->print_debugger();
+                //   echo $result = $this->email->send();
             }
         }
     }
@@ -280,9 +313,9 @@ class Order_model extends CI_Model {
 
     function order_pdf($order_id, $subject = "") {
         setlocale(LC_MONETARY, 'en_US');
-        $order_details = $this->getOrderDetailsV2($order_id, 0);
+        $order_details = $this->getOrderDetailsV3($order_id, 0);
         if ($order_details) {
-            $order_no = $order_details['order_data']->order_no;
+            $order_no = $order_details['order_data']->id;
             $html = $this->load->view('Email/order_pdf', $order_details, true);
             $html_header = $this->load->view('Email/order_mail_header', $order_details, true);
             $html_footer = $this->load->view('Email/order_mail_footer', $order_details, true);
@@ -322,6 +355,61 @@ class Order_model extends CI_Model {
                 $this->m_pdf->pdf->Output($pdfFilePath, "D");
             }
         }
+    }
+
+    public function orderInboxEmail() {
+        $hostname = '{server.costcokart.com:143/imap/notls}INBOX';
+        $username = 'sales@baanthai.costcokart.com';
+        $password = 'baansales$2019';
+        $inboxarray = [];
+
+        /* try to connect */
+        $inbox = imap_open($hostname, $username, $password) or die('Cannot connect to Email: ' . imap_last_error());
+
+        /* grab emails */
+        $emails = imap_search($inbox, 'ALL');
+
+        /* if emails are returned, cycle through each... */
+        if ($emails) {
+
+            /* begin output var */
+            $output = '';
+
+            /* put the newest emails on top */
+            rsort($emails);
+
+            /* for every email... */
+            foreach ($emails as $email_number) {
+
+                /* get information specific to this email */
+                $overview = imap_fetch_overview($inbox, $email_number, 0);
+                $message = (imap_body($inbox, $overview[0]->msgno));
+
+
+                $tempbox = array(
+                    "from_email" => $overview[0]->from,
+                    "subject" => $overview[0]->subject,
+                    "datetime" => $overview[0]->date,
+                    "message" => $message,
+                    "uid" => $overview[0]->uid,
+                    "msgno" => $overview[0]->msgno,
+                    "udate" => $overview[0]->udate,
+                    "seen" => "0",
+                );
+
+                $this->db->where('uid', $overview[0]->uid);
+                $query = $this->db->get('web_order_email');
+                $emailpre = $query->result_array();
+                if ($emailpre) {
+                    
+                } else {
+                    $this->db->insert('web_order_email', $tempbox);
+                }
+            }
+        }
+
+        /* close the connection */
+        imap_close($inbox);
     }
 
 }

@@ -28,7 +28,7 @@
         );
         foreach ($styleSheetArray as $title => $stylesheet) {
             ?>
-                                    <!-- ================== <?php echo $title ?> ================== -->
+                                                            <!-- ================== <?php echo $title ?> ================== -->
             <link href="<?php echo base_url(); ?><?php echo $stylesheet; ?>" rel="stylesheet" />
             <?php
         }
@@ -77,9 +77,40 @@
             $httpProvider.defaults.headers.post = {};
             });
             var rootBaseUrl = '<?php echo site_url("/"); ?>';
+            var rootAssetUrl = '<?php echo base_url(); ?>';
         </script>
+
+
+        <audio id="alertSound">
+            <source src="<?php echo base_url(); ?>assets/sound/sendemail.mp3" type="audio/mpeg">
+        </audio>
+
+
+
         <!-- begin #page-loader -->
         <div id="page-loader" class="fade in"><span class="spinner"></span></div>
         <!-- end #page-loader -->
         <!-- begin #page-container -->
         <div id="page-container" class="page-sidebar-fixed page-header-fixed" ng-controller="rootController">
+            <div class="modal fade" id="modal-notification">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Unseen Orders</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="list-group">
+                                <a href="<?php echo site_url("order/orderdetails/");?>{{order.id}}" class="list-group-item" ng-repeat="order in orderGlobleCheck.unseendata">
+                                    <h4 class="list-group-item-heading"><i class="fa fa-user"></i>{{order.first_name}} {{order.last_name}}</h4>
+                                    <p class="list-group-item-text"><i class="fa fa-clock-o"></i> {{order.select_date}} {{order.select_time}}</p>
+                                    <p class="list-group-item-text"><b>Source:<b/><span>{{order.order_source}}</span>, <b>Guest(s):<b/><span>{{order.people}}</span></p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+                        </div>
+                    </div>
+                </div>
+            </div>

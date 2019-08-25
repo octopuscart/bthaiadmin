@@ -54,7 +54,7 @@ $this->load->view('layout/header');
                 </div>
                 <hr />
                 <p class="text-center text-inverse">
-                    &copy; Tailor Admin Panel All Right Reserved <?php echo date("Y"); ?>
+                    &copy;Admin Panel All Right Reserved <?php echo date("Y"); ?>
                 </p>
             </form>
         </div>

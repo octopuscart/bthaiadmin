@@ -455,7 +455,8 @@ class CMS extends CI_Controller {
 
     public function siteSEOConfigUpdate() {
         $data = array();
-        $blog_data = $this->Curd_model->get_single('configuration_site', 1);
+        $blog_data = $this->Curd_model->get_single('configuration_site', 2);
+        
         $data['site_data'] = $blog_data;
         if (isset($_POST['update_data'])) {
             $blogArray = array(

@@ -29,7 +29,7 @@ if (DEFAULT_PAYMENT == 'No') {
     
 }
 
-array_push($menu_control, $product_menu);
+#array_push($menu_control, $product_menu);
 
 
 $order_menu = array(
@@ -37,6 +37,7 @@ $order_menu = array(
     "icon" => "fa fa-list",
     "active" => "",
     "sub_menu" => array(
+         "Book Now" => site_url("Order/booknow/guest"),
         "Orders Reports" => site_url("Order/orderslist"),
         "Order Analytics" => site_url("Order/index"),
     ),
@@ -66,18 +67,18 @@ $blog_menu = array(
         "Tags" => site_url("CMS/blogTag"),
     ),
 );
-array_push($menu_control, $blog_menu);
+#array_push($menu_control, $blog_menu);
 
 
 
 $lookbook_menu = array(
-    "title" => "Lookbook Management",
+    "title" => "Gallary Management",
     "icon" => "fa fa-image",
     "active" => "",
     "sub_menu" => array(
         "Categories" => site_url("CMS/lookbookCategories"),
         "Add New" => site_url("CMS/newLookbook"),
-        "Lookbook List" => site_url("CMS/lookbookList"),
+        "Images List" => site_url("CMS/lookbookList"),
 //        "Tags" => site_url("CMS/blogTag"),
     ),
 );
@@ -111,7 +112,7 @@ $msg_menu = array(
     "icon" => "fa fa-envelope",
     "active" => "",
     "sub_menu" => array(
-//        "Report Configuration" => site_url("Configuration/reportConfiguration"),
+        "Inbox" => site_url("Order/orderInbox"),
     ),
 );
 
@@ -128,7 +129,7 @@ $schedule_menu = array(
         "Schedule Report" => site_url("#"),
     ),
 );
-array_push($menu_control, $schedule_menu);
+#array_push($menu_control, $schedule_menu);
 
 $user_menu = array(
     "title" => "User Management",
