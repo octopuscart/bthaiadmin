@@ -1,7 +1,7 @@
 <?php
 $this->load->view('layout/header');
 $this->load->view('layout/topmenu');
-?>?>
+?>
 <style>
     .product_text {
         float: left;

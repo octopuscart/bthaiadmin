@@ -136,13 +136,13 @@ $user_menu = array(
     "icon" => "fa fa-user",
     "active" => "",
     "sub_menu" => array(
-        "Add User" => site_url("#"),
-        "Users Reports" => site_url("#"),
+        "Add Manager" => site_url("UserManager/addManager"),
+        "Users Reports" => site_url("UserManager/usersReportManager"),
     ),
 );
 
 
-//array_push($menu_control, $user_menu);
+array_push($menu_control, $user_menu);
 
 $setting_menu = array(
     "title" => "Settings",

@@ -118,7 +118,7 @@ class UserManager extends CI_Controller {
                     'op_date_time' => $op_date_time
                 );
                 $this->db->insert('admin_users', $post_data);
-                redirect('UserManager/addManager');
+                redirect('UserManager/usersReportManager');
             }
         }
         $this->load->view('userManager/addVendor', $data);

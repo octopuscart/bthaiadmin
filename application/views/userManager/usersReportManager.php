@@ -1,5 +1,6 @@
 <?php
-$this->load->view('layout/layoutTop');
+$this->load->view('layout/header');
+$this->load->view('layout/topmenu');
 ?>
 <style>
     .product_text {
@@ -57,19 +58,8 @@ function userReportFunction($users) {
                         <td><?php echo $count; ?></td>
 
                         <td>
-                            <?php
-                            if ($value->image) {
-                                ?>
-                                <img src="<?php echo base_url(); ?>assets_main/userimages/<?php echo $value->image; ?>" style="height:51px;">
-                            <?php } else {
-                                
-                                $avatar = $value->gender=='Female'?"avatar3":"avatar5";
-                                
-                                ?>
-                                <img src="<?php echo base_url(); ?>assets_main/dist/img/<?php echo $avatar;?>.png" style="height:51px;">
+                                                        <img src = '<?php echo base_url(); ?>assets/profile_image/<?php echo $value->image; ?>' alt = "" class = "media-object rounded-corner" style = "    width: 30px;background: url(<?php echo base_url(); ?>assets/emoji/user.png);    height: 30px;background-size: cover;" />
 
-                            <?php }
-                            ?>
 
                         </td>
 
@@ -145,6 +135,7 @@ function userReportFunction($users) {
                     <div class="" style="padding:20px">
                         <?php userReportFunction($users_manager); ?>
                     </div>
+                    <div style="clear: both"></div>
                 </div>
 
 
@@ -158,7 +149,7 @@ function userReportFunction($users) {
 
 
 <?php
-$this->load->view('layout/layoutFooter');
+$this->load->view('layout/footer');
 ?> 
 <script>
     $(function () {
