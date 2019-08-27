@@ -43,7 +43,7 @@ $this->load->view('layout/topmenu');
                     <?php echo $emaildetail->message; ?>
                 </p>
                 <p class="f-s-12 text-inverse" style="font-weight: 400" >
-                   Process By: <?php echo $emaildetail->process_user; ?>
+                   Processed By: <?php echo $emaildetail->process_user; ?>
                 </p>
             </div>
             <div style="clear: both"></div>

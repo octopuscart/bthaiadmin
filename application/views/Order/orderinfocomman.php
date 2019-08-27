@@ -49,7 +49,7 @@
                                     <?php echo $value->description; ?>
                                 </p>
                                 <p>
-                                    <small>Process By:  <?php echo $value->process_user; ?></small>
+                                    <small>Processed By:  <?php echo $value->process_user; ?></small>
                                 </p>
                                 <?php if ($key != (count($user_order_status) - 1)) { ?>
                                     <a class="btn btn-danger btn-xs"
