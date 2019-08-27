@@ -55,9 +55,13 @@ $this->load->view('layout/topmenu');
             <!--title row--> 
             <div class="col-md-12">
 
+<div class="col-md-12">
+                    <?php
+                    $this->load->view('Order/orderstatusside');
+                    ?>
+                </div>
 
-
-                <div class="col-md-9">
+                <div class="col-md-12">
 
 
                     <div class="panel panel-default">
@@ -117,11 +121,7 @@ $this->load->view('layout/topmenu');
                         </form>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <?php
-                    $this->load->view('Order/orderstatusside');
-                    ?>
-                </div>
+                
             </div>
     </section>
 

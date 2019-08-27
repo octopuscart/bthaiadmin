@@ -6,7 +6,7 @@ if ($userdata) {
 ?>
 
 <!-- begin #header -->
-<div id="header" class="header navbar navbar-default navbar-fixed-top">
+<div id="header" class="header navbar navbar-fixed-top navbar-inverse">
     <!-- begin container-fluid -->
     <div class="container-fluid">
         <!-- begin mobile sidebar expand / collapse button -->
@@ -22,14 +22,7 @@ if ($userdata) {
 
         <!-- begin header navigation right -->
         <ul class="nav navbar-nav navbar-right">
-            <li>
-                <form class="navbar-form full-width">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter keyword" />
-                        <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
-                    </div>
-                </form>
-            </li>
+          
             <button class="" id="soundButton" ng-click="playSound()" style="opacity: 0">Click</button>
             <li class="dropdown">
                 <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">

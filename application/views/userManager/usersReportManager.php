@@ -58,7 +58,7 @@ function userReportFunction($users) {
                         <td><?php echo $count; ?></td>
 
                         <td>
-                                                        <img src = '<?php echo base_url(); ?>assets/profile_image/<?php echo $value->image; ?>' alt = "" class = "media-object rounded-corner" style = "    width: 30px;background: url(<?php echo base_url(); ?>assets/emoji/user.png);    height: 30px;background-size: cover;" />
+                            <img src = '<?php echo base_url(); ?>assets/profile_image/<?php echo $value->image; ?>' alt = "" class = "media-object rounded-corner" style = "    width: 30px;background: url(<?php echo base_url(); ?>assets/emoji/user.png);    height: 30px;background-size: cover;" />
 
 
                         </td>
@@ -68,7 +68,7 @@ function userReportFunction($users) {
                                 <b><span class="seller_tag"><?php echo $value->first_name; ?> <?php echo $value->last_name; ?></span></b>
                                 <br/>
                                 <i class="fa fa-<?php echo strtolower($value->gender); ?>"></i>  <?php echo $value->gender; ?>
-                                <br/>(<?php echo $value->profession?$value->profession:'----'; ?>)
+                                <br/>(<?php echo $value->profession ? $value->profession : '----'; ?>)
                             </span>
                         </td>
 

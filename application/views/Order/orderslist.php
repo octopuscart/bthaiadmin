@@ -78,12 +78,12 @@ $this->load->view('layout/topmenu');
                                                         <td>: <?php echo $value->id; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Total Amount</th>
+                                                        <th>Guest(s)</th>
                                                         <td>: <?php  echo $value->people; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Table No.</th>
-                                                        <td>: {{<?php echo $value->select_table; ?>}}</td>
+                                                        <td>: <?php echo $value->select_table; ?></td>
                                                     </tr>
                                                 </table>
                                         
@@ -111,7 +111,8 @@ $this->load->view('layout/topmenu');
                                         <td>
                                             <?php
                                             echo "" . $value->status . "<br/>";
-                                            echo $value->status_datetime;
+                                            echo $value->status_datetime. "<br/>";
+                                             echo $value->order_source. "<br/>";
                                             ?>
                                         </td>
                                         <td>

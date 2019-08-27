@@ -195,7 +195,7 @@ foreach ($menu_control as $key => $value) {
 ?>
 
 <!-- begin #sidebar -->
-<div id="sidebar" class="sidebar">
+<div id="sidebar" class="sidebar whitebackground">
     <!-- begin sidebar scrollbar -->
     <div data-scrollbar="true" data-height="100%">
         <!-- begin sidebar user -->
