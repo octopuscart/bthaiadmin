@@ -54,7 +54,7 @@ $this->load->view('layout/topmenu');
                                 <th style="width: 70px">S. No.</th>
                                 <th style="width:250px">Order Information</th>
                                 <th style="width:300px">Customer Information</th>
-                              
+
                                 <th>Status</th>
                                 <th style="width:100px"></th>
 
@@ -71,52 +71,52 @@ $this->load->view('layout/topmenu');
                                             <?php echo $count; ?>
                                         </td>
                                         <td>
-                                      
-                                                <table class="small_table">
-                                                    <tr>
-                                                        <th>Order No.</th>
-                                                        <td>: <?php echo $value->id; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Guest(s)</th>
-                                                        <td>: <?php  echo $value->people; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Table No.</th>
-                                                        <td>: <?php echo $value->select_table; ?></td>
-                                                    </tr>
-                                                </table>
-                                        
+
+                                            <table class="small_table">
+                                                <tr>
+                                                    <th>Order No.</th>
+                                                    <td>: <?php echo $value->id; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Guest(s)</th>
+                                                    <td>: <?php echo $value->people; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Table No.</th>
+                                                    <td>: <?php echo $value->select_table; ?></td>
+                                                </tr>
+                                            </table>
+
                                         </td>
 
                                         <td>
-                                           
-                                                <b> <?php echo $value->first_name . " ".$value->last_name; ?></b>
-                                                <table class="small_table">
-                                                    <tr>
-                                                        <th><i class="fa fa-envelope"></i> &nbsp; </th>
-                                                        <td class="overtext"> <a href="#" title="<?php echo $value->email; ?>"><?php echo $value->email; ?></a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th><i class="fa fa-phone"></i>  &nbsp;</th>
-                                                        <td> <?php echo $value->contact; ?></td>
-                                                    </tr>
-                                                    
-                                                </table>
-                                          
-                                        </td>
-                                        
 
-                                      
+                                            <b> <?php echo $value->first_name . " " . $value->last_name; ?></b>
+                                            <table class="small_table">
+                                                <tr>
+                                                    <th><i class="fa fa-envelope"></i> &nbsp; </th>
+                                                    <td class="overtext"> <a href="#" title="<?php echo $value->email; ?>"><?php echo $value->email; ?></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <th><i class="fa fa-phone"></i>  &nbsp;</th>
+                                                    <td> <?php echo $value->contact; ?></td>
+                                                </tr>
+
+                                            </table>
+
+                                        </td>
+
+
+
                                         <td>
                                             <?php
                                             echo "" . $value->status . "<br/>";
-                                            echo $value->status_datetime. "<br/>";
-                                             echo $value->order_source. "<br/>";
+                                            echo $value->status_datetime . "<br/>";
+                                            echo $value->order_source . "<br/>";
                                             ?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo site_url("order/orderdetails/".$value->id);?>" class="btn btn-primary btn-sm" style="    margin-top: 20%;">Update <i class="fa fa-arrow-circle-right"></i></a>
+                                            <a href="<?php echo site_url("order/orderdetails/" . $value->id); ?>" class="btn btn-primary btn-sm" style="    margin-top: 20%;">Update <i class="fa fa-arrow-circle-right"></i></a>
                                         </td>
                                     </tr>
                                     <?php

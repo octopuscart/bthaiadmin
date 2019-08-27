@@ -54,6 +54,16 @@ $client_menu = array(
 );
 array_push($menu_control, $client_menu);
 
+$coupons_menu = array(
+    "title" => "Coupon Manegement",
+    "icon" => "fa fa-file",
+    "active" => "",
+    "sub_menu" => array(
+        "Create Coupons" => site_url("CMS/couponCode"),
+    ),
+);
+array_push($menu_control, $coupons_menu);
+
 
 
 $blog_menu = array(
@@ -76,9 +86,9 @@ $lookbook_menu = array(
     "icon" => "fa fa-image",
     "active" => "",
     "sub_menu" => array(
-        "Categories" => site_url("CMS/lookbookCategories"),
-        "Add New" => site_url("CMS/newLookbook"),
-        "Images List" => site_url("CMS/lookbookList"),
+        "Categories" => site_url("CMS/gallaryCategories"),
+        "Add New" => site_url("CMS/newGallarybook"),
+        "Images List" => site_url("CMS/gallaryList"),
 //        "Tags" => site_url("CMS/blogTag"),
     ),
 );

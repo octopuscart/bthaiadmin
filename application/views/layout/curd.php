@@ -18,11 +18,12 @@ $this->load->view('layout/topmenu');
 
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header"><?php echo $title; ?> <small><?php $description; ?></small></h1>
-    <!-- end page-header -->
+    <div class="panel panel-inverse" data-sortable-id="index-10">
+            <div class="panel-heading">
+                <h4 class="panel-title">  <?php echo $title; ?> <small><?php $description; ?></small></h4>
+            </div>
+        
 
-    <!-- begin panel -->
-    <div class="panel panel-inverse">
 
         <div class="panel-body">
 

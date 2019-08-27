@@ -114,17 +114,11 @@ function userReportFunction($users) {
 <section class="content">
     <div class="">
 
-        <div class="box box-danger">
-            <div class="box-header">
-                <h3 class="box-title">Users Reports</h3>
-                <div class="box-tools pull-right">
-                    <a class="btn btn-success " href="<?php echo site_url('userManager/user_profile_record_xls/all'); ?>"  targer="_blank">
-                        <i class="fa fa-file-excel-o"></i>  Export Data
-                    </a>
-                </div>
-
+        <div class="panel panel-inverse" data-sortable-id="index-10">
+            <div class="panel-heading">
+                <h4 class="panel-title">Managers Report</h4>
             </div>
-            <div class="box-body">
+            <div class="panel-body">
 
 
 

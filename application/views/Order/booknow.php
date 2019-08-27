@@ -55,8 +55,8 @@ $this->load->view('layout/topmenu');
     .form-row{
         /*        border-bottom: 1px solid #000;
                 padding-bottom: 15px;*/
-            padding: 10px;
-            clear: both;
+        padding: 10px;
+        clear: both;
     }
 
     .stimeslot .btn {
@@ -140,186 +140,186 @@ $this->load->view('layout/topmenu');
 
         <div class="content-wrap" style="padding: 0px;">
 
-
-
-            <ul class="nav nav-tabs" id="bookingTab">
-                <li class="active">
-                    <a href="#nav-datetime-tab" data-toggle="tab">
-                        <figure class="thumbnail" style="width: 150px;">
-                            <img src="<?php echo base_url(); ?>assets/booking/time.svg" class="figure-img img-fluid rounded tabimage" alt="...">
-
-                            <p class="tabtitle">{{bookingArray.select_date}}</p>
-                            <p class="tabtitle">{{bookingArray.select_time}}</p>
-
-                        </figure>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="#nav-table-tab" data-toggle="tab">
-                        <figure class="thumbnail" style="width: 150px;">
-                            <img src="<?php echo base_url(); ?>assets/booking/table.png" class="figure-img img-fluid rounded tabimage" alt="...">
-
-                            <p class="tabtitle">Table</p>
-                            <p class="tabtitle">{{bookingArray.select_table}}</p>
-
-                        </figure>
-
-                    </a>
-                </li>
-                <li class="">
-                    <a href="#nav-profile-tab" data-toggle="tab">
-                        <figure class="thumbnail" style="width: 150px;">
-                            <img src="<?php echo base_url(); ?>assets/booking/profile.png" class="figure-img img-fluid rounded tabimage" alt="...">
-
-                            <p class="tabtitle">{{bookingArray.book_type}}</p>
-                            <p class="tabtitle">{{bookingArray.people}} Guest(s)</p>
-
-                        </figure>
-                    </a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane fade active in" id="nav-datetime-tab">
-                    <div style="    margin-top: 20px;">
-                        <h4 style="    font-size: 12px;">Click here to reserve a booking or make an enquiry.</h4>
-                        <div class="btn-group"  role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-danger {{bookingArray.book_type == 'Reserve'?'active':''}}" ng-click="bookType('Reserve')">Reserve Now</button>
-                            <button type="button" class="btn btn-danger {{bookingArray.book_type == 'Enquiry'?'active':''}}" ng-click="bookType('Enquiry')">Make An Enquiry</button>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-5">
-
-                            <div class="">
-                                <span class="titleblockwix">Select Date</span>
-                                <div id="datepicker-inline"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <span class="titleblockwix">Select Time</span>
-                            <div class="stimeslot" style="    padding-left: 13px;">
-
-                                <button class="btn btn-primary btn-inverse btn-sm" ng-repeat="time in initWizard.timeslot" ng-click="selectTime(time)">{{time}}</button>
-                                <div style="clear:both"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary btnbooking btn-lg"    ng-if='bookingArray.select_time != "--:--:--"'    ng-click='changeWizardTble()'  >Select Guest(s) <i class="fa fa-arrow-right"></i></button>
+            <div class="panel panel-inverse" data-sortable-id="index-10">
+                <div class="panel-heading">
+                    <h4 class="panel-title">For Telephonic/Walk In Guests</h4>
                 </div>
+                <div class="panel-body">
 
+                    <ul class="nav nav-tabs" id="bookingTab">
+                        <li class="active">
+                            <a href="#nav-datetime-tab" data-toggle="tab">
+                                <figure class="thumbnail" style="width: 150px;">
+                                    <img src="<?php echo base_url(); ?>assets/booking/time.svg" class="figure-img img-fluid rounded tabimage" alt="...">
 
-                <div class="tab-pane fade" id="nav-table-tab">
-                    <div style="    margin-top: 20px;">
-                        <h4 style="    font-size: 12px;">Click here to reserve a table or make an enquiry.</h4>
-                    </div>
+                                    <p class="tabtitle">{{bookingArray.select_date}}</p>
+                                    <p class="tabtitle">{{bookingArray.select_time}}</p>
 
-                    <div class="row" style="margin-bottom: 10px;">
-                        <div class="col-md-6">
-                            <div class="">
-                                <span class="titleblockwix">Ground Floor</span>
-                                <div class="tableview">
-                                    <div class="tabletop {{bookingArray.select_table==table?'active':''}}" ng-repeat="table in initWizard.tables.zone_g" ng-click="selectTable(table)">
-                                        <figure class="figure">
-                                            <img src="<?php echo base_url(); ?>assets/booking/dining_table.png" class="figure-img img-fluid rounded tableimg" alt="...">
-                                            <figcaption class="figure-caption">{{table}}</figcaption>
-                                        </figure>
-                                    </div>
-                                    <div style="clear:both"></div>
+                                </figure>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#nav-table-tab" data-toggle="tab">
+                                <figure class="thumbnail" style="width: 150px;">
+                                    <img src="<?php echo base_url(); ?>assets/booking/table.png" class="figure-img img-fluid rounded tabimage" alt="...">
+
+                                    <p class="tabtitle">Table</p>
+                                    <p class="tabtitle">{{bookingArray.select_table}}</p>
+
+                                </figure>
+
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#nav-profile-tab" data-toggle="tab">
+                                <figure class="thumbnail" style="width: 150px;">
+                                    <img src="<?php echo base_url(); ?>assets/booking/profile.png" class="figure-img img-fluid rounded tabimage" alt="...">
+
+                                    <p class="tabtitle">{{bookingArray.book_type}}</p>
+                                    <p class="tabtitle">{{bookingArray.people}} Guest(s)</p>
+
+                                </figure>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="nav-datetime-tab">
+                            <div style="    margin-top: 20px;">
+                                <h4 style="    font-size: 12px;">Click here to reserve a booking or make an enquiry.</h4>
+                                <div class="btn-group"  role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-danger {{bookingArray.book_type == 'Reserve'?'active':''}}" ng-click="bookType('Reserve')">Reserve Now</button>
+                                    <button type="button" class="btn btn-danger {{bookingArray.book_type == 'Enquiry'?'active':''}}" ng-click="bookType('Enquiry')">Make An Enquiry</button>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-5">
+
+                                    <div class="">
+                                        <span class="titleblockwix">Select Date</span>
+                                        <div id="datepicker-inline"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <span class="titleblockwix">Select Time</span>
+                                    <div class="stimeslot" style="    padding-left: 13px;">
+
+                                        <button class="btn btn-primary btn-inverse btn-sm" ng-repeat="time in initWizard.timeslot" ng-click="selectTime(time)">{{time}}</button>
+                                        <div style="clear:both"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btnbooking btn-lg"    ng-if='bookingArray.select_time != "--:--:--"'    ng-click='changeWizardTble()'  >Select Guest(s) <i class="fa fa-arrow-right"></i></button>
                         </div>
-                        <div class="col-md-6">
-                            <span class="titleblockwix">First Floor</span>
-                            <div class="tableview">
+
+
+                        <div class="tab-pane fade" id="nav-table-tab">
+                            <div style="    margin-top: 20px;">
+                                <h4 style="    font-size: 12px;">Click here to reserve a table or make an enquiry.</h4>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <span class="titleblockwix">Ground Floor</span>
+                                        <div class="tableview">
+                                            <div class="tabletop {{bookingArray.select_table==table?'active':''}}" ng-repeat="table in initWizard.tables.zone_g" ng-click="selectTable(table)">
+                                                <figure class="figure">
+                                                    <img src="<?php echo base_url(); ?>assets/booking/dining_table.png" class="figure-img img-fluid rounded tableimg" alt="...">
+                                                    <figcaption class="figure-caption">{{table}}</figcaption>
+                                                </figure>
+                                            </div>
+                                            <div style="clear:both"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <span class="titleblockwix">First Floor</span>
+                                    <div class="tableview">
+                                        <center>
+                                            <div class="tabletop {{bookingArray.select_table==table?'active':''}}" ng-repeat="table in initWizard.tables.zone_f" ng-click="selectTable(table)">
+                                                <figure class="figure">
+                                                    <img src="<?php echo base_url(); ?>assets/booking/dining_table.png" class="figure-img img-fluid rounded tableimg" alt="...">
+                                                    <figcaption class="figure-caption">{{table}}</figcaption>
+                                                </figure>
+                                            </div>
+                                        </center>
+                                        <div style="clear:both"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary btnbooking btn-lg"    ng-if='bookingArray.select_table == "--"'    ng-click='changeWizardTime()'  ><i class="fa fa-arrow-left"></i> Select Date & Time</button>
+                            <div ng-if='bookingArray.select_table != "--"'>
+                                <button class="btn btn-primary btn-lg button_minus"  ng-click="changeWizardTime()"><i class="fa fa-arrow-left"></i> Select Date & Time</button>
+                                <button class="btn btn-primary btnbooking btn-lg button_plus"     ng-click='changeWizardProfile()'  >Select Guest(s) <i class="fa fa-arrow-right"></i></button>
+                            </div>    
+                        </div>
+
+
+                        <div class="tab-pane fade" id="nav-profile-tab">
+                            <form action="#" method="post" >
+                                <input type="hidden1" name="select_date" value="{{bookingArray.select_date}}"/>
+                                <input type="hidden11" name="select_time" value="{{bookingArray.select_time}}"/>
+                                <input type="hidden" name="booking_type" value="{{bookingArray.book_type}}"/>
+                                <input type="hidden1" name="select_table" value="{{bookingArray.select_table}}"/>
+                                <input type="hidden1" name="usertype" value="<?php echo $usertype; ?>"/>
+
                                 <center>
-                                    <div class="tabletop {{bookingArray.select_table==table?'active':''}}" ng-repeat="table in initWizard.tables.zone_f" ng-click="selectTable(table)">
-                                        <figure class="figure">
-                                            <img src="<?php echo base_url(); ?>assets/booking/dining_table.png" class="figure-img img-fluid rounded tableimg" alt="...">
-                                            <figcaption class="figure-caption">{{table}}</figcaption>
-                                        </figure>
+                                    <div class="form-row" style="width:150px; ">
+                                        <span class="booking_lable" style="    float: left;
+                                              width: 100%;">Select people</span>
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-btn ">
+                                                <button class="btn btn-primary btn-sm button_minus" type="button" ng-click="changePeople('minus')"><i class="fa fa-minus"></i></button>
+                                            </span>
+                                            <input type="text" name="people" class="form-control" placeholder="" value="{{bookingArray.people}}" style="height: 32px;" id="people" required="">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-primary  btn-sm  button_plus" type="button" ng-click="changePeople('plus')"><i class="fa fa-plus"></i></button>
+                                            </span>
+                                        </div><!-- /input-group -->
                                     </div>
                                 </center>
-                                <div style="clear:both"></div>
-                            </div>
 
+
+
+
+
+                                <h4 style="    font-size: 12px;">  Enter Guest Details </h4>
+
+                                <div class="form-row">
+                                    <div class="form-holder col-md-6">
+                                        <input type="text" name="first_name" placeholder="First Name" class="form-control" required="" ng-model="bookingArray.first_name">
+                                    </div>
+                                    <div class="form-holder col-md-6">
+                                        <input type="text" name="last_name" placeholder="Last Name" class="form-control" required="" ng-model="bookingArray.last_name">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder col-md-6">
+                                        <input type="text" name="email" placeholder="Your Email" class="form-control" required="" ng-model="bookingArray.email">
+                                    </div>
+                                    <div class="form-holder col-md-6">
+                                        <input type="text" name="contact_no" placeholder="Phone Number" class="form-control" required="" ng-model="bookingArray.contact_no">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+
+                                    <div class="form-holder col-md-12" style="    width: 100%;">
+                                        <input type="text" name="extra_remark" placeholder="Special Request (Optional)" class="form-control" >
+                                    </div>
+                                </div>
+                                <hr/>
+                                <button class="btn btn-primary btn-lg button_minus" type="button"  ng-click="changeWizardTble()"><i class="fa fa-arrow-left"></i></button>
+                                <button class="btn btn-primary btn-lg button_plus" name="submit" type="submit">Confirm Now <i class="fa fa-arrow-right"></i></button>
+                            </form>
                         </div>
                     </div>
-
-                    <button class="btn btn-primary btnbooking btn-lg"    ng-if='bookingArray.select_table == "--"'    ng-click='changeWizardTime()'  ><i class="fa fa-arrow-left"></i> Select Date & Time</button>
-                    <div ng-if='bookingArray.select_table != "--"'>
-                        <button class="btn btn-primary btn-lg button_minus"  ng-click="changeWizardTime()"><i class="fa fa-arrow-left"></i> Select Date & Time</button>
-                        <button class="btn btn-primary btnbooking btn-lg button_plus"     ng-click='changeWizardProfile()'  >Select Guest(s) <i class="fa fa-arrow-right"></i></button>
-                    </div>    
-                </div>
-
-
-                <div class="tab-pane fade" id="nav-profile-tab">
-                    <form action="#" method="post" >
-                        <input type="hidden1" name="select_date" value="{{bookingArray.select_date}}"/>
-                        <input type="hidden11" name="select_time" value="{{bookingArray.select_time}}"/>
-                        <input type="hidden" name="booking_type" value="{{bookingArray.book_type}}"/>
-                        <input type="hidden1" name="select_table" value="{{bookingArray.select_table}}"/>
-                        <input type="hidden1" name="usertype" value="<?php echo $usertype;?>"/>
-
-                        <center>
-                            <div class="form-row" style="width:150px; ">
-                                <span class="booking_lable" style="    float: left;
-                                      width: 100%;">Select people</span>
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-btn ">
-                                        <button class="btn btn-primary btn-sm button_minus" type="button" ng-click="changePeople('minus')"><i class="fa fa-minus"></i></button>
-                                    </span>
-                                    <input type="text" name="people" class="form-control" placeholder="" value="{{bookingArray.people}}" style="height: 32px;" id="people" required="">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary  btn-sm  button_plus" type="button" ng-click="changePeople('plus')"><i class="fa fa-plus"></i></button>
-                                    </span>
-                                </div><!-- /input-group -->
-                            </div>
-                        </center>
-
-
-
-
-
-                        <h4 style="    font-size: 12px;">  Enter Guest Details </h4>
-
-                        <div class="form-row">
-                            <div class="form-holder col-md-6">
-                                <input type="text" name="first_name" placeholder="First Name" class="form-control" required="" ng-model="bookingArray.first_name">
-                            </div>
-                            <div class="form-holder col-md-6">
-                                <input type="text" name="last_name" placeholder="Last Name" class="form-control" required="" ng-model="bookingArray.last_name">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-holder col-md-6">
-                                <input type="text" name="email" placeholder="Your Email" class="form-control" required="" ng-model="bookingArray.email">
-                            </div>
-                            <div class="form-holder col-md-6">
-                                <input type="text" name="contact_no" placeholder="Phone Number" class="form-control" required="" ng-model="bookingArray.contact_no">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-
-                            <div class="form-holder col-md-12" style="    width: 100%;">
-                                <input type="text" name="extra_remark" placeholder="Special Request (Optional)" class="form-control" >
-                            </div>
-                        </div>
-                        <hr/>
-
-
-
-                        
-
-
-                        <button class="btn btn-primary btn-lg button_minus" type="button"  ng-click="changeWizardTble()"><i class="fa fa-arrow-left"></i></button>
-                        <button class="btn btn-primary btn-lg button_plus" name="submit" type="submit">Confirm Now <i class="fa fa-arrow-right"></i></button>
-                    </form>
+                    <div style="clear:both"></div>
                 </div>
             </div>
-
 
         </div>
 

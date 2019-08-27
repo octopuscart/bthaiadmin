@@ -1,5 +1,8 @@
 <link href="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" />
 <form action="#" method="get" class="form-inline">
+     <div class="col-md-5 ">
+        <h4> Orders from <small><?php echo $daterange; ?></small></h4>
+    </div>
     <div class="col-md-7">
         <div class="input-group" id="daterangepicker">
             <input type="text" name="daterange" class="form-control dateFormat"  placeholder="click to select the date range" readonly="" style="    background: #FFFFFF;
@@ -17,9 +20,7 @@
         }
         ?>
     </div>
-    <div class="col-md-5 text-right">
-        <h4> Orders from <small><?php echo $daterange; ?></small></h4>
-    </div>
+   
 
 </form>
 

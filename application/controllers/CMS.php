@@ -627,6 +627,45 @@ class CMS extends CI_Controller {
 
         $this->load->view('configuration/site_update', $data);
     }
+    
+    
+      public function couponCode() {
+        $data = array();
+        $data['title'] = "Create Coupons";
+        $data['description'] = "Enter Coupon Discount In Percentage.";
+        $data['form_title'] = "Add Coupons";
+        $data['table_name'] = 'configuration_coupons';
+        $form_attr = array(
+            "coupon_code" => array("title" => "Coupons Code", "required" => true, "place_holder" => "Coupons Code", "type" => "text", "default" => ""),
+            "description" => array("title" => "Description", "required" => false, "place_holder" => "Description", "type" => "text", "default" => ""),
+            "discount" => array("title" => "Discount", "required" => false, "place_holder" => "Discount", "type" => "text", "default" => ""),
+        );
+
+        if (isset($_POST['submitData'])) {
+            $postarray = array();
+            foreach ($form_attr as $key => $value) {
+                $postarray[$key] = $this->input->post($key);
+            }
+            $this->Curd_model->insert('configuration_coupons', $postarray);
+            redirect("CMS/couponCode");
+        }
+
+
+        $categories_data = $this->Curd_model->get('configuration_coupons');
+        $data['list_data'] = $categories_data;
+
+        $fields = array(
+            "id" => array("title" => "ID#", "width" => "100px"),
+            "coupon_code" => array("title" => "Coupons Code", "width" => "200px"),
+            "discount" => array("title" => "Discount", "width" => "100px"),
+            "description" => array("title" => "Description", "width" => "300px"),
+        );
+
+        $data['fields'] = $fields;
+        $data['form_attr'] = $form_attr;
+        $this->load->view('layout/curd', $data);
+    }
+    
 
 }
 
