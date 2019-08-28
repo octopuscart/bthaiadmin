@@ -23,11 +23,17 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
                 $scope.orderGlobleCheck.unseen = 1;
 
             }
+            else{
+                $scope.orderGlobleCheck.unseen = 0;
+            }
             var inboxOrderMail = rootBaseUrl + "localApi/inboxOrderMailIndb";
             $http.get(inboxOrderMail).then(function (rmdata) {
                 $scope.orderGlobleCheck.unseenemail = rmdata.data;
                 if (rmdata.data.length) {
                     $scope.orderGlobleCheck.unssenmail = 1;
+                }
+                else{
+                    $scope.orderGlobleCheck.unssenmail = 0;
                 }
                 if (($scope.orderGlobleCheck.unseen == 1) || ($scope.orderGlobleCheck.unssenmail == 1)) {
                     $("#modal-notification").modal("show");
