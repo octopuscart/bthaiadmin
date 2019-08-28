@@ -260,13 +260,14 @@ class Order_model extends CI_Model {
         $emailsender = EMAIL_SENDER;
         $sendername = EMAIL_SENDER_NAME;
         $email_bcc = EMAIL_BCC;
+        echo EMAILCC;
 
         if ($order_details) {
             $currentstatus = $order_details['order_status'][0];
             $order_no = $order_details['order_data']->id;
             $this->email->from(EMAIL_BCC, $sendername);
             $this->email->to($order_details['order_data']->email);
-            $this->email->cc(EMAILCC);
+          
             $this->email->bcc(EMAIL_BCC);
             $subject = SITE_NAME . " - " . $currentstatus->remark;
             $this->email->subject($subject);
@@ -276,6 +277,7 @@ class Order_model extends CI_Model {
 //                ob_clean();
                 echo $orderhtml;
             } else {
+                
                    $this->email->message($orderhtml);
                    $this->email->print_debugger();
                    echo $result = $this->email->send();
