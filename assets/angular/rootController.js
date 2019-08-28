@@ -41,6 +41,10 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
                     $("#modal-notification").modal("show");
                     $scope.playSound();
                 }
+                else{
+                     $("#modal-notification").modal("hide");
+                    $scope.playSound();
+                }
             })
         })
 
