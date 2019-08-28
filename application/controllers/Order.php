@@ -206,6 +206,16 @@ class Order extends CI_Controller {
             $query = $this->db->get('user_order_status');
             $orderstatuslist = $query->result();
 
+            $updateStatus = array(
+                "status" => "1",
+                "process_by" => $this->session_user['login_id'],
+                "process_user" => $this->session_user['username'],
+            );
+
+            $this->db->set($updateStatus);
+            $this->db->where("id", $order_id);
+            $this->db->update('web_order');
+
             if (count($orderstatuslist)) {
                 
             } else {
@@ -213,15 +223,7 @@ class Order extends CI_Controller {
                 $ordertype = $order_details['order_data']->booking_type;
                 $ordertsource = $order_details['order_data']->order_source;
 
-                $updateStatus = array(
-                    "status" => "1",
-                    "process_by" => $this->session_user['login_id'],
-                    "process_user" => $this->session_user['username'],
-                );
 
-                $this->db->set($updateStatus);
-                $this->db->where("id", $order_id);
-                $this->db->update('web_order');
 
                 $order_status_data = array(
                     'c_date' => date('Y-m-d'),
@@ -294,7 +296,7 @@ class Order extends CI_Controller {
                     'log_datetime' => date('Y-m-d H:i:s'),
                     'user_id' => "",
                     'order_id' => $order_id,
-                    'log_detail' => $this->input->post('status')." " . $this->input->post('remark'),
+                    'log_detail' => $this->input->post('status') . " " . $this->input->post('remark'),
                     "process_by" => $this->session_user['login_id'],
                     "process_user" => $this->session_user['username'],
                 );
@@ -378,14 +380,13 @@ class Order extends CI_Controller {
         $this->load->view('Order/orderdetails_enquiry', $data);
     }
 
-
     function order_mail_send($order_id) {
         $this->Order_model->order_mail($order_id);
     }
 
     function order_mail_send_direct($order_key) {
         $this->Order_model->order_mail($order_key);
-         redirect("Order/orderdetails/$order_key");
+        redirect("Order/orderdetails/$order_key");
     }
 
     function order_pdf($order_id) {
