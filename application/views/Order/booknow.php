@@ -142,7 +142,7 @@ $this->load->view('layout/topmenu');
 
             <div class="panel panel-inverse" data-sortable-id="index-10">
                 <div class="panel-heading">
-                    <h4 class="panel-title">For Telephonic/Walk In Guests</h4>
+                    <h4 class="panel-title">For Telephonic/Walkin Guests</h4>
                 </div>
                 <div class="panel-body">
 

@@ -276,9 +276,9 @@ class Order_model extends CI_Model {
 //                ob_clean();
                 echo $orderhtml;
             } else {
-                //   $this->email->message($orderhtml);
-                //   $this->email->print_debugger();
-                //   echo $result = $this->email->send();
+                   $this->email->message($orderhtml);
+                   $this->email->print_debugger();
+                   echo $result = $this->email->send();
             }
         }
     }

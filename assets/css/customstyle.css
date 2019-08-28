@@ -42,3 +42,8 @@
     font-size: 24px;
     color: #ffffff;
 }
+
+.panel-title {
+    line-height: 20px;
+    font-size: 20px;
+}

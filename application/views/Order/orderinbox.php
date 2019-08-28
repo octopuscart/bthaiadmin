@@ -10,7 +10,7 @@ $this->load->view('layout/topmenu');
     <!-- begin vertical-box -->
     <div class="panel panel-inverse" data-sortable-id="index-10">
         <div class="panel-heading">
-            <h4 class="panel-title">Email From Your Inbox</h4>
+            <h4 class="panel-title">Inbox</h4>
         </div>
         <div class="panel-body">
             <div class="vertical-box" style="    background: white;">
