@@ -18,23 +18,23 @@
                 border-color: #9E9E9E;
                 font-size: 12px
             }
-            
+
             .boooking{
                 border-color: #fff;
             }
 
             .boooking td{
                 padding: 5px 10px;
-                    border: #fff;
+                border: #fff;
             }
             .boooking tr{
                 /*padding: 0 10px;*/
                 border-color: #fff;
                 font-size: 12px
             }
-            
-            
-            
+
+
+
 
             .detailstable td{
                 padding:10px 20px;
@@ -99,50 +99,41 @@
             <?php echo EMAIL_HEADER; ?>
             <table class="detailstable" align="center" border="0" cellpadding="0" cellspacing="0" width="700" style="background: #fff">
                 <tr>
-                    <td style="font-size: 12px;width: 50%" >
+                    <td style="font-size: 12px;width: 100%" >
 
-                        <table class="gn_table">
+                        <table class="gn_table" style="width: 100%">
                             <tr>
-                                <td colspan="2">
-                                    <b>Guest Information</b><br/><hr/>
+                                <td colspan="2" style="text-align: center;font-size: 16px;">
+                                    <b>Guest Informations</b><br/><hr/>
                                 </td>
                             </tr>
                             <tr>
-                                <th>Name</th>
+                                <th style="width: 50%;text-align: right;">Name</th>
                                 <td>: <?php echo $order_data->first_name; ?> <?php echo $order_data->last_name; ?> </td>
                             </tr>
                             <tr>
-                                <th>Email</th>
+                                <th style="width: 50%;text-align: right;">Email</th>
                                 <td>: <?php echo $order_data->email; ?> </td>
                             </tr>
                             <tr>
-                                <th>Contact No.</th>
+                                <th style="width: 50%;text-align: right;">Contact No.</th>
                                 <td>: <?php echo $order_data->contact; ?> </td>
                             </tr>
-                            
-                        </table>
-
-
-                    </td>
-                    <td style="font-size: 12px;width: 35%" >
-
-                        <table class="gn_table">
-
                             <tr>
-                                <th>Order No.</th>
+                                <th style="width: 50%;text-align: right;">Order No.</th>
                                 <td>: <?php echo $order_data->id; ?> </td>
                             </tr>
                             <tr>
-                                <th>Date/Time</th>
+                                <th style="width: 50%;text-align: right;">Date/Time</th>
                                 <td>: <?php echo $order_data->datetime; ?>   </td>
                             </tr>
-                           
+
                             <tr>
-                                <th>Order Source</th>
+                                <th style="width: 50%;text-align: right;">Order Source</th>
                                 <td>: <?php echo $order_data->order_source; ?>   </td>
                             </tr>
                             <tr>
-                                <th>Status</th>
+                                <th style="width: 50%;text-align: right;">Status</th>
                                 <td>: <?php
                                     if ($order_status) {
                                         echo end($order_status)->status;
@@ -151,10 +142,12 @@
                                     }
                                     ?> </td>
                             </tr>
+
                         </table>
 
 
                     </td>
+
                 </tr>
             </table>
 
