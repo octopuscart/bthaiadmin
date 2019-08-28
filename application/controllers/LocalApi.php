@@ -195,7 +195,7 @@ class LocalApi extends REST_Controller {
         $this->response($systemlog);
     }
     
-    function sendEmailOrderCancle($order_key){
+    function sendEmailOrderCancle_get($order_key){
         $this->Order_model->order_mail($order_key);
     }
 
