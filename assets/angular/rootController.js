@@ -52,7 +52,7 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
             var inboxOrderMail = rootBaseUrl + "localApi/inboxOrderMailIndb";
             $http.get(inboxOrderMail).then(function (rmdata) {
                 $scope.orderGlobleCheck.unseenemail = rmdata.data;
-               
+                $scope.orderGlobleCheck.unssenmail = rmdata.data.length;
                 if (rmdata.data.length) {
                     $scope.orderGlobleCheck.unssenmail = 1;
                     for (nt1 in rmdata.data) {
