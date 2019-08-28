@@ -35,6 +35,8 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
                 else{
                     $scope.orderGlobleCheck.unssenmail = 0;
                 }
+                console.log(($scope.orderGlobleCheck.unseen == 1) || ($scope.orderGlobleCheck.unssenmail == 1));
+                console.log($scope.orderGlobleCheck.unseen, $scope.orderGlobleCheck.unssenmail);
                 if (($scope.orderGlobleCheck.unseen == 1) || ($scope.orderGlobleCheck.unssenmail == 1)) {
                     $("#modal-notification").modal("show");
                     $scope.playSound();
