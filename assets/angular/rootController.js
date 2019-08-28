@@ -84,7 +84,7 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
                     }
 
                     if ($scope.orderGlobleCheck.unseenemail) {
-                        messgage = messgage + "\n" + "" + $scope.orderGlobleCheck.unseenemail + " unread email(s).";
+                        messgage = messgage + "\n" + "" + $scope.orderGlobleCheck.unssenmail+ " unread email(s).";
 
                     }
 
