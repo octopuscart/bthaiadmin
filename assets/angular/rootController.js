@@ -78,7 +78,7 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
                 if (($scope.orderGlobleCheck.unseen == 1) || ($scope.orderGlobleCheck.unssenmail == 1)) {
 //                    $("#modal-notification").modal("show");
                     var messgage = "";
-                    var totalnotify = $scope.orderGlobleCheck.unseenorder + $scope.orderGlobleCheck.unseenemail;
+                    var totalnotify = $scope.orderGlobleCheck.unseenorder + $scope.orderGlobleCheck.unssenmail;
                     if ($scope.orderGlobleCheck.unseenorder) {
                         messgage = messgage + "" + $scope.orderGlobleCheck.unseenorder + " order(s) for review.";
                     }
