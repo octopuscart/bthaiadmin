@@ -55,20 +55,20 @@ if ($userdata) {
             <li class="dropdown">
                 <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
                     <i class="fa fa-bell-o"></i>
-                    <span class="label">{{rootData.notifications.length}}</span>
+                    <span class="label">{{orderGlobleCheck.allNotifications.length}}</span>
                 </a>
                 <ul class="dropdown-menu media-list pull-right animated fadeInDown">
-                    <li class="dropdown-header">Notifications ({{rootData.notifications.length}})</li>
+                    <li class="dropdown-header">Notifications ({{orderGlobleCheck.allNotifications.length}})</li>
 
 
 
-                    <li class="media" ng-repeat="notify in rootData.notifications">
+                    <li class="media" ng-repeat="notify in orderGlobleCheck.allNotifications">
                         <a href="javascript:;">
                             <div class="media-left"><i class="fa fa-calendar media-object bg-red"></i></div>
                             <div class="media-body">
-                                <h6 class="media-heading textoverflow">{{notify.log_type}}</h6>
-                                <div class="text-muted f-s-11 textoverflow">{{notify.log_detail}}</div>
-                                <div class="text-muted f-s-11">{{notify.log_datetime}}</div>
+                                <h6 class="media-heading textoverflow">{{notify.title}}</h6>
+                                <div class="text-muted f-s-11 textoverflow">{{notify.description}}</div>
+                                <div class="text-muted f-s-11">{{notify.data.datetime}}</div>
                             </div>
                         </a>
                     </li>
@@ -76,7 +76,7 @@ if ($userdata) {
 
 
                     <li class="dropdown-footer text-center">
-                        <a href="javascript:;">View more</a>
+                        <a href="<?php echo site_url("Messages/notifications");?>">View more</a>
                     </li>
                 </ul>
             </li>

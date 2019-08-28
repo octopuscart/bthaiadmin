@@ -18,7 +18,7 @@ class Messages extends CI_Controller {
 //
 //        $this->load->library('mailchimp_library', $params);
 
-
+ $this->checklogin = $this->session->userdata('logged_in');
         $session_user = $this->session->userdata('logged_in');
         if ($session_user) {
             $this->user_id = $session_user['login_id'];
@@ -579,6 +579,16 @@ class Messages extends CI_Controller {
             $this->email->print_debugger();
             echo $result = $this->email->send();
         }
+    }
+    
+    function notifications(){
+         if ($this->checklogin) {
+             
+         }
+         else{
+             redirect(site_url("/"));
+         }
+          $this->load->view('Services/notifications');
     }
 
 }
