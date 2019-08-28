@@ -10,7 +10,7 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
         $scope.rootData.notifications = rdata.data;
     }, function () {})
 
-    $scope.orderGlobleCheck = {"unssen": 0, "unseendata": "", "sound": "", "unseenemail": []}
+    $scope.orderGlobleCheck = {"unssen": 0, "unssenmail": 0, "unseendata": "", "sound": "", "unseenemail": []}
 
     $scope.orderGlobleCheck.sound = document.getElementById("alertSound");
 
@@ -21,27 +21,24 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
             $scope.orderGlobleCheck.unseendata = rdata.data;
             if (rdata.data.length) {
                 $scope.orderGlobleCheck.unseen = 1;
+
             }
             var inboxOrderMail = rootBaseUrl + "localApi/inboxOrderMailIndb";
-            $http.get(inboxOrderMail).then(function (rdata) {
-                $scope.orderGlobleCheck.unseenemail = rdata.data;
-                if (rdata.data.length) {
-                    $scope.orderGlobleCheck.unseen = 1;
+            $http.get(inboxOrderMail).then(function (rmdata) {
+                $scope.orderGlobleCheck.unseenemail = rmdata.data;
+                if (rmdata.data.length) {
+                    $scope.orderGlobleCheck.unssenmail = 1;
                 }
-                if ($scope.orderGlobleCheck.unseen == 1) {
+                if (($scope.orderGlobleCheck.unseen == 1) || ($scope.orderGlobleCheck.unssenmail == 1)) {
                     $("#modal-notification").modal("show");
-                 $scope.playSound();
+                    $scope.playSound();
                 }
             })
-
-
         })
 
         var inboxOrderMail = rootBaseUrl + "localApi/inboxOrderMail";
         $http.get(inboxOrderMail).then(function (rdata) {
         })
-
-
 
     }
 
