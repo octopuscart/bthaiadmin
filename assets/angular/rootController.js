@@ -22,8 +22,7 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
             if (rdata.data.length) {
                 $scope.orderGlobleCheck.unseen = 1;
 
-            }
-            else{
+            } else {
                 $scope.orderGlobleCheck.unseen = 0;
             }
             var inboxOrderMail = rootBaseUrl + "localApi/inboxOrderMailIndb";
@@ -31,8 +30,7 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
                 $scope.orderGlobleCheck.unseenemail = rmdata.data;
                 if (rmdata.data.length) {
                     $scope.orderGlobleCheck.unssenmail = 1;
-                }
-                else{
+                } else {
                     $scope.orderGlobleCheck.unssenmail = 0;
                 }
                 console.log(($scope.orderGlobleCheck.unseen == 1) || ($scope.orderGlobleCheck.unssenmail == 1));
@@ -40,10 +38,9 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
                 if (($scope.orderGlobleCheck.unseen == 1) || ($scope.orderGlobleCheck.unssenmail == 1)) {
                     $("#modal-notification").modal("show");
                     $scope.playSound();
-                }
-                else{
-                     $("#modal-notification").modal("hide");
-                    $scope.playSound();
+                } else {
+                    $("#modal-notification").modal("hide");
+                    $scope.pouseSound();
                 }
             })
         })
@@ -62,7 +59,9 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
         }
     })
 
-
+    $scope.pouseSound = function () {
+      $scope.orderGlobleCheck.sound.pause();
+    }
 
     $scope.playSound = function () {
         var promise = $scope.orderGlobleCheck.sound.play();
