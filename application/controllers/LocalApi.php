@@ -434,6 +434,11 @@ class LocalApi extends REST_Controller {
     }
 
     function ganarateNotificationForAdmin_get() {
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET");
+        header("Access-Control-Allow-Methods: GET, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
         $this->db->order_by('id', 'desc');
         $this->db->where('seen', "0");
         $query = $this->db->get('web_order_email');
@@ -460,6 +465,35 @@ class LocalApi extends REST_Controller {
             $messagem = ($messageo ? " and " : "Total ") . "$emailcount Unseen Email(s)";
         }
         $message = $messageo . $messagem;
+
+        $query = $this->db->get('gcm_registration');
+        $gcm_registration = $query->result_array();
+        $regid = [];
+        foreach ($gcm_registration as $key => $value) {
+            array_push($regid, $value['reg_id']);
+        }
+        $data = array('title' => $title, "message" => $message);
+        if($totalcount){
+            $this->android($data, $regid);
+        }
+    }
+
+    function newOrderNotification_get($orderid) {
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET");
+        header("Access-Control-Allow-Methods: GET, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        $this->db->where('id', $orderid);
+        $query = $this->db->get('web_order');
+        $orderdata = $query->row();
+        $name = $orderdata->first_name . " " . $orderdata->last_name;
+        $email = $orderdata->email;
+        $ordersource = $orderdata->order_source;
+
+        $title = "New booking (#$orderid) From $ordersource";
+        $message = "Guest:$name, Email:$email";
+
 
         $query = $this->db->get('gcm_registration');
         $gcm_registration = $query->result_array();
