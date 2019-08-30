@@ -279,8 +279,6 @@ class LocalApi extends REST_Controller {
         $this->response($systemlog);
     }
 
-
-
     function registerMobileUser_post() {
         $this->config->load('rest', TRUE);
         header('Access-Control-Allow-Origin: *');
@@ -298,7 +296,14 @@ class LocalApi extends REST_Controller {
             "user_type" => "Admin",
             "datetime" => date("Y-m-d H:i:s a")
         );
-        $this->db->insert('gcm_registration', $regArray);
+        $this->db->where('reg_id', $reg_id);
+        $query = $this->db->get('gcm_registration');
+        $regarray = $query->result_array();
+        if ($regArray) {
+            
+        } else {
+            $this->db->insert('gcm_registration', $regArray);
+        }
         $this->response(array("status" => "done"));
     }
 
