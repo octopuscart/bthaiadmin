@@ -178,11 +178,9 @@ class LocalApi extends REST_Controller {
         $this->Order_model->orderInboxEmail();
         $this->response();
     }
-    
-    
-     function inboxOrderMailIndb_get() {
+
+    function inboxOrderMailIndb_get() {
         $this->db->order_by('id', 'desc');
-        $this->db->where('seen', "0");
         $query = $this->db->get('web_order_email');
         $systemlog = $query->result_array();
         $this->response($systemlog);
@@ -194,9 +192,134 @@ class LocalApi extends REST_Controller {
         $systemlog = $query->result_array();
         $this->response($systemlog);
     }
-    
-    function sendEmailOrderCancle_get($order_key){
+
+    function sendEmailOrderCancle_get($order_key) {
         $this->Order_model->order_mail($order_key);
+    }
+
+    //mobile app api
+    function inboxOrderMailIndbMobileUnseen_get() {
+        $this->db->order_by('id', 'desc');
+        $this->db->where('seen', "0");
+        $query = $this->db->get('web_order_email');
+        $systemlog = $query->result_array();
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET");
+        header("Access-Control-Allow-Methods: GET, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        $this->response($systemlog);
+    }
+
+    function checkUnseenOrderMobileUnseen_get() {
+
+        $this->db->order_by('id', 'desc');
+        $this->db->where('status', "0");
+        $query = $this->db->get('web_order');
+        $systemlog = $query->result_array();
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET");
+        header("Access-Control-Allow-Methods: GET, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+
+        $this->response($systemlog);
+    }
+
+    function inboxOrderMailIndbMobile_get() {
+        $this->db->order_by('id', 'desc');
+        $query = $this->db->get('web_order_email');
+        $systemlog = $query->result_array();
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET");
+        header("Access-Control-Allow-Methods: GET, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        $tamparray = [];
+        foreach ($systemlog as $key => $value) {
+            $emp = $value['from_email'];
+            $tmp = explode("<", $emp);
+            $name = $tmp[0];
+            $emailf = str_replace(">", "", $tmp[1]);
+            $value["femail"] = $emailf;
+            $value["name"] = $name;
+            array_push($tamparray, $value);
+        }
+        $this->response($tamparray);
+    }
+
+    function checkUnseenOrderMobile_get() {
+        $this->db->order_by('id', 'desc');
+
+        $query = $this->db->get('web_order');
+        $systemlog = $query->result_array();
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET");
+        header("Access-Control-Allow-Methods: GET, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        $this->response($systemlog);
+    }
+
+    function checkClientMobile_get() {
+        $this->db->order_by('id', 'desc');
+        $this->db->where('user_type', "");
+        $query = $this->db->get('admin_users');
+
+        $systemlog = $query->result_array();
+        header('Content-type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET");
+        header("Access-Control-Allow-Methods: GET, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        $this->response($systemlog);
+    }
+
+    function registerMobileUser_post() {
+        $this->config->load('rest', TRUE);
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        $reg_id = $this->post('reg_id');
+        $model = $this->post('model');
+        $manufacturer = $this->post('manufacturer');
+        $uuid = $this->post('uuid');
+        $regArray = array(
+            "reg_id" => $reg_id,
+            "manufacturer" => $manufacturer,
+            "uuid" => $uuid,
+            "model" => $model,
+            "user_id" => "Admin",
+            "user_type" => "Admin",
+            "datetime" => date("Y-m-d H:i:s a")
+        );
+        $this->db->insert('gcm_registration', $regArray);
+
+
+        $this->response(array("status" => "done"));
+    }
+
+    function updateOrderStatus_post() {
+        $this->config->load('rest', TRUE);
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        $order_id = $this->post('order_id');
+        $data = array("status" => "1");
+        $this->db->set($data);
+        $this->db->where("id", $order_id);
+        $this->db->update("web_order");
+        $this->response(array("status" => "done"));
+    }
+
+    function updateEmailStatus_post() {
+        $this->config->load('rest', TRUE);
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        $email_id = $this->post('email_id');
+        $data = array("seen" => "1");
+        $this->db->set($data);
+        $this->db->where("id", $email_id);
+        $this->db->update("web_order_email");
+        $this->response(array("status" => "done"));
     }
 
 }
