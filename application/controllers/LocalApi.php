@@ -308,6 +308,19 @@ class LocalApi extends REST_Controller {
         $this->db->set($data);
         $this->db->where("id", $order_id);
         $this->db->update("web_order");
+
+        $order_status_data = array(
+            'c_date' => date('Y-m-d'),
+            'c_time' => date('H:i:s'),
+            'order_id' => $order_id,
+            'status' => "Received",
+            'user_id' => "Mobile user",
+            'remark' => "Order Received From Mobile App",
+            "process_by" => "Mobile App",
+            "process_user" => "Admin Mobile App",
+        );
+        $this->db->insert('user_order_status', $order_status_data);
+
         $this->response(array("status" => "done"));
     }
 
