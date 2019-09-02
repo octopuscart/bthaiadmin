@@ -381,7 +381,7 @@ class LocalApi extends REST_Controller {
         header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         $bookingarray = $this->post();
-        print_r($bookingarray);
+        //print_r($bookingarray);
         
         $this->response(array("status" => "done"));
     }
