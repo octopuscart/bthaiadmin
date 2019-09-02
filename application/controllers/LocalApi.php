@@ -306,6 +306,36 @@ class LocalApi extends REST_Controller {
         }
         $this->response(array("status" => "done"));
     }
+    
+    
+        function registerMobileGuest_post() {
+        $this->config->load('rest', TRUE);
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        $reg_id = $this->post('reg_id');
+        $model = $this->post('model');
+        $manufacturer = $this->post('manufacturer');
+        $uuid = $this->post('uuid');
+        $regArray = array(
+            "reg_id" => $reg_id,
+            "manufacturer" => $manufacturer,
+            "uuid" => $uuid,
+            "model" => $model,
+            "user_id" => "Guest",
+            "user_type" => "Guest",
+            "datetime" => date("Y-m-d H:i:s a")
+        );
+        $this->db->where('reg_id', $reg_id);
+        $query = $this->db->get('gcm_registration');
+        $regarray = $query->result_array();
+        if ($regArray) {
+            
+        } else {
+            $this->db->insert('gcm_registration', $regArray);
+        }
+        $this->response(array("status" => "done"));
+    }
+    
 
     function updateOrderStatus_post() {
         $this->config->load('rest', TRUE);
@@ -343,6 +373,20 @@ class LocalApi extends REST_Controller {
         $this->db->update("web_order_email");
         $this->response(array("status" => "done"));
     }
+    
+    
+    //Mobile Booking APi
+    function bookingFromMobile_post() {
+        $this->config->load('rest', TRUE);
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        $bookingarray = $this->post();
+        print_r($bookingarray);
+        
+        $this->response(array("status" => "done"));
+    }
+    
+    
 
     // Curl 
     private function useCurl($url, $headers, $fields = null) {
