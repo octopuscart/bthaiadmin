@@ -306,9 +306,8 @@ class LocalApi extends REST_Controller {
         }
         $this->response(array("status" => "done"));
     }
-    
-    
-        function registerMobileGuest_post() {
+
+    function registerMobileGuest_post() {
         $this->config->load('rest', TRUE);
         header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
@@ -335,7 +334,6 @@ class LocalApi extends REST_Controller {
         }
         $this->response(array("status" => "done"));
     }
-    
 
     function updateOrderStatus_post() {
         $this->config->load('rest', TRUE);
@@ -373,8 +371,7 @@ class LocalApi extends REST_Controller {
         $this->db->update("web_order_email");
         $this->response(array("status" => "done"));
     }
-    
-    
+
     //Mobile Booking APi
     function bookingFromMobile_post() {
         $this->config->load('rest', TRUE);
@@ -382,11 +379,40 @@ class LocalApi extends REST_Controller {
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         $bookingarray = $this->post();
         //print_r($bookingarray);
-        
+
+        $web_order = array(
+            'last_name' => $this->post('first_name'),
+            'first_name' => $this->post('last_name'),
+            'email' => $this->post('email'),
+            'contact' => $this->post('contact_no'),
+            'select_date' => $this->post('select_date'),
+            'select_time' => $this->post('select_time'),
+            'booking_type' => $this->post('book_type'),
+            'extra_remark' =>"",
+            'select_table' => $this->post('select_table'),
+            'people' => $this->post('people'),
+            "usertype" => $this->post('usertype'),
+            'datetime' => date("Y-m-d H:i:s a"),
+            "order_source" => "Mobile App",
+            'order_date' => date("Y-m-d"),
+            'status' => "0",
+        );
+        $this->db->insert('web_order', $web_order);
+
+        $last_id = $this->db->insert_id();
+        $oderid = $last_id;
+        $ordertype = $this->post('booking_type');
+        $orderlog = array(
+            'log_type' => "Order Received",
+            'log_datetime' => date('Y-m-d H:i:s'),
+            'user_id' => "",
+            'order_id' => $last_id,
+            'log_detail' => "Order No. #$last_id  $ordertype From Mobile App",
+        );
+        $this->db->insert('system_log', $orderlog);
+
         $this->response(array("status" => "done"));
     }
-    
-    
 
     // Curl 
     private function useCurl($url, $headers, $fields = null) {
@@ -517,7 +543,7 @@ class LocalApi extends REST_Controller {
             array_push($regid, $value['reg_id']);
         }
         $data = array('title' => $title, "message" => $message);
-        if($totalcount){
+        if ($totalcount) {
             $this->android($data, $regid);
         }
     }
