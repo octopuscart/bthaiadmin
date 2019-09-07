@@ -296,14 +296,15 @@ class LocalApi extends REST_Controller {
             "user_type" => "Admin",
             "datetime" => date("Y-m-d H:i:s a")
         );
-        $this->db->where('reg_id', $reg_id);
-        $query = $this->db->get('gcm_registration');
-        $regarray = $query->result_array();
-        if ($regArray) {
-            
-        } else {
-            $this->db->insert('gcm_registration', $regArray);
-        }
+         $this->db->insert('gcm_registration', $regArray);
+//        $this->db->where('reg_id', $reg_id);
+//        $query = $this->db->get('gcm_registration');
+//        $regarray = $query->result_array();
+//        if ($regArray) {
+//            
+//        } else {
+//            $this->db->insert('gcm_registration', $regArray);
+//        }
         $this->response(array("status" => "done"));
     }
 
@@ -324,14 +325,15 @@ class LocalApi extends REST_Controller {
             "user_type" => "Guest",
             "datetime" => date("Y-m-d H:i:s a")
         );
-        $this->db->where('reg_id', $reg_id);
-        $query = $this->db->get('gcm_registration');
-        $regarray = $query->result_array();
-        if ($regArray) {
-            
-        } else {
-            $this->db->insert('gcm_registration', $regArray);
-        }
+          $this->db->insert('gcm_registration', $regArray);
+//        $this->db->where('reg_id', $reg_id);
+//        $query = $this->db->get('gcm_registration');
+//        $regarray = $query->result_array();
+//        if ($regArray) {
+//            
+//        } else {
+//          
+//        }
         $this->response(array("status" => "done"));
     }
 
