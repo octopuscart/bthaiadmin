@@ -545,8 +545,9 @@ class LocalApi extends REST_Controller {
             array_push($regid, $value['reg_id']);
         }
         $data = array('title' => $title, "message" => $message);
+  
         if ($totalcount) {
-            $this->android($data, $regid);
+         echo   $this->android($data, $regid);
         }
     }
 
