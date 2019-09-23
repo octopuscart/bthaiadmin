@@ -66,7 +66,7 @@ $this->load->view('layout/topmenu');
                         <div class="panel-heading with-border">
                             <h3 class="panel-title" style="width: 100%"><i class=" fa fa-thumbs-up"></i> Order
                                 Confirmation
-                                <span style="float: right"> Order No.:
+                                <span style="float: right"> Booking No.:
                                     <?php echo $ordersdetails['order_data']->order_no; ?></span>
                             </h3>
                         </div>

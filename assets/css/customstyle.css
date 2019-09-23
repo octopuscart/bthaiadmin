@@ -47,3 +47,23 @@
     line-height: 20px;
     font-size: 20px;
 }
+
+.tableimg{
+   
+}
+.tabletop {
+ 
+    background: #ececec;
+    display:  inline-block;
+
+    text-align: center;
+    border: 3px solid #ececec;
+}
+
+.tabletop:hover{
+    border: 3px solid black;
+}
+
+.tabletop.active {
+    border: 3px solid #000000;
+}

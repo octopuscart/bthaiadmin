@@ -33,13 +33,13 @@ if (DEFAULT_PAYMENT == 'No') {
 
 
 $order_menu = array(
-    "title" => "Order Manegement",
+    "title" => "Booking Manegement",
     "icon" => "fa fa-list",
     "active" => "",
     "sub_menu" => array(
-         "Book Now" => site_url("Order/booknow/guest"),
-        "Orders Reports" => site_url("Order/orderslist"),
-        "Order Analytics" => site_url("Order/index"),
+        "Book Now" => site_url("Order/booknow/guest"),
+        "Booking Reports" => site_url("Order/orderslist"),
+        "Booking Analytics" => site_url("Order/index"),
     ),
 );
 array_push($menu_control, $order_menu);

@@ -53,7 +53,7 @@
                                 </p>
                                 <?php if ($key != (count($user_order_status) - 1)) { ?>
                                     <a class="btn btn-danger btn-xs"
-                                       href="<?php echo site_url('Order/remove_order_status/' . $value->id . "/" . $order_key); ?>"><i
+                                       href="<?php echo site_url('Booking/remove_order_status/' . $value->id . "/" . $order_key); ?>"><i
                                             class="fa fa-trash"></i> Remove</a>
                                     <?php }
                                     ?>
@@ -82,11 +82,11 @@
                     class="fa fa-envelope"></i> Send Current Status Mail</a>
             <a class="btn btn-success btn-sm m-b-10"
                href="<?php echo site_url("order/order_pdf/" . $ordersdetails['order_data']->id) ?>"><i
-                    class="fa fa-download "></i> Order PDF</a>
+                    class="fa fa-download "></i> Booking PDF</a>
 <!--            <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i
                     class="fa fa-print m-r-5"></i> Print</a>-->
         </span>
-        Order No:#<?php echo $ordersdetails['order_data']->id; ?>
+        Booking No:#<?php echo $ordersdetails['order_data']->id; ?>
     </div>
     <div class="invoice-header">
         <div class="invoice-from">
@@ -113,11 +113,11 @@
         </div>
 
         <div class="invoice-to">
-            <small>Order Information</small>
+            <small>Booking Information</small>
             <address class="m-t-5 m-b-5">
                 <table class="gn_table">
                     <tr>
-                        <th>Order No.</th>
+                        <th>Booking No.</th>
                         <td>: <?php echo $ordersdetails['order_data']->id; ?> </td>
                     </tr>
                     <tr>

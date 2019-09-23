@@ -1,7 +1,7 @@
 <table border="1">
     <thead>
         <tr>
-            <th>Order No.</th>
+            <th>Booking No.</th>
             <th>Source</th>
             <th>Guest(s)</th>
             <th>Select Date</th>

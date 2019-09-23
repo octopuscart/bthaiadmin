@@ -52,7 +52,7 @@ $this->load->view('layout/topmenu');
                         <thead>
                             <tr>
                                 <th style="width: 70px">S. No.</th>
-                                <th style="width:250px">Order Information</th>
+                                <th style="width:250px">Booking Information</th>
                                 <th style="width:300px">Customer Information</th>
 
                                 <th>Status</th>
@@ -74,7 +74,7 @@ $this->load->view('layout/topmenu');
 
                                             <table class="small_table">
                                                 <tr>
-                                                    <th>Order No.</th>
+                                                    <th>Booking No.</th>
                                                     <td>: <?php echo $value->id; ?></td>
                                                 </tr>
                                                 <tr>

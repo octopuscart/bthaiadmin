@@ -70,7 +70,7 @@ $this->load->view('layout/topmenu');
     }
 
     .tabimage{
-        height: 40px!important;
+             height: 40px!important;
     }
 
     .tabtitle{
@@ -91,13 +91,14 @@ $this->load->view('layout/topmenu');
     }
 
     .tableimg{
-        height: 40px!important;
+         
+            height: 40px!important;
     }
     .tabletop {
-        padding: 5px;
+      
         background: #ececec;
         display:  inline-block;
-        margin: 5px;
+     
         text-align: center;
         border: 3px solid #ececec;
     }
@@ -219,34 +220,33 @@ $this->load->view('layout/topmenu');
                             </div>
 
                             <div class="row" style="margin-bottom: 10px;">
+
                                 <div class="col-md-6">
-                                    <div class="">
-                                        <span class="titleblockwix">Ground Floor</span>
+                                    <div class="col-md-6">
+                                        <div class="">
+                                            <span class="titleblockwix">Ground Floor</span>
+                                            <div class="tableview">
+                                                <div class="tabletop {{bookingArray.select_table=='Ground Floor'?'active':''}}"  ng-click="selectTable('Ground Floor')">
+                                                    <figure class="figure">
+                                                        <img src="<?php echo base_url(); ?>assets/booking/groundfloot.jpg" class="figure-img img-fluid  " alt="..." style="    width: 100%;">
+                                                    </figure>
+                                                </div>
+                                                <div style="clear:both"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span class="titleblockwix">First Floor</span>
                                         <div class="tableview">
-                                            <div class="tabletop {{bookingArray.select_table==table?'active':''}}" ng-repeat="table in initWizard.tables.zone_g" ng-click="selectTable(table)">
+                                            <div class="tabletop {{bookingArray.select_table=='First Floor'?'active':''}}"  ng-click="selectTable('First Floor')">
                                                 <figure class="figure">
-                                                    <img src="<?php echo base_url(); ?>assets/booking/dining_table.png" class="figure-img img-fluid rounded tableimg" alt="...">
-                                                    <figcaption class="figure-caption">{{table}}</figcaption>
+                                                    <img src="<?php echo base_url(); ?>assets/booking/firstfloor.jpg" class="figure-img img-fluid  " alt="..." style="    width: 100%;">
                                                 </figure>
                                             </div>
                                             <div style="clear:both"></div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <span class="titleblockwix">First Floor</span>
-                                    <div class="tableview">
-                                        <center>
-                                            <div class="tabletop {{bookingArray.select_table==table?'active':''}}" ng-repeat="table in initWizard.tables.zone_f" ng-click="selectTable(table)">
-                                                <figure class="figure">
-                                                    <img src="<?php echo base_url(); ?>assets/booking/dining_table.png" class="figure-img img-fluid rounded tableimg" alt="...">
-                                                    <figcaption class="figure-caption">{{table}}</figcaption>
-                                                </figure>
-                                            </div>
-                                        </center>
-                                        <div style="clear:both"></div>
-                                    </div>
 
+                                    </div>
                                 </div>
                             </div>
 
@@ -260,11 +260,11 @@ $this->load->view('layout/topmenu');
 
                         <div class="tab-pane fade" id="nav-profile-tab">
                             <form action="#" method="post" >
-                                <input type="hidden1" name="select_date" value="{{bookingArray.select_date}}"/>
-                                <input type="hidden11" name="select_time" value="{{bookingArray.select_time}}"/>
+                                <input type="hidden" name="select_date" value="{{bookingArray.select_date}}"/>
+                                <input type="hidden" name="select_time" value="{{bookingArray.select_time}}"/>
                                 <input type="hidden" name="booking_type" value="{{bookingArray.book_type}}"/>
-                                <input type="hidden1" name="select_table" value="{{bookingArray.select_table}}"/>
-                                <input type="hidden1" name="usertype" value="<?php echo $usertype; ?>"/>
+                                <input type="hidden" name="select_table" value="{{bookingArray.select_table}}"/>
+                                <input type="hidden" name="usertype" value="<?php echo $usertype; ?>"/>
 
                                 <center>
                                     <div class="form-row" style="width:150px; ">

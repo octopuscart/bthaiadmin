@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Order No#</title>
+        <title>Booking No#</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <style>
             .carttable{
@@ -120,7 +120,7 @@
                                 <td>: <?php echo $order_data->contact; ?> </td>
                             </tr>
                             <tr>
-                                <th style="width: 50%;text-align: right;">Order No.</th>
+                                <th style="width: 50%;text-align: right;">Booking No.</th>
                                 <td>: <?php echo $order_data->id; ?> </td>
                             </tr>
                             <tr>
@@ -129,7 +129,7 @@
                             </tr>
 
                             <tr>
-                                <th style="width: 50%;text-align: right;">Order Source</th>
+                                <th style="width: 50%;text-align: right;">Booking Source</th>
                                 <td>: <?php echo $order_data->order_source; ?>   </td>
                             </tr>
                             <tr>
@@ -162,7 +162,7 @@
                              margin-bottom: 18px;
                              border-radius: 5px;">
                             <center>
-                                <h3 style="padding: 2px;  margin: -2px;  background-color: #ECECEC; margin-bottom: 10px;  color: #000; font-weight: 300;">Order Status</h3>
+                                <h3 style="padding: 2px;  margin: -2px;  background-color: #ECECEC; margin-bottom: 10px;  color: #000; font-weight: 300;">Booking Status</h3>
 
                                 <table class="orderstatustable" align="center"  cellpadding="0" cellspacing="0" width="600" >
 

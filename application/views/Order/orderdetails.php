@@ -55,7 +55,7 @@ $this->load->view('layout/topmenu');
             <!--title row--> 
             <div class="col-md-12">
 
-<div class="col-md-12">
+                <div class="col-md-12">
                     <?php
                     $this->load->view('Order/orderstatusside');
                     ?>
@@ -66,7 +66,7 @@ $this->load->view('layout/topmenu');
 
                     <div class="panel panel-default">
                         <div class="panel-heading with-border">
-                            <h3 class="panel-title">Order No.:<?php echo $ordersdetails['order_data']->id; ?></h3>
+                            <h3 class="panel-title">Booking No.:<?php echo $ordersdetails['order_data']->id; ?></h3>
                         </div>
 
 
@@ -75,20 +75,19 @@ $this->load->view('layout/topmenu');
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Order Status</label>
+                                        <label>Booking Status</label>
                                         <?php if ($status != 'Other') { ?>
                                             <input class="form-control" readonly="" name="status" value="<?php echo $status; ?>">
                                         <?php } else { ?>
                                             <input class="form-control"  name="status" value="<?php echo $status != 'Other' ? $status : ''; ?>">
                                         <?php } ?>
-
                                     </div>
                                 </div>
 
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label>Remark <small>(It will be subject of email.)</small></label>
-                                        <input type="text" class="form-control" placeholder="Remark for order status"  name="remark" required="">
+                                        <input type="text" class="form-control" placeholder="Remark for booking status"  name="remark" required="">
                                     </div>
                                 </div>
 
@@ -114,14 +113,12 @@ $this->load->view('layout/topmenu');
                                     </div>
                                     <div class="col-md-8">
                                         <button type="submit" class="btn btn-primary btn-lg" style="    font-size: 13px;" name="submit" value="submit">Submit</button>
-
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-                
             </div>
     </section>
 

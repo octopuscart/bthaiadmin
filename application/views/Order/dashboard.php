@@ -32,7 +32,7 @@ function truncate($str, $len) {
             <div class="widget widget-stats bg-blue">
                 <div class="stats-icon"><i class="fa fa-pencil-square"></i></div>
                 <div class="stats-info">
-                    <h4>Total Orders</h4>
+                    <h4>Total Booking</h4>
                     <p><?php echo count($orderslist); ?></p>	
                 </div>
                 <!--                <div class="stats-link">
@@ -93,7 +93,7 @@ function truncate($str, $len) {
             <div class="" data-sortable-id="index-3">
                 <div class="panel panel-inverse" data-sortable-id="index-10">
                     <div class="panel-heading">
-                          <h4 class="panel-title">Recent Order</h4>
+                          <h4 class="panel-title">Recent Booking</h4>
                     </div>
                     <div class="panel-body">
                         <div class="height-sm" data-scrollbar="true">
@@ -103,7 +103,7 @@ function truncate($str, $len) {
                                 <thead>
                                     <tr>
                                         <th style="width: 70px">S. No.</th>
-                                        <th style="width:250px">Order Information</th>
+                                        <th style="width:250px">Booking Information</th>
                                         <th style="width:200px">Customer Information</th>
 
                                         <th></th>
@@ -124,7 +124,7 @@ function truncate($str, $len) {
 
                                                     <table class="small_table">
                                                         <tr>
-                                                            <th>Order No.</th>
+                                                            <th>Booking No.</th>
                                                             <td>: <?php echo $value->id; ?></td>
                                                         </tr>
                                                         <tr>
@@ -167,7 +167,7 @@ function truncate($str, $len) {
                                         }
                                     } else {
                                         ?>
-                                    <h4><i class="fa fa-warning"></i> No order found</h4>
+                                    <h4><i class="fa fa-warning"></i> No Booking found</h4>
                                     <?php
                                 }
                                 ?>

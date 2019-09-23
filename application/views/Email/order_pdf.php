@@ -35,11 +35,11 @@ echo PDF_HEADER;
                 <table class="gn_table">
                     <tr>
                         <td colspan="2">
-                            <b>Order Information</b><br/><hr/>
+                            <b>Booking Information</b><br/><hr/>
                         </td>
                     </tr>
                     <tr>
-                        <th>Order No.</th>
+                        <th>Booking No.</th>
                         <td>: <?php echo $order_data->id; ?> </td>
                     </tr>
                     <tr>
@@ -47,7 +47,7 @@ echo PDF_HEADER;
                         <td>: <?php echo $order_data->datetime; ?>   </td>
                     </tr>
 <tr>
-                                <th>Order Source</th>
+                                <th>Booking Source</th>
                                 <td>: <?php echo $order_data->order_source; ?>   </td>
                             </tr>
 

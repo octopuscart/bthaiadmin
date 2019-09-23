@@ -1,7 +1,7 @@
 <link href="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" />
 <form action="#" method="get" class="form-inline">
      <div class="col-md-5 ">
-        <h4> Orders from <small><?php echo $daterange; ?></small></h4>
+        <h4> Booking from <small><?php echo $daterange; ?></small></h4>
     </div>
     <div class="col-md-7">
         <div class="input-group" id="daterangepicker">

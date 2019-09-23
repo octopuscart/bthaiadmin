@@ -231,18 +231,18 @@ class Order extends CI_Controller {
                     'order_id' => $order_id,
                     'status' => "Received",
                     'user_id' => $usertype,
-                    'remark' => "Order $ordertype From $ordertsource",
+                    'remark' => "Reservation $ordertype From $ordertsource",
                     "process_by" => $this->session_user['login_id'],
                     "process_user" => $this->session_user['username'],
                 );
                 $this->db->insert('user_order_status', $order_status_data);
 
                 $orderlog = array(
-                    'log_type' => "Order Received",
+                    'log_type' => "Reservation Received",
                     'log_datetime' => date('Y-m-d H:i:s'),
                     'user_id' => "",
                     'order_id' => $order_id,
-                    'log_detail' => "Order Received " . " Order $ordertype From $ordertsource",
+                    'log_detail' => "Reservation Received " . " Reservation $ordertype From $ordertsource",
                     "process_by" => $this->session_user['login_id'],
                     "process_user" => $this->session_user['username'],
                 );
@@ -261,7 +261,7 @@ class Order extends CI_Controller {
                 switch ($currentstatus) {
 
 
-                    case "Order Enquiry":
+                    case "Booking Enquiry":
                         redirect("Order/orderdetails_enquiry/$order_key");
                         break;
                     case "Confirmed":

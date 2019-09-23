@@ -20,7 +20,7 @@ $this->load->view('layout/layoutTop');
                                 echo $total_order;
                                 ?></h3>
 
-                            <p>New Orders</p>
+                            <p>New Booking</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -35,7 +35,7 @@ $this->load->view('layout/layoutTop');
                         <div class="inner">
                             <h3><?php echo $total_amount; ?></h3>
 
-                            <p>Order Amount</p>
+                            <p>Booking Amount</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
