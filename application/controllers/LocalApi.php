@@ -353,7 +353,7 @@ class LocalApi extends REST_Controller {
             'order_id' => $order_id,
             'status' => "Received",
             'user_id' => "Mobile user",
-            'remark' => "Order Received From Mobile App",
+            'remark' => "Reservation Received From Mobile App",
             "process_by" => "Mobile App",
             "process_user" => "Admin Mobile App",
         );
@@ -405,11 +405,11 @@ class LocalApi extends REST_Controller {
         $oderid = $last_id;
         $ordertype = $this->post('booking_type');
         $orderlog = array(
-            'log_type' => "Order Received",
+            'log_type' => "Reservation Received",
             'log_datetime' => date('Y-m-d H:i:s'),
             'user_id' => "",
             'order_id' => $last_id,
-            'log_detail' => "Order No. #$last_id  $ordertype From Mobile App",
+            'log_detail' => "Reservation No. #$last_id  $ordertype From Mobile App",
         );
         $this->db->insert('system_log', $orderlog);
 
