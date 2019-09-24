@@ -30,6 +30,9 @@ $this->load->view('layout/topmenu');
     .blog-posts article {
         margin-bottom: 10px;
     }
+    tr.highlightpeople {
+    border: 3px solid red;
+}
 </style>
 
 

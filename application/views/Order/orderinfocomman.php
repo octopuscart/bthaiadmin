@@ -53,7 +53,7 @@
                                 </p>
                                 <?php if ($key != (count($user_order_status) - 1)) { ?>
                                     <a class="btn btn-danger btn-xs"
-                                       href="<?php echo site_url('Booking/remove_order_status/' . $value->id . "/" . $order_key); ?>"><i
+                                       href="<?php echo site_url('Order/remove_order_status/' . $value->id . "/" . $order_key); ?>"><i
                                             class="fa fa-trash"></i> Remove</a>
                                     <?php }
                                     ?>

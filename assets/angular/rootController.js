@@ -38,8 +38,8 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
                 for (nt2 in rdata.data) {
                     var temp1 = rdata.data[nt2]; 
                     var tempdata = {
-                        'title':"Order No. #"+temp1.id,
-                        'description':"You have new order from "+temp1.order_source,
+                        'title':"Booking No. #"+temp1.id,
+                        'description':"You have new reservation from "+temp1.order_source,
                         'tag':"order",
                         'data':temp1,
                     }
@@ -80,7 +80,7 @@ Admin.controller('rootController', function ($scope, $http, $timeout, $interval)
                     var messgage = "";
                     var totalnotify = $scope.orderGlobleCheck.unseenorder + $scope.orderGlobleCheck.unssenmail;
                     if ($scope.orderGlobleCheck.unseenorder) {
-                        messgage = messgage + "" + $scope.orderGlobleCheck.unseenorder + " order(s) for review.";
+                        messgage = messgage + "" + $scope.orderGlobleCheck.unseenorder + " reservation(s) for review.";
                     }
 
                     if ($scope.orderGlobleCheck.unseenemail) {
