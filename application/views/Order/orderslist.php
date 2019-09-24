@@ -66,7 +66,7 @@ $this->load->view('layout/topmenu');
                                 $count = 1;
                                 foreach ($orderslist as $key => $value) {
                                     ?>
-                                    <tr style="border-bottom: 1px solid #000;">
+                                    <tr style="border-bottom: 1px solid #000;"  class="<?php echo $value->people>9?'highlightpeople':''; ?>">
                                         <td>
                                             <?php echo $count; ?>
                                         </td>

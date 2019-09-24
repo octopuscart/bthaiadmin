@@ -525,7 +525,7 @@ class Order extends CI_Controller {
             $data['orderslist'] = $orderslistr;
             $html = $this->load->view('Order/vendororderslist_xls', $data, TRUE);
         }
-        $filename = 'orders_report_' . $daterange . ".xls";
+        $filename = 'booking_report_' . $daterange . ".xls";
         ob_clean();
         header("Content-Disposition: attachment; filename=$filename");
         header("Content-Type: application/vnd.ms-excel");

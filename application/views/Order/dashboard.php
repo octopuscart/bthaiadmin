@@ -133,7 +133,7 @@ function truncate($str, $len) {
                                                         </tr>
                                                         <tr>
                                                             <th>Table No.</th>
-                                                            <td>: {{<?php echo $value->select_table; ?>}}</td>
+                                                            <td>: <?php echo $value->select_table; ?></td>
                                                         </tr>
                                                     </table>
 

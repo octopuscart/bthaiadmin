@@ -35,7 +35,7 @@ echo PDF_HEADER;
                 <table class="gn_table">
                     <tr>
                         <td colspan="2">
-                            <b>Booking Information</b><br/><hr/>
+                            <b>Reservation Information</b><br/><hr/>
                         </td>
                     </tr>
                     <tr>
