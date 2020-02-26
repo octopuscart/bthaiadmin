@@ -78,6 +78,9 @@
     <div class="invoice-company">
         <span class="pull-right hidden-print">
             <a class="btn btn-success  btn-sm m-b-10"
+               href="<?php echo site_url("order/order_mail_send_direct2/" . $ordersdetails['order_data']->id) ?>"><i
+                    class="fa fa-envelope"></i> Send Order Mail</a>
+            <a class="btn btn-success  btn-sm m-b-10"
                href="<?php echo site_url("order/order_mail_send_direct/" . $ordersdetails['order_data']->id) ?>"><i
                     class="fa fa-envelope"></i> Send Current Status Mail</a>
             <a class="btn btn-success btn-sm m-b-10"
