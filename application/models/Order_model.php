@@ -269,7 +269,7 @@ class Order_model extends CI_Model {
             $this->email->to($order_details['order_data']->email);
           
             $this->email->bcc(EMAIL_BCC);
-            $subject = SITE_NAME . " - " . $currentstatus->remark;
+            $subject = "Thank you for your booking.";
             $this->email->subject($subject);
             $checkcode = REPORT_MODE;
             $orderhtml = $this->load->view('Email/order_mail2', $order_details, true);

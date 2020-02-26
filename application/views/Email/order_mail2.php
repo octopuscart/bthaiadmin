@@ -16,7 +16,7 @@
                         <tr>
                             <td style="vertical-align: top; padding-bottom:30px;" align="center">
                                 <a href="<?php echo site_url("/"); ?>" target="_blank">
-                                    <img src="<?php echo site_mail_logo; ?>" alt="Baan Thai" style="border:none;height:50px;"/></a>
+                                    <img src="https://baanthaihk.com/assets/images/logo.png" alt="Baan Thai" style="border:none;height:50px;"/></a>
                             </td>
                         </tr>
                     </tbody>
@@ -84,7 +84,7 @@
                                         </tr>
                                     </table>
 
-                                    <p><a href="<?php echo site_url("cancleOrder/" . $orderid); ?>" target="_blank" style="color:white">Click here</a> to cancel or update this reservation..</p>
+                                    <p><a href="<?php echo site_url("cancleOrder/" . $order_data->id); ?>" target="_blank" style="color:white">Click here</a> to cancel or update this reservation..</p>
                                     <b>- Thanks -</b> 
                                     <br/>
                                     <img src="https://baanthaihk.com/assets/images/logo.png" style="margin: 10px; height: 25px;    background: white;width: auto;"/>
