@@ -254,6 +254,37 @@ class Order_model extends CI_Model {
         return $order_data;
     }
 
+      function order_mail2($order_id, $subject = "") {
+        setlocale(LC_MONETARY, 'en_US');
+        $order_details = $this->getOrderDetailsV3($order_id, 'key');
+        $emailsender = EMAIL_SENDER;
+        $sendername = EMAIL_SENDER_NAME;
+        $email_bcc = EMAIL_BCC;
+        echo EMAILCC;
+
+        if ($order_details) {
+            $currentstatus = $order_details['order_status'][0];
+            $order_no = $order_details['order_data']->id;
+            $this->email->from(EMAIL_BCC, $sendername);
+            $this->email->to($order_details['order_data']->email);
+          
+            $this->email->bcc(EMAIL_BCC);
+            $subject = SITE_NAME . " - " . $currentstatus->remark;
+            $this->email->subject($subject);
+            $checkcode = REPORT_MODE;
+            $orderhtml = $this->load->view('Email/order_mail2', $order_details, true);
+            if ($checkcode == 0) {
+//                ob_clean();
+                echo $orderhtml;
+            } else {
+                
+                   $this->email->message($orderhtml);
+                   $this->email->print_debugger();
+                   echo $result = $this->email->send();
+            }
+        }
+    }
+    
     function order_mail($order_id, $subject = "") {
         setlocale(LC_MONETARY, 'en_US');
         $order_details = $this->getOrderDetailsV3($order_id, 'key');
