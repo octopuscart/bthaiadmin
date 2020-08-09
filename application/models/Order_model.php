@@ -298,8 +298,8 @@ class Order_model extends CI_Model {
             $order_no = $order_details['order_data']->id;
             $this->email->from(EMAIL_BCC, $sendername);
             $this->email->to($order_details['order_data']->email);
-          
-            $this->email->bcc(EMAIL_BCC);
+       
+            $this->email->bcc(array(EMAIL_BCC, "stewart@baanthai.hk"));
             $subject = SITE_NAME . " - " . $currentstatus->remark;
             $this->email->subject($subject);
             $checkcode = REPORT_MODE;
