@@ -316,6 +316,8 @@ class Order_model extends CI_Model {
         }
     }
 
+    
+    
     function order_mail_confirm($order_id, $subject = "") {
         setlocale(LC_MONETARY, 'en_US');
         $order_details = $this->getOrderDetailsV2($order_id, 'key');
