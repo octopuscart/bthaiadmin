@@ -262,7 +262,7 @@ function truncate($str, $len) {
                             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                         </div>
-                        <h4 class="panel-title">Todo List</h4>
+                        <h4 class="panel-title">To do List</h4>
                     </div>
                     <div class="panel-body p-0">
                         <ul class="todolist">
