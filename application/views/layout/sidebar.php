@@ -62,7 +62,7 @@ $coupons_menu = array(
         "Create Coupons" => site_url("CMS/couponCode"),
     ),
 );
-array_push($menu_control, $coupons_menu);
+//array_push($menu_control, $coupons_menu);
 
 
 
@@ -92,7 +92,7 @@ $lookbook_menu = array(
 //        "Tags" => site_url("CMS/blogTag"),
     ),
 );
-array_push($menu_control, $lookbook_menu);
+//array_push($menu_control, $lookbook_menu);
 
 //
 //$cms_menu = array(
