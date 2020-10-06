@@ -158,7 +158,7 @@ function truncate($str, $len) {
                                                 </td>
                                                 <td>
                                                     <?php
-                                                    echo "" . $value->source . "<br/>";
+                                                    echo "" . $value->order_source . "<br/>";
                                                     echo $value->select_date . "<br/>";
                                                     echo $value->select_time . "<br/>";
                                                     ?>
