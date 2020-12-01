@@ -40,6 +40,7 @@ $order_menu = array(
         "Book Now" => site_url("Order/booknow/guest"),
         "Booking Reports" => site_url("Order/orderslist"),
         "Booking Analytics" => site_url("Order/index"),
+        "Block Dates" => site_url("Order/bookingDateBlock"),
     ),
 );
 array_push($menu_control, $order_menu);
